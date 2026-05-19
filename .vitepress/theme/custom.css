@@ -20,7 +20,7 @@
 
   /* 布局核心变量 (调整以匹配 Wiki 风格) */
   --vp-sidebar-width: 260px;       /* 左侧边栏宽度 */
-  --vp-layout-max-width: 1600px;   /* 整体最大宽度 */
+  --vp-layout-max-width: 1560px;   /* 调整为更稳重的宽度 */
   
   /* 调小侧边栏内部的文字层级缩进，增加利用率 */
   --vp-sidebar-item-padding: 8px 12px;
@@ -206,33 +206,27 @@ body {
 
   .VPDoc .container {
     max-width: 100% !important;
-    margin: 0 !important; 
+    margin: 0 auto !important; /* 恢复居中 */
+    display: flex !important;
+    justify-content: center !important; /* 主体居中 */
   }
   
   .VPDoc .content-container {
-    max-width: 1200px !important;
-    margin: 0 !important;
+    max-width: 1000px !important; /* 适度收窄，为 Aside 腾出平衡空间 */
+    margin: 0 !important; /* 在 Flex 容器内不再需要 auto margin */
   }
 }
 
 /* 侧边大纲栏 (Aside) 优化 */
 @media (min-width: 1280px) {
   .VPDoc.has-aside .aside {
-    width: 220px !important;
-    padding-left: 16px !important;
+    width: 320px !important; /* 增加到 320px，更有分量 */
+    padding-left: 40px !important; /* 增加与正文的间距 (Gap) */
     margin-right: 0 !important;
     display: block !important;
   }
 
   .VPDoc.has-aside .aside-container {
-    width: 220px !important;
-  }
-}
-
-/* 超宽屏对齐 */
-@media (min-width: 1440px) {
-  .VPDoc .container {
-    display: flex;
-    justify-content: flex-start;
+    width: 320px !important;
   }
 }
