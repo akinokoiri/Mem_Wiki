@@ -1,0 +1,235 @@
+:root {
+  /* DST 风格配色 */
+  --vp-c-brand: #b19cd9; /* 芒伊木灵魂紫 */
+  --vp-c-brand-light: #c8b9e6;
+  --vp-c-brand-lighter: #dfd6f2;
+  --vp-c-brand-dark: #8e7cc3;
+  --vp-c-brand-darker: #674ea7;
+
+  /* 背景与文字 - 更加温暖的羊皮纸色 */
+  --vp-c-bg: #fdfaf5; 
+  --vp-c-bg-soft: #f4eee1;
+  --vp-c-bg-mute: #ebe2d0;
+  
+  --vp-c-text-1: #3d2e2e; /* 经典深褐 */
+  --vp-c-text-2: #5c4a4a;
+
+  /* 密度调整核心变量 */
+  --vp-font-size-base: 14px; 
+  --vp-nav-height: 54px;     
+}
+
+/* 整体背景纹理 (模拟纸张) */
+body {
+  background-color: #fdfaf5;
+  background-image: radial-gradient(#dcd1ba 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
+
+/* ============================================================
+   布局核心变量 (调整以匹配 Wiki 风格)
+   ============================================================ */
+:root {
+  /* 基础间距与宽度 */
+  --vp-sidebar-width: 260px;       /* 左侧边栏宽度 */
+  --vp-layout-max-width: 1440px;   /* 整体最大宽度 */
+  --vp-nav-height: 56px;           /* 导航栏高度 */
+  
+  /* 调小侧边栏内部的文字层级缩进，增加利用率 */
+  --vp-sidebar-item-padding: 8px 12px;
+}
+
+/* ============================================================
+   整体布局重置 (基于 VitePress 原生结构)
+   ============================================================ */
+
+/* 1. 确保侧边栏容器本身宽度正确，且内容不溢出 */
+.VPSidebar {
+  width: var(--vp-sidebar-width) !important;
+  background-color: #f4eee1 !important;
+  border-right: 1px solid #dcd1ba !important;
+  padding: 16px 12px !important; /* 增加内部 Padding 确保文字不贴边 */
+  box-sizing: border-box;
+}
+
+/* 2. 修正正文区域位置，确保与侧边栏完美对齐而不重叠 */
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    margin-left: var(--vp-sidebar-width) !important;
+    padding-left: 0 !important; /* 移除冗余的默认 Padding */
+  }
+
+  .VPDoc {
+    padding: 32px 48px 96px !important; /* 文档区域本身的呼吸感 */
+  }
+
+  /* 核心内容容器：限制最大宽度并居中，模仿 Wiki 逻辑 */
+  .VPDoc .container {
+    max-width: 1100px !important;
+    margin: 0 !important; /* Wiki 风格通常靠左，配合右侧 InfoBox */
+  }
+  
+  .VPDoc .content-container {
+    max-width: 100% !important;
+  }
+}
+
+/* 3. 右侧大纲栏 (Aside) 优化 */
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .aside {
+    padding-left: 32px !important;
+    width: 240px !important; /* 稍微缩窄大纲栏，腾出空间给正文 */
+    display: block !important;
+  }
+}
+
+/* 4. 侧边栏文字美化，防止长标题溢出 */
+.VPSidebarItem .text {
+  white-space: normal !important; /* 允许换行 */
+  word-break: break-all;
+  line-height: 1.4;
+  display: block;
+}
+
+/* ============================================================
+   视觉美化 (保留 DST 风格)
+   ============================================================ */
+body {
+  background-color: #fdfaf5;
+  background-image: radial-gradient(#dcd1ba 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
+
+/* 标题美化 */
+.vp-doc h1, .vp-doc h2, .vp-doc h3 {
+  color: #5c3a21;
+  font-family: "Georgia", serif;
+  letter-spacing: 0.02em;
+  overflow: hidden; /* 触发 BFC，使其宽度自动避开浮动元素 */
+  display: block;
+  clear: none !important; /* 严禁清理浮动，否则会跳到卡片下方 */
+}
+
+.vp-doc h1 { 
+  margin-top: 24px; 
+  margin-bottom: 24px; 
+  font-size: 32px; 
+  text-align: center;
+  border-bottom: none;
+}
+
+.vp-doc h1::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #5c3a21;
+  margin: 8px auto;
+  border-radius: 2px;
+}
+
+.vp-doc h2 { 
+  margin-top: 32px; 
+  margin-bottom: 16px; 
+  font-size: 24px; 
+  border-bottom: 2px solid #dcd1ba;
+  padding-bottom: 4px;
+}
+
+.vp-doc h3 { 
+  margin-top: 24px; 
+  margin-bottom: 12px; 
+  font-size: 18px; 
+  color: #7d5a44;
+}
+
+/* 引用块美化 */
+.vp-doc blockquote {
+  margin: 16px 0;
+  padding: 12px 20px;
+  background: rgba(220, 209, 186, 0.2);
+  border-left: 4px solid #5c3a21;
+  border-radius: 0 4px 4px 0;
+  font-style: italic;
+  color: #5c4a4a;
+}
+
+/* 列表紧凑化 */
+.vp-doc li + li { margin-top: 4px; }
+.vp-doc ul, .vp-doc ol { margin: 12px 0; padding-left: 24px; }
+
+/* 侧边栏样式 */
+.VPSidebar {
+  background-color: #f4eee1 !important;
+  border-right: 1px solid #dcd1ba !important;
+}
+
+.VPSidebarItem.level-0 .text { font-size: 15px; font-weight: 800; color: #5c3a21; }
+.VPSidebarItem.level-1 .text { font-size: 14px; }
+
+/* 导航栏样式 */
+.VPNavBar {
+  background-color: rgba(253, 250, 245, 0.9) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #dcd1ba !important;
+}
+
+/* 修复分割线断开组件的问题 */
+.vp-doc hr {
+  overflow: hidden; 
+  display: block;
+  clear: none !important;
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid #dcd1ba;
+}
+
+/* 优化卡片的基础定位 */
+.infobox, .media-card {
+  position: relative;
+  z-index: 1; /* 适当降低 z-index，让其在标准文档流中参与浮动 */
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdfaf5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dcd1ba;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5b79e;
+}
+
+/* 表格美化 */
+.vp-doc table {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(92, 58, 33, 0.05);
+}
+
+.vp-doc th {
+  background-color: #5c3a21;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #5c3a21;
+}
+
+.vp-doc td {
+  border: 1px solid #dcd1ba;
+}
+
+/* 强制清除浮动的辅助类 */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
