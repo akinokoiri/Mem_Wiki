@@ -79,9 +79,23 @@ body {
 /* 3. 右侧大纲栏 (Aside) 优化 */
 @media (min-width: 1280px) {
   .VPDoc.has-aside .aside {
-    padding-left: 32px !important;
-    width: 240px !important; /* 稍微缩窄大纲栏，腾出空间给正文 */
+    width: 220px !important; /* 固定宽度 */
+    padding-left: 16px !important; /* 减小左内边距，使其更贴近内容 */
+    margin-right: 0 !important;
     display: block !important;
+  }
+
+  /* 调整 Aside 内部容器，防止其在大屏幕下飘走 */
+  .VPDoc.has-aside .aside-container {
+    width: 220px !important;
+  }
+}
+
+/* 确保在超宽屏下 Aside 依然紧跟正文 */
+@media (min-width: 1440px) {
+  .VPDoc .container {
+    display: flex;
+    justify-content: flex-start;
   }
 }
 
