@@ -32,7 +32,7 @@ body {
 :root {
   /* 基础间距与宽度 */
   --vp-sidebar-width: 260px;       /* 左侧边栏宽度 */
-  --vp-layout-max-width: 1440px;   /* 整体最大宽度 */
+  --vp-layout-max-width: 1600px;   /* 整体最大宽度 */
   --vp-nav-height: 56px;           /* 导航栏高度 */
   
   /* 调小侧边栏内部的文字层级缩进，增加利用率 */
@@ -60,7 +60,7 @@ body {
   }
 
   .VPDoc {
-    padding: 32px 48px 96px !important; 
+    padding: 32px 32px 96px !important; 
   }
 
   /* 核心内容容器：限制最大宽度并居中，模仿 Wiki 逻辑 */
