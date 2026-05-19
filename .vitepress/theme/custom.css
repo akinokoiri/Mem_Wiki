@@ -52,7 +52,7 @@ body {
   box-sizing: border-box;
 }
 
-/* 2. 修正正文区域位置，确保与侧边栏完美对齐而不重叠 */
+/* 确保正文与侧边栏的间距足够大，符合 Wiki 感觉 */
 @media (min-width: 960px) {
   .VPContent.has-sidebar {
     margin-left: var(--vp-sidebar-width) !important;
@@ -60,7 +60,7 @@ body {
   }
 
   .VPDoc {
-    padding: 32px 48px 96px !important; /* 文档区域本身的呼吸感 */
+    padding: 32px 48px 96px !important; 
   }
 
   /* 核心内容容器：限制最大宽度并居中，模仿 Wiki 逻辑 */

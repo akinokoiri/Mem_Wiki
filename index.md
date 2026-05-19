@@ -3,23 +3,23 @@
 layout: home
 
 hero:
-  name: "芒伊木“尽可能”详尽的介绍"
+  name: "芒伊木 Wiki"
   text: "饥荒：联机版 芒伊木模组全效果说明书"
-  tagline: My great project tagline
+  tagline: 灵魂的归宿，狐影的低语
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 核心机制
+      link: /mechanics/core
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 形态研究
+      link: /forms/human
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 灵魂系统
+    details: 独特的灵魂值与灵魂池机制，掌控生死转换的奥秘。
+  - title: 三重形态
+    details: 人类、狐狸、怨灵。在不同的身份间切换，应对多变的生存环境。
+  - title: 深度机制
+    details: 包含死亡回归、捕猎姿态等大量原创机制，带给您纯正的 DST 体验。
 ---
 
