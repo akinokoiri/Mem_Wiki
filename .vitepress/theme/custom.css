@@ -183,17 +183,17 @@ body {
 }
 
 /* ============================================================
-   响应式布局对齐 (Media Queries)
+   响应式布局与媒体查询
    ============================================================ */
 
-/* 移动端优化 */
+/* 移动端 (小于 960px) */
 @media (max-width: 959px) {
   .VPDoc .container {
     display: block !important;
   }
 }
 
-/* 桌面端布局 */
+/* 桌面端基础 (大于等于 960px) */
 @media (min-width: 960px) {
   .VPContent.has-sidebar {
     margin-left: var(--vp-sidebar-width) !important;
@@ -206,22 +206,22 @@ body {
 
   .VPDoc .container {
     max-width: 100% !important;
-    margin: 0 auto !important; /* 恢复居中 */
+    margin: 0 auto !important;
     display: flex !important;
-    justify-content: center !important; /* 主体居中 */
+    justify-content: center !important; /* 强制居中 */
   }
   
   .VPDoc .content-container {
-    max-width: 1000px !important; /* 适度收窄，为 Aside 腾出平衡空间 */
-    margin: 0 !important; /* 在 Flex 容器内不再需要 auto margin */
+    max-width: 700px !important;
+    margin: 0 !important;
   }
 }
 
-/* 侧边大纲栏 (Aside) 优化 */
+/* 侧边大纲栏 (Aside) 断点 (大于等于 1280px) */
 @media (min-width: 1280px) {
   .VPDoc.has-aside .aside {
-    width: 320px !important; /* 增加到 320px，更有分量 */
-    padding-left: 40px !important; /* 增加与正文的间距 (Gap) */
+    width: 320px !important;
+    padding-left: 48px !important;
     margin-right: 0 !important;
     display: block !important;
   }
@@ -231,9 +231,13 @@ body {
   }
 }
 
-/* 移除 1440px 下的强制靠左指令 */
-@media (min-width: 1440px) {
-  .VPDoc .container {
-    justify-content: center !important;
+/* 宽屏优化 (大于等于 1560px) */
+@media (min-width: 1560px) {
+  .VPDoc .content-container {
+    max-width: 1000px !important;
+  }
+  
+  .VPDoc.has-aside .aside {
+    padding-left: 64px !important;
   }
 }
