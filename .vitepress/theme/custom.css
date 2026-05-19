@@ -230,3 +230,10 @@ body {
     width: 320px !important;
   }
 }
+
+/* 移除 1440px 下的强制靠左指令 */
+@media (min-width: 1440px) {
+  .VPDoc .container {
+    justify-content: center !important;
+  }
+}
