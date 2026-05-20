@@ -4,10 +4,10 @@
   title="芒伊木 (本体)"
   image="/mem_card.png"
   :stats="[
-    { label: '生命值', value: '75', icon: '/health_icon.png' },
-    { label: '理智值', value: '200', icon: '/sanity_icon.png' },
-    { label: '饱食度', value: '150', icon: '/hunger_icon.png' },
-    { label: '灵魂值', value: '150', icon: '/soul_icon.png' }
+    { label: '生命值', value: '75', icon: '/icon_health.png' },
+    { label: '理智值', value: '200', icon: '/icon_sanity.png' },
+    { label: '饱食度', value: '150', icon: '/icon_hunger.png' },
+    { label: '灵魂值', value: '150', icon: '/icon_soul.png' }
   ]"
   :details="[
     { label: '初始物品', value: '封印项圈Lv1' },
