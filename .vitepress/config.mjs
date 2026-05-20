@@ -38,9 +38,9 @@ export default defineConfig({
   // 自定义 Markdown 编译器行为
   markdown: {
     config: (md) => {
-      md.core.ruler.after('block', 'dst-noun-autolink-plugin', (state) => {
-        // 核心正则：匹配 [名词]、[**名词**]、**[名词]** 并过滤 [文字](url)
-        const regex = /(?:\*\*)?\[(\*?\*?)([^\]]+?)\1\](?:\*\*)?(?!\()/g;
+      md.core.ruler.after('inline', 'dst-noun-autolink-plugin', (state) => {
+        // 核心正则：匹配 [名词]、[**名词**]、**[名词]**
+        const regex = /(?:\*\*)?\[(\*?\*?)([^\]]+?)\1\](?:\*\*)?/g;
         
         const nounMap = {
           '生命值': 'health',
@@ -71,8 +71,13 @@ export default defineConfig({
         state.tokens.forEach(token => {
           if (token.type === 'inline') {
             let newChildren = [];
+            let inLink = false;
+
             token.children.forEach(child => {
-              if (child.type === 'text') {
+              if (child.type === 'link_open') inLink = true;
+              if (child.type === 'link_close') inLink = false;
+
+              if (child.type === 'text' && !inLink) {
                 let text = child.content;
                 let lastIndex = 0;
                 let match;
@@ -86,7 +91,7 @@ export default defineConfig({
                 if (matches.length > 0) {
                   matches.forEach(m => {
                     const startIndex = m.index;
-                    const endIndex = regex.lastIndex;
+                    const endIndex = m.index + m[0].length;
                     
                     // 匹配前的普通文本
                     if (startIndex > lastIndex) {
