@@ -222,14 +222,15 @@ body {
 /* 侧边大纲栏 (Aside) 断点 (大于等于 1280px) */
 @media (min-width: 1280px) {
   .VPDoc.has-aside .aside {
-    width: 320px !important;
-    padding-left: 48px !important;
+    width: 300px !important; /* 增加到 300px */
+    padding-left: 32px !important; /* 给内容留出呼吸感 */
     margin-right: 0 !important;
     display: block !important;
+    flex-shrink: 0; /* 禁止被正文压缩 */
   }
 
   .VPDoc.has-aside .aside-container {
-    width: 320px !important;
+    width: 300px !important;
   }
 }
 
