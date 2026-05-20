@@ -38,11 +38,11 @@ defineProps({
 .infobox {
   float: right;
   clear: right; /* 确保多个卡片垂直排列 */
-  width: 280px;
+  width: 320px;
   background: #fdfaf5;
   border: 2px solid #5c3a21;
   border-radius: 8px;
-  margin: 0 0 24px 24px;
+  margin: 0 0 24px 32px; /* 增加一点左侧留白让文字呼吸 */
   font-size: 0.9em;
   box-shadow: 4px 4px 0px rgba(92, 58, 33, 0.1);
   overflow: hidden;

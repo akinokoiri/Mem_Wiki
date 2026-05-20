@@ -12,28 +12,10 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: '核心机制',
+        text: '芒伊木 Wiki 词条',
         collapsed: false,
         items: [
-          { text: '基础属性与常驻机制', link: '/mechanics/core' },
-          { text: '灵魂系统', link: '/mechanics/soul' },
-          { text: '死亡与复活', link: '/mechanics/death' }
-        ]
-      },
-      {
-        text: '形态研究',
-        collapsed: false,
-        items: [
-          { text: '人类形态', link: '/forms/human' },
-          { text: '兽化形态 (狐狸)', link: '/forms/fox' },
-          { text: '怨灵形态', link: '/forms/wraith' }
-        ]
-      },
-      {
-        text: '装备与物品',
-        collapsed: false,
-        items: [
-          { text: '封印项圈', link: '/items/collar' }
+          { text: '一、基础属性与常驻机制', link: '/mechanics/core' }
         ]
       }
     ],

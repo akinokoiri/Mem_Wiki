@@ -33,7 +33,7 @@ const isVideo = computed(() => {
 .media-card {
   float: right;
   clear: right;
-  margin: 0 0 24px 24px;
+  margin: 0 0 24px 32px;
   background: #fdfaf5;
   border: 2px solid #5c3a21;
   border-radius: 8px;
