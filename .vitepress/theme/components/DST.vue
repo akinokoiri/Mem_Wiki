@@ -16,26 +16,11 @@ const props = defineProps({
 const slots = useSlots()
 const imageError = ref(false)
 
-// 递归提取 VNode 中的所有纯文本，完美支持嵌套标签与混合插槽
-const extractText = (vnodes) => {
-  if (!vnodes) return ''
-  return vnodes.map(node => {
-    if (!node) return ''
-    if (typeof node === 'string' || typeof node === 'number') {
-      return String(node)
-    }
-    if (typeof node.children === 'string') {
-      return node.children
-    }
-    if (Array.isArray(node.children)) {
-      return extractText(node.children)
-    }
-    return ''
-  }).join('')
-}
-
 const nounText = computed(() => {
-  return slots.default ? extractText(slots.default()) : ''
+  if (slots.default) {
+    return slots.default()[0]?.children || ''
+  }
+  return ''
 })
 
 const iconMap = {
@@ -73,11 +58,7 @@ const handleImageError = () => {
 </script>
 
 <style scoped>
-/* 基类：高阶 CSS 变量定义 */
 .dst-noun {
-  --theme-color: #38bdf8; 
-  --theme-color-rgb: 56, 189, 248;
-
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -85,22 +66,14 @@ const handleImageError = () => {
   padding: 2px 8px;
   margin: 0 4px;
   border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   vertical-align: middle;
   cursor: help;
   position: relative;
-  
-  color: var(--theme-color);
-  background: rgba(var(--theme-color-rgb), 0.03);
-  border: 1px solid rgba(var(--theme-color-rgb), 0.2);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-
-  /* transition 性能调优，避免 all 带来的重绘开销 */
-  transition: 
-    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .noun-icon {
@@ -111,63 +84,89 @@ const handleImageError = () => {
   transition: transform 0.25s ease;
 }
 
-/* 统一 hover 发光与微动效 */
+/* 悬浮微动效与发光包边 */
 .dst-noun:hover {
-  background: rgba(var(--theme-color-rgb), 0.09);
-  border-color: rgba(var(--theme-color-rgb), 0.45);
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-1.5px);
-  box-shadow: 
-    0 0 12px rgba(var(--theme-color-rgb), 0.35),
-    0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .dst-noun:hover .noun-icon {
   transform: translateY(-1px) scale(1.1);
 }
 
-/* 变量映射层：完美遵循 DRY */
+/* 基于 DST 经典的专属属性渐变色彩体系 */
 .dst-health { 
-  --theme-color: #ff4d4d; 
-  --theme-color-rgb: 255, 77, 77;
+  color: #ff4d4d; 
+  border-color: rgba(255, 77, 77, 0.3);
+}
+.dst-health:hover {
+  box-shadow: 0 0 12px rgba(255, 77, 77, 0.35);
+  background: rgba(255, 77, 77, 0.08);
 }
 
 .dst-sanity { 
-  --theme-color: #ffd633; 
-  --theme-color-rgb: 255, 214, 51;
+  color: #ffd633; 
+  border-color: rgba(255, 214, 51, 0.3);
+}
+.dst-sanity:hover {
+  box-shadow: 0 0 12px rgba(255, 214, 51, 0.35);
+  background: rgba(255, 214, 51, 0.08);
 }
 
 .dst-hunger { 
-  --theme-color: #ff9933; 
-  --theme-color-rgb: 255, 153, 51;
+  color: #ff9933; 
+  border-color: rgba(255, 153, 51, 0.3);
+}
+.dst-hunger:hover {
+  box-shadow: 0 0 12px rgba(255, 153, 51, 0.35);
+  background: rgba(255, 153, 51, 0.08);
 }
 
 .dst-soul { 
-  --theme-color: #c084fc; 
-  --theme-color-rgb: 192, 132, 252;
+  color: #c084fc; 
+  border-color: rgba(192, 132, 252, 0.3);
+}
+.dst-soul:hover {
+  box-shadow: 0 0 12px rgba(192, 132, 252, 0.35);
+  background: rgba(192, 132, 252, 0.08);
 }
 
 .dst-beast { 
-  --theme-color: #eab308; 
-  --theme-color-rgb: 234, 179, 8;
+  color: #eab308; 
+  border-color: rgba(234, 179, 8, 0.3);
+}
+.dst-beast:hover {
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.35);
+  background: rgba(234, 179, 8, 0.08);
 }
 
 .dst-ghost { 
-  --theme-color: #94a3b8; 
-  --theme-color-rgb: 148, 163, 184;
+  color: #94a3b8; 
+  border-color: rgba(148, 163, 184, 0.3);
+}
+.dst-ghost:hover {
+  box-shadow: 0 0 12px rgba(148, 163, 184, 0.35);
+  background: rgba(148, 163, 184, 0.08);
 }
 
+/* 其它各种模组特有概念颜色统一收口 */
 .dst-mod {
-  --theme-color: #38bdf8;
-  --theme-color-rgb: 56, 189, 248;
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+.dst-mod:hover {
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.08);
 }
 
 /* 特殊封印项圈系列 */
-.dst-collar, 
-.dst-collar-lv2, 
-.dst-collar-lv3, 
-.dst-collar-lv4-an, 
-.dst-collar-lv4-yue {
-  --theme-color: #06b6d4;
-  --theme-color-rgb: 6, 182, 212;
+.dst-collar, .dst-collar-lv2, .dst-collar-lv3, .dst-collar-lv4-an, .dst-collar-lv4-yue {
+  color: #06b6d4;
+  border-color: rgba(6, 182, 212, 0.3);
+}
+.dst-collar:hover, .dst-collar-lv2:hover, .dst-collar-lv3:hover, .dst-collar-lv4-an:hover, .dst-collar-lv4-yue:hover {
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.35);
+  background: rgba(6, 182, 212, 0.08);
 }
 </style>
