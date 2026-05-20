@@ -16,9 +16,26 @@ const props = defineProps({
 const slots = useSlots()
 const imageError = ref(false)
 
+const extractText = (vnodes) => {
+  if (!vnodes) return ''
+  let text = ''
+  for (const vnode of vnodes) {
+    if (typeof vnode === 'string') {
+      text += vnode
+    } else if (typeof vnode.children === 'string') {
+      text += vnode.children
+    } else if (Array.isArray(vnode.children)) {
+      text += extractText(vnode.children)
+    } else if (typeof vnode.children === 'object' && vnode.children?.default) {
+      text += extractText(vnode.children.default())
+    }
+  }
+  return text
+}
+
 const nounText = computed(() => {
   if (slots.default) {
-    return slots.default()[0]?.children || ''
+    return extractText(slots.default())
   }
   return ''
 })
@@ -59,6 +76,10 @@ const handleImageError = () => {
 
 <style scoped>
 .dst-noun {
+  --dst-theme-h: 199;
+  --dst-theme-s: 92%;
+  --dst-theme-l: 60%;
+  
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -66,14 +87,27 @@ const handleImageError = () => {
   padding: 2px 8px;
   margin: 0 4px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* Glassmorphism & HSL Gradient variables */
+  background: linear-gradient(135deg, hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.05), hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.15));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.25);
+  color: hsl(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l));
+  
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   vertical-align: middle;
   cursor: help;
   position: relative;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dst-noun:hover {
+  background: linear-gradient(135deg, hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.1), hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.25));
+  border-color: hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.5);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.35);
 }
 
 .noun-icon {
@@ -84,89 +118,27 @@ const handleImageError = () => {
   transition: transform 0.25s ease;
 }
 
-/* 悬浮微动效与发光包边 */
-.dst-noun:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1.5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-
 .dst-noun:hover .noun-icon {
   transform: translateY(-1px) scale(1.1);
 }
 
 /* 基于 DST 经典的专属属性渐变色彩体系 */
-.dst-health { 
-  color: #ff4d4d; 
-  border-color: rgba(255, 77, 77, 0.3);
-}
-.dst-health:hover {
-  box-shadow: 0 0 12px rgba(255, 77, 77, 0.35);
-  background: rgba(255, 77, 77, 0.08);
-}
-
-.dst-sanity { 
-  color: #ffd633; 
-  border-color: rgba(255, 214, 51, 0.3);
-}
-.dst-sanity:hover {
-  box-shadow: 0 0 12px rgba(255, 214, 51, 0.35);
-  background: rgba(255, 214, 51, 0.08);
-}
-
-.dst-hunger { 
-  color: #ff9933; 
-  border-color: rgba(255, 153, 51, 0.3);
-}
-.dst-hunger:hover {
-  box-shadow: 0 0 12px rgba(255, 153, 51, 0.35);
-  background: rgba(255, 153, 51, 0.08);
-}
-
-.dst-soul { 
-  color: #c084fc; 
-  border-color: rgba(192, 132, 252, 0.3);
-}
-.dst-soul:hover {
-  box-shadow: 0 0 12px rgba(192, 132, 252, 0.35);
-  background: rgba(192, 132, 252, 0.08);
-}
-
-.dst-beast { 
-  color: #eab308; 
-  border-color: rgba(234, 179, 8, 0.3);
-}
-.dst-beast:hover {
-  box-shadow: 0 0 12px rgba(234, 179, 8, 0.35);
-  background: rgba(234, 179, 8, 0.08);
-}
-
-.dst-ghost { 
-  color: #94a3b8; 
-  border-color: rgba(148, 163, 184, 0.3);
-}
-.dst-ghost:hover {
-  box-shadow: 0 0 12px rgba(148, 163, 184, 0.35);
-  background: rgba(148, 163, 184, 0.08);
-}
-
-/* 其它各种模组特有概念颜色统一收口 */
-.dst-mod {
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.3);
-}
-.dst-mod:hover {
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
-  background: rgba(56, 189, 248, 0.08);
-}
+.dst-health { --dst-theme-h: 0; --dst-theme-s: 100%; --dst-theme-l: 65%; }
+.dst-sanity { --dst-theme-h: 48; --dst-theme-s: 100%; --dst-theme-l: 60%; }
+.dst-hunger { --dst-theme-h: 30; --dst-theme-s: 100%; --dst-theme-l: 60%; }
+.dst-soul   { --dst-theme-h: 275; --dst-theme-s: 96%; --dst-theme-l: 75%; }
+.dst-beast  { --dst-theme-h: 46; --dst-theme-s: 90%; --dst-theme-l: 47%; }
+.dst-ghost  { --dst-theme-h: 215; --dst-theme-s: 25%; --dst-theme-l: 65%; }
+.dst-mod    { --dst-theme-h: 199; --dst-theme-s: 92%; --dst-theme-l: 60%; }
 
 /* 特殊封印项圈系列 */
 .dst-collar, .dst-collar-lv2, .dst-collar-lv3, .dst-collar-lv4-an, .dst-collar-lv4-yue {
-  color: #06b6d4;
-  border-color: rgba(6, 182, 212, 0.3);
+  --dst-theme-h: 189; --dst-theme-s: 94%; --dst-theme-l: 37%;
 }
-.dst-collar:hover, .dst-collar-lv2:hover, .dst-collar-lv3:hover, .dst-collar-lv4-an:hover, .dst-collar-lv4-yue:hover {
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.35);
-  background: rgba(6, 182, 212, 0.08);
-}
+
+/* 新增映射的色彩支持 */
+.dst-repair         { --dst-theme-h: 142; --dst-theme-s: 71%; --dst-theme-l: 45%; }
+.dst-tomb-upgrader  { --dst-theme-h: 258; --dst-theme-s: 90%; --dst-theme-l: 66%; }
+.dst-corpse         { --dst-theme-h: 0; --dst-theme-s: 0%; --dst-theme-l: 55%; }
+.dst-shadow-gestalt { --dst-theme-h: 270; --dst-theme-s: 50%; --dst-theme-l: 45%; }
 </style>
