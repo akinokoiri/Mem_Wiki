@@ -1,5 +1,5 @@
 <template>
-  <aside class="infobox">
+  <aside class="infobox" :style="{ width: width }">
     <div class="infobox-title">{{ title }}</div>
     <div v-if="image" class="infobox-image">
       <img :src="withBase(image)" :alt="title" />
@@ -11,14 +11,14 @@
           <img v-if="stat.icon" :src="withBase(stat.icon)" class="stat-mini-icon" />
           {{ stat.label }}
         </div>
-        <div class="infobox-stat-value">{{ stat.value }}</div>
+        <div class="infobox-stat-value">{{ formatValue(stat.value) }}</div>
       </div>
     </div>
     <div v-if="details && details.length" class="infobox-section">核心特征</div>
     <div class="infobox-details">
       <div v-for="detail in details" :key="detail.label" class="infobox-detail-row">
         <span class="detail-label">{{ detail.label }}:</span>
-        <span class="detail-value">{{ detail.value }}</span>
+        <span class="detail-value">{{ formatValue(detail.value) }}</span>
       </div>
     </div>
   </aside>
@@ -29,9 +29,18 @@ import { withBase } from 'vitepress'
 defineProps({
   title: String,
   image: String,
+  width: {
+    type: String,
+    default: '320px'
+  },
   stats: Array, // [{ label: '生命', value: '75', icon: '/health_icon.png' }]
   details: Array // [{ label: '代码名', value: 'mem' }]
 })
+
+const formatValue = (val) => {
+  if (typeof val !== 'string') return val
+  return val.replace(/\\n/g, '\n') // 将字符串 "\n" 转换为真正的换行符
+}
 </script>
 
 <style scoped>
@@ -74,12 +83,14 @@ defineProps({
 
 .infobox-image {
   padding: 10px;
-  background: #fff;
+  background: #f5efe4;
   text-align: center;
   border-bottom: 1px solid #dcd1ba;
 }
 
 .infobox-image img {
+  display: block;
+  margin: 0 auto;
   max-width: 100%;
   height: auto;
   border-radius: 2px;
@@ -126,6 +137,7 @@ defineProps({
 .infobox-stat-value {
   font-weight: bold;
   color: #3d2e2e;
+  white-space: pre-line; /* 支持换行符 */
 }
 
 .infobox-details {
@@ -145,5 +157,6 @@ defineProps({
 
 .detail-value {
   color: #3d2e2e;
+  white-space: pre-line; /* 支持换行符 */
 }
 </style>

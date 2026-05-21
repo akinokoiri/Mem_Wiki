@@ -7,7 +7,7 @@
     </div>
     <div v-if="caption" class="media-caption">
       <div class="caption-decorator"></div>
-      {{ caption }}
+      {{ formattedCaption }}
     </div>
   </aside>
 </template>
@@ -26,6 +26,11 @@ const props = defineProps({
 
 const isVideo = computed(() => {
   return props.src && (props.src.endsWith('.mp4') || props.src.endsWith('.webm'))
+})
+
+const formattedCaption = computed(() => {
+  if (!props.caption) return ''
+  return props.caption.replace(/\\n/g, '\n') // 将字符串 "\n" 转换为真正的换行符
 })
 </script>
 
@@ -73,6 +78,7 @@ const isVideo = computed(() => {
   line-height: 1.4;
   padding: 0 4px;
   position: relative;
+  white-space: pre-line; /* 支持换行符 */
 }
 
 .caption-decorator {
