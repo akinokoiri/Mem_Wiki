@@ -43,10 +43,10 @@ const nounText = computed(() => {
 
 const iconSrc = computed(() => {
   if (imageError.value) {
-    return '/icon_mod.png'
+    return '/icons/icon_mod.png'
   }
   const iconKey = props.icon ? props.icon.toLowerCase().trim() : 'mod'
-  return iconMap[iconKey] || '/icon_mod.png'
+  return iconMap[iconKey] || '/icons/icon_mod.png'
 })
 
 const themeStyle = computed(() => {

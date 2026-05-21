@@ -39,23 +39,58 @@ export default defineConfig({
 
   // 自定义 Markdown 编译器行为
   markdown: {
+    math: true,
     config: (md) => {
+      // 注册黑幕 ||文字|| 行内语法插件
+      md.inline.ruler.before('emphasis', 'heimu', (state, silent) => {
+        const start = state.pos;
+        if (state.src.charCodeAt(start) !== 0x7C || state.src.charCodeAt(start + 1) !== 0x7C) return false;
+
+        let end = -1;
+        for (let i = start + 2; i < state.posMax - 1; i++) {
+          if (state.src.charCodeAt(i) === 0x7C && state.src.charCodeAt(i + 1) === 0x7C) {
+            end = i;
+            break;
+          }
+        }
+
+        if (end === -1) return false;
+
+        if (!silent) {
+          const tokenOpen = state.push('heimu_open', 'span', 1);
+          tokenOpen.attrs = [['class', 'heimu']];
+          
+          const max = state.posMax;
+          state.pos = start + 2;
+          state.posMax = end;
+          state.md.inline.tokenize(state);
+          state.posMax = max;
+
+          const tokenClose = state.push('heimu_close', 'span', -1);
+        }
+
+        state.pos = end + 2;
+        return true;
+      });
+
       md.core.ruler.after('inline', 'dst-noun-autolink-plugin', (state) => {
         // 核心正则：匹配 [名词]、[**名词**]、**[名词]**
         const regexNoun = /(?:\*\*)?\[(\*?\*?)([^\]]+?)\1\](?:\*\*)?/g;
-        // 黑幕正则：匹配 ||文字||
-        const regexSpoiler = /\|\|(.+?)\|\|/g;
-        
         const nounMap = {
           '生命值': 'health',
           '饱食度': 'hunger',
           '理智值': 'sanity',
           '精神值': 'sanity',
           '灵魂值': 'soul',
-          '灵魂池': 'soul',
+          '灵魂值系统': 'soul',
+          '灵魂池': 'hpky',
           '兽化': 'beast',
           '怨灵': 'ghost',
           '尸体': 'corpse',
+          '芒头': 'corpse',
+          '芒身': 'corpse',
+          '芒手': 'corpse',
+          '芒腿': 'corpse',
           '芒芒的尸体': 'corpse',
           '封印项圈': 'collar',
           '封印项圈lv1': 'collar',
@@ -88,35 +123,58 @@ export default defineConfig({
           '电锯惊魂': 'dj',
           '刻印形态': 'kyxt',
           '电锯轰鸣': "djhm",
-          '魂魄刻印': "hpky",
-          '沐尹荒': 'shadowmem',
-          '友善的沐尹荒': 'shadowmem-pet',
-          '编织梦魇': 'mod',
+          '魂魄刻印': "state",
+          '沐尹荒': 'shadowmem_minion',
+          '友善的沐尹荒': 'shadowmem_minion_pet',
+          '身体(友善的荒尹沐)': 'shadowmem_pet_body',
+          '编织梦魇': 'stalker_minion',
           '位面寄生': 'shadowaligned',
+          '位面能量': 'shadowaligned',
           '暗影位面寄生': 'shadowaligned',
           '月亮位面寄生': 'moonaligned',
           '位面封锁': 'moonaligned',
-          '敌意虚影·启迪': 'mod',
-          '闪耀刻印': 'mod',
+          '敌意虚影·启迪': 'mem_gestalt_guard',
+          '闪耀刻印': 'state',
           '潜伏恐惧': 'mod',
           '鬼火': 'ghost_fire',
-          '月光灼烧': 'mod',
-          '位面实体降格': 'mod',
+          '月光灼烧': 'state',
+          '位面实体降格': 'state',
           '芒伊木': 'mod',
           '芒芒的肢体': 'corpse',
           '灵魂实体专精': 'mod',
           '彼世的光芒': 'mod',
           '死体精通': 'mod',
-          '启迪陷阱空投仓': 'mod',
-          '再一次的机会': 'mod',
-          '复生虚弱': 'mod',
-          '灵魂震荡': 'mod',
-          '灵魂裂痕': 'mod',
+          '启迪陷阱空投仓': 'trap',
+          '启迪陷阱': 'trap',
+          '启迪陷阱空袭': 'trap',
+          '启迪陷阱阵列': 'trap',
+          '再一次的机会': 'state',
+          '复生虚弱': 'state',
+          '灵魂震荡': 'state',
+          '灵魂裂痕': 'state',
           '捕猎姿态': 'beast',
           '分头行动': 'ftxd',
           '暗影观察者': 'mod',
           '死亡回归': 'mod',
           '友善随从': 'mod',
+          '天基激光': 'tenkibeam',
+          '月能激光': 'yuebeam',
+          '月能灼烧伤害': 'original',
+          '极限催眠': 'original',
+          '虚影轰炸区': 'atk',
+          '三连击': 'atk',
+          '跳劈': 'atk',
+          '横扫': 'atk',
+          '冲刺': 'atk',
+          '劈砍': 'atk',
+          '暗影观察者': 'shadowseer',
+          '收回': 'command',
+          '战斗': 'command',
+          '工作命令': 'command',
+          '解散': 'command',
+          '汇合行动(解散)': 'command',
+          '分头行动(友善的荒尹沐)': 'command',
+          '潜伏恐惧': 'mem_ruinsnightmare',
         };
 
         state.tokens.forEach(token => {
@@ -131,14 +189,6 @@ export default defineConfig({
               if (child.type === 'text' && !inLink) {
                 let content = child.content;
                 let isModified = false;
-                
-                // 1. 先处理黑幕 ||text|| -> <span class="heimu">text</span>
-                if (regexSpoiler.test(content)) {
-                  isModified = true;
-                  content = content.replace(regexSpoiler, (match, p1) => {
-                    return `<span class="heimu">${p1}</span>`;
-                  });
-                }
 
                 regexNoun.lastIndex = 0;
                 if (regexNoun.test(content)) {

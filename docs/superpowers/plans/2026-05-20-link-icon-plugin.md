@@ -94,30 +94,30 @@ const nounText = computed(() => {
 })
 
 const iconMap = {
-  health: '/icon_health.png',
-  sanity: '/icon_sanity.png',
-  hunger: '/icon_hunger.png',
-  soul: '/icon_soul.png',
-  beast: '/icon_mem_beast_mode.png',
-  ghost: '/icon_mem_ghost_mode.png',
-  collar: '/icon_mem_xq.png',
-  'collar-lv2': '/icon_mem_xq_lv2.png',
-  'collar-lv3': '/icon_mem_xq_lv3.png',
-  'collar-lv4-an': '/icon_mem_xq_lv4_an.png',
-  'collar-lv4-yue': '/icon_mem_xq_lv4_yue.png',
-  repair: '/icon_mem_repair.png',
-  'tomb-upgrader': '/icon_mem_tomb_upgrader.png',
-  corpse: '/icon_mem_corpse.png',
-  'shadow-gestalt': '/icon_mem_shadow_gestalt.png',
-  mod: '/icon_mod.png'
+  health: '/icons/icon_health.png',
+  sanity: '/icons/icon_sanity.png',
+  hunger: '/icons/icon_hunger.png',
+  soul: '/icons/icon_soul.png',
+  beast: '/icons/icon_mem_beast_mode.png',
+  ghost: '/icons/icon_mem_ghost_mode.png',
+  collar: '/icons/icon_mem_xq.png',
+  'collar-lv2': '/icons/icon_mem_xq_lv2.png',
+  'collar-lv3': '/icons/icon_mem_xq_lv3.png',
+  'collar-lv4-an': '/icons/icon_mem_xq_lv4_an.png',
+  'collar-lv4-yue': '/icons/icon_mem_xq_lv4_yue.png',
+  repair: '/icons/icon_mem_repair.png',
+  'tomb-upgrader': '/icons/icon_mem_tomb_upgrader.png',
+  corpse: '/icons/icon_mem_corpse.png',
+  'shadow-gestalt': '/icons/icon_mem_shadow_gestalt.png',
+  mod: '/icons/icon_mod.png'
 }
 
 const iconSrc = computed(() => {
   if (imageError.value) {
-    return '/icon_mod.png'
+    return '/icons/icon_mod.png'
   }
   const iconKey = props.icon ? props.icon.toLowerCase().trim() : 'mod'
-  return iconMap[iconKey] || '/icon_mod.png'
+  return iconMap[iconKey] || '/icons/icon_mod.png'
 })
 
 const iconClass = computed(() => `dst-${props.icon ? props.icon.toLowerCase().trim() : 'mod'}`)
@@ -415,10 +415,10 @@ git commit -m "feat: implement custom markdown-it plugin in VitePress config for
   title="芒伊木 (常态人类)"
   image="/mem_card.png"
   :stats="[
-    { label: '生命值', value: '75', icon: '/icon_health.png' },
-    { label: '理智值', value: '200', icon: '/icon_sanity.png' },
-    { label: '饱食度', value: '150', icon: '/icon_hunger.png' },
-    { label: '灵魂值', value: '150', icon: '/icon_soul.png' }
+    { label: '生命值', value: '75', icon: '/icons/icon_health.png' },
+    { label: '理智值', value: '200', icon: '/icons/icon_sanity.png' },
+    { label: '饱食度', value: '150', icon: '/icons/icon_hunger.png' },
+    { label: '灵魂值', value: '150', icon: '/icons/icon_soul.png' }
   ]"
   :details="[
     { label: '代码名', value: 'mem' },

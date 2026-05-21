@@ -4,10 +4,10 @@
   title="芒伊木 (常态人类)"
   image="/mem_card.png"
   :stats="[
-    { label: '生命值', value: '75', icon: '/icon_health.png' },
-    { label: '理智值', value: '200', icon: '/icon_sanity.png' },
-    { label: '饱食度', value: '150', icon: '/icon_hunger.png' },
-    { label: '灵魂值', value: '150', icon: '/icon_soul.png' }
+    { label: '生命值', value: '75', icon: '/icons/icon_health.png' },
+    { label: '理智值', value: '200', icon: '/icons/icon_sanity.png' },
+    { label: '饱食度', value: '150', icon: '/icons/icon_hunger.png' },
+    { label: '灵魂值', value: '150', icon: '/icons/icon_soul.png' }
   ]"
   :details="[
     { label: '代码名', value: 'mem' },
