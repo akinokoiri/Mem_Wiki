@@ -382,7 +382,7 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 ---
 
-### 友善的芒伊月<DSTIcon icon="yue-pet" />
+### 友善的芒伊月<DSTIcon icon="mem_yue_pet" />
 
 <Infobox 
   title="友善的芒伊月"
@@ -461,7 +461,7 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 ---
 
-### 光辉意志<DSTIcon icon="yue-bond" />
+### 光辉意志<DSTIcon icon="mem_yue_bond" />
 
 与[友善的芒伊月]绑定的信物（类似**眼骨**）。可右键打开 **轮盘菜单** 来指挥[友善的芒伊月]。
 
@@ -492,7 +492,7 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 ---
 
-### 友善的荒尹沐<DSTIcon icon="shadowmem-pet" />
+### 友善的荒尹沐<DSTIcon icon="shadowmem_pet" />
 
 <Infobox 
   title="友善的荒尹沐"
@@ -554,7 +554,7 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 ---
 
-### 先驱意志<DSTIcon icon="shadowmem-bond" />
+### 先驱意志<DSTIcon icon="shadowmem_bond" />
 
 与[友善的荒尹沐]绑定的信物（类似**眼骨**）。可右键打开 **轮盘菜单** 指挥[友善的荒尹沐]。
 

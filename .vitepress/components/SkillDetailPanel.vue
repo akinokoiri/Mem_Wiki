@@ -12,14 +12,15 @@
           </ul>
         </div>
       </div>
-      <div v-else-if="skillId === 'mem_skill_soul_light'" class="skill-info" key="mem_skill_soul_light">
+      <div v-else-if="skillLore" class="skill-info" :key="skillId">
         <MediaCard 
-          src="/box_3.png" 
-          caption="发着光的鬼火和魂魄刻印" 
+          v-if="skillLore.media"
+          :src="skillLore.media" 
+          :caption="skillLore.caption" 
           width="100%"
         />
-        <div class="rich-text">
-          <p>也会影响 <DST icon="original" />友善的芒伊月 和 <DST icon="original" />友善的荒尹沐 的鬼火。</p>
+        <div class="rich-text" v-if="skillLore.text">
+          <AutoText :text="skillLore.text" />
         </div>
       </div>
       
@@ -31,11 +32,19 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+import { SKILL_LORES } from '../../data/skillLore.js';
+import AutoText from './AutoText.vue';
+
+const props = defineProps({
   skillId: {
     type: String,
     default: null
   }
+});
+
+const skillLore = computed(() => {
+  return props.skillId ? SKILL_LORES[props.skillId] : null;
 });
 </script>
 
