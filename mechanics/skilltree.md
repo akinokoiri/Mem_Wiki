@@ -37,6 +37,12 @@ const onSkillSelect = (id) => {
   max-width: 95%; /* 放宽右侧边界限制 */
 }
 
+.skill-column-right {
+  position: sticky;
+  top: 100px; /* 避开 VitePress 顶部导航栏，实现平滑吸顶悬浮 */
+  align-self: start;
+}
+
 @media (max-width: 960px) {
   .skill-page-layout {
     grid-template-columns: 1fr;
