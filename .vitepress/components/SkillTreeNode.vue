@@ -2,9 +2,9 @@
   <div 
     class="skill-node" 
     :style="nodeStyle"
-    @click="handleClick"
-    @dblclick="handleDoubleClick"
-    @contextmenu.prevent="handleRightClick"
+    @click.stop="handleClick"
+    @dblclick.stop="handleDoubleClick"
+    @contextmenu.prevent.stop="handleRightClick"
     @mouseenter="onHover"
     @mouseleave="onLeave"
   >

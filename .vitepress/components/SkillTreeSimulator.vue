@@ -1,6 +1,6 @@
 <template>
   <div class="skilltree-root">
-    <div class="simulator-wrapper">
+    <div class="simulator-wrapper" @click="resetSelection">
       <!-- 顶部装饰组：木牌与左右标签 -->
       <div class="top-decorations">
         <!-- 左侧标签 (纯装饰) -->
@@ -25,7 +25,7 @@
       
       <div class="content-layer">
         <!-- 顶部中心：剩余洞察点数显示 -->
-        <div class="insight-points">
+        <div class="insight-points" @click.stop>
           <div class="insight-icon-wrapper">
             <img src="/skills/office_icon/skill_icon_textbox.png" class="insight-bg" draggable="false" />
             <span class="insight-number">{{ availablePoints }}</span>
@@ -35,7 +35,7 @@
 
         <!-- 技能树背景与交互区 -->
         <div class="skilltree-container">
-          <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" @click="resetSelection" />
+          <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" />
           
           <SkillTreeNode
             v-for="node in SKILL_NODES"
@@ -50,7 +50,7 @@
         </div>
 
         <!-- 底部信息面板 -->
-        <div class="info-panel">
+        <div class="info-panel" @click.stop>
           <img src="/skills/office_icon/wilson_background_text.png" class="info-bg" draggable="false" />
           <div class="info-content">
             <h3 class="info-title">{{ displayTitle }}</h3>
