@@ -105,4 +105,11 @@ const skillLore = computed(() => {
   flex-direction: column;
   gap: 15px;
 }
+
+/* 强制重置 MediaCard 的浮动和外边距，防止撑破容器 */
+.skill-info :deep(.media-card) {
+  float: none;
+  margin: 0 0 20px 0;
+  width: 100% !important;
+}
 </style>
