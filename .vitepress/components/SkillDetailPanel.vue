@@ -12,7 +12,7 @@
           </ul>
         </div>
       </div>
-      <div v-else-if="skillId === 'mem_skill_soul_light'" class="skill-info" :key="skillId">
+      <div v-else-if="skillId === 'mem_skill_soul_light'" class="skill-info" key="mem_skill_soul_light">
         <MediaCard 
           src="/box_3.png" 
           caption="发着光的鬼火和魂魄刻印" 
@@ -24,7 +24,7 @@
       </div>
       
       <!-- 未配置的技能，面板显示为空 -->
-      <div v-else class="skill-info empty-state" :key="skillId">
+      <div v-else class="skill-info empty-state" :key="'empty-' + skillId">
       </div>
     </transition>
   </div>
