@@ -72,11 +72,12 @@ const handleImageError = () => {
   
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   font-weight: 600;
-  padding: 2px 8px;
-  margin: 0 4px;
-  border-radius: 6px;
+  font-size: 0.9em;
+  padding: 1px 6px;
+  margin: 0 2px;
+  border-radius: 4px;
   
   /* Glassmorphism & HSL Gradient variables */
   background: linear-gradient(135deg, hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.05), hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.15));
@@ -101,8 +102,8 @@ const handleImageError = () => {
 }
 
 .noun-icon {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   object-fit: contain;
   vertical-align: middle;
   transition: transform 0.25s ease;

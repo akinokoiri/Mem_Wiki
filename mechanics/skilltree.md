@@ -30,11 +30,11 @@ const onSkillSelect = (id) => {
 <style>
 .skill-page-layout {
   display: grid;
-  grid-template-columns: 6fr 3.2fr; /* 稍微缩小右侧比例 */
+  grid-template-columns: 6fr 3.6fr; /* 稍微扩大右侧比例 */
   gap: 30px; /* 增加两列之间的呼吸感 */
   align-items: start;
   margin-top: 20px;
-  max-width: 92%; /* 限制整体最大宽度，避免完全贴紧浏览器右侧边缘 */
+  max-width: 95%; /* 放宽右侧边界限制 */
 }
 
 @media (max-width: 960px) {

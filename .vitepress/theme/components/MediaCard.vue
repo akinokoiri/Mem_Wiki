@@ -46,6 +46,7 @@ const formattedCaption = computed(() => {
   box-shadow: 4px 4px 0px rgba(92, 58, 33, 0.1);
   z-index: 10;
   transition: transform 0.2s ease;
+  box-sizing: border-box;
 }
 
 .media-card:hover {

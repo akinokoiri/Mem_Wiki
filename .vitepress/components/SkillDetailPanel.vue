@@ -95,6 +95,7 @@ const skillLore = computed(() => {
   margin-top: 15px;
   color: #3a2512;
   line-height: 1.6;
+  font-size: 14.5px;
 }
 .rich-text p {
   margin: 0;
