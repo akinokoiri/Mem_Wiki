@@ -1,23 +1,50 @@
-
+---
+aside: false
+---
 这里是《芒伊木》模组的专属技能树深度模拟器。你可以在这里自由分配技能点，预览各种加点路线的机制与效果。
 
-> [!NOTE]操作介绍<DSTIcon icon="original" />
-> - **加点**：**双击** 高亮的可用技能节点
->   - 或选中技能后点击 <U>学习</U> 
-> - **退点**：**右键** 点击已解锁的技能节点（注意：如果有其他已解锁的技能依赖此节点，将无法退回）
->   - 或点击 <U>重置洞察</U> 来清空所有加点
-
 <script setup>
+import { ref } from 'vue'
 import SkillTreeSimulator from '../.vitepress/components/SkillTreeSimulator.vue'
+import SkillDetailPanel from '../.vitepress/components/SkillDetailPanel.vue'
+
+const currentSkillId = ref(null);
+
+const onSkillSelect = (id) => {
+  currentSkillId.value = id;
+}
 </script>
 
 <ClientOnly>
-  <SkillTreeSimulator :maxPoints="15" />
+  <div class="skill-page-layout">
+    <div class="skill-column-left">
+      <SkillTreeSimulator :maxPoints="15" @select="onSkillSelect"></SkillTreeSimulator>
+    </div>
+    <div class="skill-column-right">
+      <SkillDetailPanel :skillId="currentSkillId"></SkillDetailPanel>
+      <!-- 暂时放置到底部用于测试 -->
+      <MediaCard 
+        src="/box_3.png" 
+        caption="灵魂裂痕和灵魂震荡叠加导致的三维上限损失" 
+        width="100%"
+        style="margin-top: 20px;"
+      ></MediaCard>
+    </div>
+  </div>
 </ClientOnly>
 
+<style>
+.skill-page-layout {
+  display: grid;
+  grid-template-columns: 6.5fr 3.5fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
 
-<MediaCard 
-  src="/box_3.png" 
-  caption="灵魂裂痕和灵魂震荡叠加导致的三维上限损失" 
-  width="320px"
-/>
+@media (max-width: 960px) {
+  .skill-page-layout {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
