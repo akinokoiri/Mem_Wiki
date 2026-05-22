@@ -1,6 +1,7 @@
 <script>
 import { h, defineComponent } from 'vue';
 import DST from '../theme/components/DST.vue';
+import DSTIcon from '../theme/components/DSTIcon.vue';
 import { nounMap } from '../theme/components/icons.js';
 
 export default defineComponent({
@@ -10,12 +11,17 @@ export default defineComponent({
   },
   setup(props) {
     const parseInline = (str) => {
-      // 匹配 ul, li, 加粗, 名词, 换行
-      const tokenRegex = /(<ul>[\s\S]*?<\/ul>|<li>[\s\S]*?<\/li>|\*\*.*?\*\*|\[.*?\]|<strong>.*?<\/strong>|<b>.*?<\/b>|<br\s*\/?>|\n)/ig;
+      // 匹配 DSTIcon, ul, li, 加粗, 名词, 换行
+      const tokenRegex = /(<DSTIcon\s+icon="[^"]+"\s*\/?>|<ul>[\s\S]*?<\/ul>|<li>[\s\S]*?<\/li>|\*\*.*?\*\*|\[.*?\]|<strong>.*?<\/strong>|<b>.*?<\/b>|<br\s*\/?>|\n)/ig;
       const parts = str.split(tokenRegex);
       
       return parts.map(part => {
         if (!part) return null;
+        // 匹配 <DSTIcon icon="..." />
+        if (/^<DSTIcon\s+icon="([^"]+)"\s*\/?>$/i.test(part)) {
+          const match = part.match(/^<DSTIcon\s+icon="([^"]+)"\s*\/?>$/i);
+          return h(DSTIcon, { icon: match[1] });
+        }
         
         // 匹配 <ul> 和 <li>
         if (/^<ul>[\s\S]*<\/ul>$/i.test(part)) {
