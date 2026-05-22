@@ -17,7 +17,8 @@ export default defineConfig({
         items: [
           { text: '一、基础属性与常驻机制', link: '/mechanics/core' },
           { text: '二、建筑、物品、装备与料理', link: '/mechanics/items' },
-          { text: '三、敌人与随从', link: '/mechanics/enemies' }
+          { text: '三、敌人与随从', link: '/mechanics/enemies' },
+          { text: '四、技能树', link: '/mechanics/skilltree' }
         ]
       }
     ],
