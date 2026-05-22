@@ -52,8 +52,7 @@ watch(() => props.skillId, (newId) => {
 <style scoped>
 .skill-detail-panel {
   width: 100%;
-  height: 100%;
-  min-height: 460px; /* 对齐左侧模拟器的基础比例高度 */
+  min-height: 180px; /* 改为较小的最小高度，让面板可以自适应收缩 */
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 12px;
