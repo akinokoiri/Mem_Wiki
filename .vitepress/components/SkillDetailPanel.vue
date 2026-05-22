@@ -12,28 +12,8 @@
           </ul>
         </div>
       </div>
-      <div v-else-if="skillLore" class="skill-info" :key="skillId">
-        <!-- 支持单图或多图模式 -->
-        <template v-if="skillLore.media">
-          <MediaCard 
-            v-if="typeof skillLore.media === 'string'"
-            :src="skillLore.media" 
-            :caption="skillLore.caption" 
-            width="100%"
-          />
-          <div v-else-if="Array.isArray(skillLore.media)" class="media-gallery">
-            <MediaCard 
-              v-for="(img, index) in skillLore.media" 
-              :key="index"
-              :src="img.src" 
-              :caption="img.caption" 
-              width="100%"
-            />
-          </div>
-        </template>
-        <div class="rich-text" v-if="skillLore.text">
-          <AutoText :text="skillLore.text" />
-        </div>
+      <div v-else-if="AsyncDesc" class="skill-info" :key="skillId">
+        <component :is="AsyncDesc" />
       </div>
       
       <!-- 未配置的技能，面板显示为空 -->
@@ -44,9 +24,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { SKILL_LORES } from '../../data/skillLore.js';
-import AutoText from './AutoText.vue';
+import { defineAsyncComponent, shallowRef, watch } from 'vue';
 
 const props = defineProps({
   skillId: {
@@ -55,9 +33,20 @@ const props = defineProps({
   }
 });
 
-const skillLore = computed(() => {
-  return props.skillId ? SKILL_LORES[props.skillId] : null;
-});
+const AsyncDesc = shallowRef(null);
+
+watch(() => props.skillId, (newId) => {
+  if (newId) {
+    AsyncDesc.value = defineAsyncComponent(() => 
+      import(`../../mechanics/skills_desc/${newId}.md`).catch(() => {
+        // 如果文件不存在，返回空渲染
+        return { render: () => null };
+      })
+    );
+  } else {
+    AsyncDesc.value = null;
+  }
+}, { immediate: true });
 </script>
 
 <style scoped>
