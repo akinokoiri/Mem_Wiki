@@ -19,7 +19,7 @@
           width="100%"
         />
         <div class="rich-text">
-          <p>也会影响 <DSTIcon icon="original" />友善的芒伊月 和 <DSTIcon icon="original" />友善的荒尹沐 的鬼火。</p>
+          <p>也会影响 <DST icon="original" />友善的芒伊月 和 <DST icon="original" />友善的荒尹沐 的鬼火。</p>
         </div>
       </div>
       
