@@ -1,74 +1,79 @@
 <template>
   <div class="skilltree-root">
-    <div class="simulator-wrapper" @click="resetSelection">
-      <!-- 顶部装饰组：木牌与左右标签 -->
-      <div class="top-decorations">
-        <!-- 左侧标签 (纯装饰) -->
-        <div class="top-tab tab-left">
-          <img src="/skills/office_icon/tab_skills_unselected.png" class="tab-bg" draggable="false" />
-        </div>
+    <!-- 外层按 600/460 比例在文档流中占位 -->
+    <div class="simulator-scaler" ref="scalerRef" @click="resetSelection">
+      <!-- 内部是严格固定的 600x460 画布 -->
+      <div class="simulator-canvas" :style="{ transform: `scale(${scaleFactor})` }">
         
-        <!-- 中间主标题 -->
-        <div class="top-title-banner">
-          <img src="/skills/office_icon/playerinfo_bg.png" class="title-bg" draggable="false" />
-          <span class="title-text">技能树模拟器</span>
-        </div>
-        
-        <!-- 右侧标签 (假装当前选中) -->
-        <div class="top-tab tab-right">
-          <img src="/skills/office_icon/tab_skills_unselected.png" class="tab-bg" draggable="false" />
-        </div>
-      </div>
-
-      <!-- 游戏内卷轴作为最底层背景 -->
-      <img src="/skills/office_icon/background.png" class="main-bg" draggable="false" />
-      
-      <div class="content-layer">
-        <!-- 顶部中心：剩余洞察点数显示 -->
-        <div class="insight-points" @click.stop>
-          <div class="insight-icon-wrapper">
-            <img src="/skills/office_icon/skill_icon_textbox.png" class="insight-bg" draggable="false" />
-            <span class="insight-number">{{ availablePoints }}</span>
+        <!-- 顶部装饰组：木牌与左右标签 -->
+        <div class="top-decorations">
+          <!-- 左侧标签 (纯装饰) -->
+          <div class="top-tab tab-left">
+            <img src="/skills/office_icon/tab_skills_unselected.png" class="tab-bg" draggable="false" />
           </div>
-          <span class="insight-text">剩余洞察</span>
-        </div>
-
-        <!-- 技能树背景与交互区 -->
-        <div class="skilltree-container">
-          <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" />
           
-          <SkillTreeNode
-            v-for="node in SKILL_NODES"
-            :key="node.id"
-            :node="node"
-            :status="getNodeStatus(node.id)"
-            :is-focused="selectedNodeId === node.id"
-            @click="handleNodeClick"
-            @dblclick="handleNodeDoubleClick"
-            @rightclick="handleNodeRightClick"
-          />
+          <!-- 中间主标题 -->
+          <div class="top-title-banner">
+            <img src="/skills/office_icon/playerinfo_bg.png" class="title-bg" draggable="false" />
+            <span class="title-text">技能树模拟器</span>
+          </div>
+          
+          <!-- 右侧标签 (假装当前选中) -->
+          <div class="top-tab tab-right">
+            <img src="/skills/office_icon/tab_skills_unselected.png" class="tab-bg" draggable="false" />
+          </div>
         </div>
 
-        <!-- 底部信息面板 -->
-        <div class="info-panel" @click.stop>
-          <img src="/skills/office_icon/wilson_background_text.png" class="info-bg" draggable="false" />
-          <div class="info-content">
-            <h3 class="info-title">{{ displayTitle }}</h3>
-            <p class="info-desc">{{ displayDesc }}</p>
+        <!-- 游戏内卷轴作为最底层背景 -->
+        <img src="/skills/office_icon/background.png" class="main-bg" draggable="false" />
+        
+        <div class="content-layer">
+          <!-- 顶部中心：剩余洞察点数显示 -->
+          <div class="insight-points" @click.stop>
+            <div class="insight-icon-wrapper">
+              <img src="/skills/office_icon/skill_icon_textbox.png" class="insight-bg" draggable="false" />
+              <span class="insight-number">{{ availablePoints }}</span>
+            </div>
+            <span class="insight-text">剩余洞察</span>
           </div>
-          <div class="info-buttons">
-            <button 
-              v-if="displayNodeId && displayNodeId === selectedNodeId"
-              class="action-btn learn-btn" 
-              :class="{ 'is-learned': isNodeUnlocked(displayNodeId) }"
-              :disabled="!canLearnDisplayNode"
-              @click="learnDisplayNode"
-            >
-              {{ isNodeUnlocked(displayNodeId) ? '已掌握技能' : '学习' }}
-            </button>
-            <button class="action-btn reset-btn" @click="resetSkills">
-              重置洞察
-            </button>
+
+          <!-- 技能树背景与交互区 -->
+          <div class="skilltree-container">
+            <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" />
+            
+            <SkillTreeNode
+              v-for="node in SKILL_NODES"
+              :key="node.id"
+              :node="node"
+              :status="getNodeStatus(node.id)"
+              :is-focused="selectedNodeId === node.id"
+              @click="handleNodeClick"
+              @dblclick="handleNodeDoubleClick"
+              @rightclick="handleNodeRightClick"
+            />
+          </div>
+
+          <!-- 底部信息面板 -->
+          <div class="info-panel" @click.stop>
+            <img src="/skills/office_icon/wilson_background_text.png" class="info-bg" draggable="false" />
+            <div class="info-content">
+              <h3 class="info-title">{{ displayTitle }}</h3>
+              <p class="info-desc">{{ displayDesc }}</p>
+            </div>
+            <div class="info-buttons">
+              <button 
+                v-if="displayNodeId && displayNodeId === selectedNodeId"
+                class="action-btn learn-btn" 
+                :class="{ 'is-learned': isNodeUnlocked(displayNodeId) }"
+                :disabled="!canLearnDisplayNode"
+                @click="learnDisplayNode"
+              >
+                {{ isNodeUnlocked(displayNodeId) ? '已掌握技能' : '学习' }}
+              </button>
+              <button class="action-btn reset-btn" @click="resetSkills">
+                重置洞察
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -77,9 +82,31 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { SKILL_NODES } from '../data/skilltree.js';
 import SkillTreeNode from './SkillTreeNode.vue';
+
+// ---------------- 动态缩放逻辑 ----------------
+const scalerRef = ref(null);
+const scaleFactor = ref(1);
+let resizeObserver = null;
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      // 通过外部容器宽度比例，等比缩放整个 600px 画布
+      scaleFactor.value = entry.contentRect.width / 600;
+    }
+  });
+  if (scalerRef.value) {
+    resizeObserver.observe(scalerRef.value);
+  }
+});
+
+onUnmounted(() => {
+  if (resizeObserver) resizeObserver.disconnect();
+});
+// ----------------------------------------------
 
 const props = defineProps({
   maxPoints: {
@@ -279,22 +306,30 @@ const displayDesc = computed(() => {
 </script>
 
 <style scoped>
-.simulator-wrapper {
+.simulator-scaler {
   position: relative;
   width: 100%;
-  /* 移除 max-width: 950px; 和 margin: 0 auto; */
   margin-bottom: 12%; 
+  aspect-ratio: 600 / 460;
+}
+
+.simulator-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 460px;
+  transform-origin: top left;
   font-family: sans-serif;
   color: #333;
-  aspect-ratio: 600 / 460; 
 }
 
 .main-bg {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 118%; /* 从 105% 增加到 118%，向下额外拉伸以包裹所有组件 */
+  width: 600px;
+  height: 543px; /* 460 * 1.18 = 542.8px */
   object-fit: fill; 
   z-index: -1;
   pointer-events: none;
@@ -304,19 +339,19 @@ const displayDesc = computed(() => {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 460px;
 }
 
 .skilltree-container {
-  /* 基于 Lua：ScaleToSize(521, 320), SetPosition(5, 50) */
+  /* 恢复纯正的 Lua 设计大小，中心点定位 */
   position: absolute;
-  width: 86.83%;  /* 521 / 600 */
-  height: 69.56%; /* 320 / 460 */
+  width: 521px;
+  height: 320px;
   left: 50%;
   top: 50%;
-  margin-left: 0.83%; /* 5 / 600 */
-  margin-top: -6%; /* 原为 -10.86%，往下移了一点避免顶端穿模 */
+  margin-left: 5px;
+  margin-top: -28px;
   transform: translate(-50%, -50%);
   background: transparent;
 }
@@ -332,18 +367,19 @@ const displayDesc = computed(() => {
 
 .insight-points {
   position: absolute;
-  top: 13%; /* 原为 6.5%，为了跟上技能树背景的下移，跟着往下挪一点 */
-  left: 58%;
-  transform: translateX(-50%);
+  top:56px; 
+  left: 270px;
   display: flex;
   align-items: center;
   gap: 8px;
   z-index: 5;
+  transform: scale(0.8);  /* 👈 加上这行，0.8 表示缩小为原来的 80% */
+  transform-origin: center center; /* 👈 (可选) 设置缩放中心点 */
 }
 
 .insight-icon-wrapper {
   position: relative;
-  width: 70px; /* 图片原始大小是 256x256，这里缩放到合适尺寸 */
+  width: 70px;
   height: 70px;
   display: flex;
   justify-content: center;
@@ -364,30 +400,28 @@ const displayDesc = computed(() => {
   z-index: 2;
   width: 100%;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: bold;
   color: #3a2512;
-  font-family: serif; /* 偏古典字体 */
-  transform: translateY(3.5px);
+  font-family: serif;
+  transform: translateY(4px);
 }
 
 .insight-text {
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: bold;
   color: #3a2512;
-  transform: translateY(5px); /* 根据图标图案的视觉重心向下微调 */
+  transform: translateY(5px);
 }
 
 .info-panel {
-  /* 基于 Lua：ScaleToSize(470, 130), infopanel SetPosition(0, -148), bg SetPosition(0, -10) */
   position: absolute;
-  width: 88%;  /* 原 78.33%，稍微拉长 X 轴 */
-  height: 31%; /* 原 28.26%，整体也稍微放大一点 */
+  width: 528px;
+  height: 143px;
   left: 50%;
-  top: 50%;
-  margin-left: 0%;
-  margin-top: 34.34%; /* 向下平移 158/460 */
-  /* 在居中（-50%）的基础上，原为 -90%，改为 -65%，让整个介绍栏整体向下移动以拉开空间 */
+  top: 62%;
+  margin-left: 0;
+  margin-top: 158px;
   transform: translate(-50%, -65%);
   display: flex;
   justify-content: center;
@@ -406,7 +440,7 @@ const displayDesc = computed(() => {
 .info-content {
   position: relative;
   z-index: 1;
-  width: 85%;
+  width: 501px;
   height: auto;
   padding: 5px 15px;
   text-align: center;
@@ -414,32 +448,35 @@ const displayDesc = computed(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateY(-5px); /* 文字Y轴向上微调居中于背景卷轴的视觉中心 */
+  transform: translateY(-5px);
 }
 
 .info-title {
-  margin: 0 0 5px 0;
-  font-size: 1.2rem;
-  color: #5c3a21; /* 饥荒木板文字风格颜色 */
+  margin: 0;
+  padding: 0;
+  font-size: 11.5px;
+  color: #5c3a21;
   font-weight: bold;
+  line-height: 1.2;
 }
 
 .info-desc {
-  margin: 0;
-  font-size: 0.95rem;
+  margin: 2px 0 0 0;
+  padding: 0;
+  font-size: 10px;
   color: #3a2512;
-  white-space: pre-wrap; /* 保留 Lua 里的换行符 */
-  line-height: 1.4;
+  white-space: pre-wrap;
+  line-height: 1.3;
 }
 
 .info-buttons {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, 60%); /* 将Y轴下移，使得按钮恰好被背景图底边框从中间切分 */
+  transform: translate(-50%, 60%);
   display: flex;
-  flex-direction: row; /* 横向排列按钮以减少底部溢出 */
-  gap: 15px; /* 稍微增加两个按钮之间的间距，视觉更舒展 */
+  flex-direction: row;
+  gap: 15px;
   align-items: center;
   z-index: 2;
 }
@@ -456,7 +493,7 @@ const displayDesc = computed(() => {
   color: #332414;
   font-weight: bold;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 15px;
   cursor: pointer;
   transition: transform 0.1s;
   display: flex;
@@ -490,49 +527,45 @@ const displayDesc = computed(() => {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 15%; /* 增加上方避让空间，防止绝对定位的木牌遮挡 Markdown 文本 */
+  margin-top: 15%; /* 保持外部整体占据空间，如果想完全绝对，也可以保留 */
 }
 
 .top-decorations {
   position: absolute;
-  top: -15%; /* 大幅往上提，让标题能露出来 */
+  top: -69px;
   left: 0;
-  width: 100%;
+  width: 600px;
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* 底部对齐 */
-  z-index: -2; /* 放到主卷轴 (-1) 的下方！ */
-  pointer-events: none; /* 纯装饰，不遮挡可能的内容 */
-  /* 继续往上抬其 WEB 中大小 Y 轴的 25% */
-  transform: translateY(-25%);
+  align-items: flex-end;
+  z-index: -2;
+  pointer-events: none;
+  transform: translateY(-34px);
 }
 
-/* 左右标签样式 */
 .top-tab {
   position: relative;
-  width: 28%; /* 增大一点标签 */
-  aspect-ratio: 397 / 267; /* 原图比例 */
+  width: 168px;
+  height: 113px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 -4%; /* 交叠 */
+  margin: 0 -24px;
   z-index: 1; 
 }
 
 .tab-left {
-  /* X轴向右靠宽度50%，Y轴往上宽度50% (按比例397/267换算得自身高度的74.34%) */
-  transform: translate(40%, 10%);
+  transform: translate(67px, 11px);
   z-index: 3; 
 }
 
 .tab-right {
-  /* X轴向左靠宽度50%，Y轴往上宽度50% */
-  transform: translate(-40%, 10%);
+  transform: translate(-67px, 11px);
   z-index: 3; 
 }
 
 .tab-left .tab-bg {
-  transform: scaleX(-1); /* 水平翻转背景图 */
+  transform: scaleX(-1);
 }
 
 .tab-bg {
@@ -547,17 +580,16 @@ const displayDesc = computed(() => {
 .tab-text {
   position: relative;
   z-index: 2;
-  font-size: 1.2rem;
+  font-size: 19px;
   color: #5c3a21;
   font-weight: bold;
-  padding-bottom: 5%; /* 下调文字重心，适配木牌中间位置 */
+  padding-bottom: 6px;
 }
 
-/* 中间主标题样式 */
 .top-title-banner {
   position: relative;
-  width: 55%; 
-  aspect-ratio: 999 / 406; /* 真实木牌素材的大致比例 */
+  width: 330px; 
+  height: 134px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -576,11 +608,12 @@ const displayDesc = computed(() => {
 .title-text {
   position: relative;
   z-index: 2;
-  font-size: 1.6rem;
-  color: #c04040; /* 偏暗的红字，还原游戏风格 */
+  font-size: 20px;
+  color: #c04040;
   font-weight: bold;
   letter-spacing: 3px;
   text-shadow: 2px 2px 2px rgba(0,0,0,0.6);
-  padding-top: 7%; /* 往下挪一点，回到木牌的正中央视觉位置 */
+  padding-top: 9px;
+  transform: translateY(8px);
 }
 </style>

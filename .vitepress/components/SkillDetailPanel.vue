@@ -13,12 +13,24 @@
         </div>
       </div>
       <div v-else-if="skillLore" class="skill-info" :key="skillId">
-        <MediaCard 
-          v-if="skillLore.media"
-          :src="skillLore.media" 
-          :caption="skillLore.caption" 
-          width="100%"
-        />
+        <!-- 支持单图或多图模式 -->
+        <template v-if="skillLore.media">
+          <MediaCard 
+            v-if="typeof skillLore.media === 'string'"
+            :src="skillLore.media" 
+            :caption="skillLore.caption" 
+            width="100%"
+          />
+          <div v-else-if="Array.isArray(skillLore.media)" class="media-gallery">
+            <MediaCard 
+              v-for="(img, index) in skillLore.media" 
+              :key="index"
+              :src="img.src" 
+              :caption="img.caption" 
+              width="100%"
+            />
+          </div>
+        </template>
         <div class="rich-text" v-if="skillLore.text">
           <AutoText :text="skillLore.text" />
         </div>
@@ -86,5 +98,10 @@ const skillLore = computed(() => {
 }
 .rich-text p {
   margin: 0;
+}
+.media-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 </style>

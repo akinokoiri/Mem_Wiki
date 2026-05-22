@@ -63,8 +63,8 @@ const nodeStyle = computed(() => {
   const topPx = offsetY - props.node.y; // 饥荒中y轴向上为正，Web中向下为正，故用减法
   
   return {
-    left: `${(leftPx / 521) * 100}%`,
-    top: `${(topPx / 320) * 100}%`
+    left: `${leftPx}px`,
+    top: `${topPx}px`
   };
 });
 
@@ -94,8 +94,8 @@ const handleRightClick = () => {
 <style scoped>
 .skill-node {
   position: absolute;
-  width: 6.14%;
-  aspect-ratio: 1 / 1;
+  width: 32px;
+  height: 32px;
   transform: translate(-50%, -50%);
   cursor: pointer;
 }

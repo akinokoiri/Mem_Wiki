@@ -10,12 +10,20 @@ export default defineComponent({
   },
   setup(props) {
     const parseInline = (str) => {
-      // 匹配 **加粗** 或 [名词] 或 <strong>加粗</strong> 或 <b>加粗</b> 或 <br> 换行
-      const tokenRegex = /(\*\*.*?\*\*|\[.*?\]|<strong>.*?<\/strong>|<b>.*?<\/b>|<br\s*\/?>|\n)/ig;
+      // 匹配 ul, li, 加粗, 名词, 换行
+      const tokenRegex = /(<ul>[\s\S]*?<\/ul>|<li>[\s\S]*?<\/li>|\*\*.*?\*\*|\[.*?\]|<strong>.*?<\/strong>|<b>.*?<\/b>|<br\s*\/?>|\n)/ig;
       const parts = str.split(tokenRegex);
       
       return parts.map(part => {
         if (!part) return null;
+        
+        // 匹配 <ul> 和 <li>
+        if (/^<ul>[\s\S]*<\/ul>$/i.test(part)) {
+          return h('ul', null, parseInline(part.replace(/^<ul>|<\/ul>$/ig, '')));
+        }
+        if (/^<li>[\s\S]*<\/li>$/i.test(part)) {
+          return h('li', null, parseInline(part.replace(/^<li>|<\/li>$/ig, '')));
+        }
         
         // 匹配 **加粗**
         if (part.startsWith('**') && part.endsWith('**')) {
