@@ -12,9 +12,19 @@
           </ul>
         </div>
       </div>
-      <div v-else class="skill-info" :key="skillId">
-        <!-- 后续任务完善具体的技能信息展示 -->
-        <p>选中技能: {{ skillId }}</p>
+      <div v-else-if="skillId === 'mem_skill_soul_light'" class="skill-info" :key="skillId">
+        <MediaCard 
+          src="/box_3.png" 
+          caption="发着光的鬼火和魂魄刻印" 
+          width="100%"
+        />
+        <div class="rich-text">
+          <p>也会影响 <DSTIcon icon="original" />友善的芒伊月 和 <DSTIcon icon="original" />友善的荒尹沐 的鬼火。</p>
+        </div>
+      </div>
+      
+      <!-- 未配置的技能，面板显示为空 -->
+      <div v-else class="skill-info empty-state" :key="skillId">
       </div>
     </transition>
   </div>
@@ -59,5 +69,13 @@ defineProps({
 .fade-slide-leave-to {
   opacity: 0;
   transform: translateY(-10px);
+}
+.rich-text {
+  margin-top: 15px;
+  color: #3a2512;
+  line-height: 1.6;
+}
+.rich-text p {
+  margin: 0;
 }
 </style>

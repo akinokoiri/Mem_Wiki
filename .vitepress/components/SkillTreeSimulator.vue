@@ -35,7 +35,7 @@
 
         <!-- 技能树背景与交互区 -->
         <div class="skilltree-container">
-          <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" />
+          <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" @click="resetSelection" />
           
           <SkillTreeNode
             v-for="node in SKILL_NODES"
@@ -257,10 +257,14 @@ function handleNodeRightClick(id) {
   }
 }
 
-function resetSkills() {
-  unlockedSkills.value.clear();
+function resetSelection() {
   selectedNodeId.value = null;
   emit('select', null);
+}
+
+function resetSkills() {
+  unlockedSkills.value.clear();
+  resetSelection();
 }
 
 const displayTitle = computed(() => {

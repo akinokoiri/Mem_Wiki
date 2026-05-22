@@ -23,13 +23,6 @@ const onSkillSelect = (id) => {
     </div>
     <div class="skill-column-right">
       <SkillDetailPanel :skillId="currentSkillId"></SkillDetailPanel>
-      <!-- 暂时放置到底部用于测试 -->
-      <MediaCard 
-        src="/box_3.png" 
-        caption="灵魂裂痕和灵魂震荡叠加导致的三维上限损失" 
-        width="100%"
-        style="margin-top: 20px;"
-      ></MediaCard>
     </div>
   </div>
 </ClientOnly>
