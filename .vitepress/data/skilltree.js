@@ -117,7 +117,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_SOUL_LOCK_1",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[融魂术]\n你需要在黑暗中倾听危险的警告，逃回光照以积攒胆识。\n越是极限收益越高，但若被黑暗反噬受伤，你将会失去所有进度。",
+    "desc": "前置要求：点亮[融魂术]\n【封印】你需要在黑暗中倾听危险的警告，逃回光照以积攒胆识。\n越是极限收益越高，但若被黑暗反噬受伤，你将会失去所有进度。",
     "icon": "mem_skill_soul_lock_1"
   },
   "mem_skill_soul_light": {
@@ -147,7 +147,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_SOUL_LOCK_3",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[融魂术]、[灵魂实体专精三级]、[休养死息二级]中的任意两个\n你需要通过大量治疗溢出，让[灵魂池]在某一刻≥150点。",
+    "desc": "前置要求：点亮[融魂术]、[灵魂实体专精三级]、[休养死息二级]中的任意两个\n【封印】你需要通过大量治疗溢出，让[灵魂池]在某一刻≥150点。",
     "icon": "mem_skill_soul_lock_3"
   },
   "mem_skill_soul_split": {
@@ -177,7 +177,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_SOUL_LOCK_2",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[休养死息二级]\n你需要承受一次幅度≥101%的[灵魂震荡]。\n只有让躯壳彻底体验过灵魂撕裂的痛苦，你才能学会如何构筑壁垒。",
+    "desc": "前置要求：点亮[休养死息二级]\n【封印】你需要承受一次幅度≥101%的[灵魂震荡]。\n只有让躯壳彻底体验过灵魂撕裂的痛苦，你才能学会如何构筑壁垒。",
     "icon": "mem_skill_soul_lock_2"
   },
   "mem_skill_soul_wall": {
@@ -220,7 +220,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_BODY_LOCK_SPIRIT",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[休养死息二级]、[精准度优化一级]、[参点防腐剂一级]、[逐渐麻木一级]中的任意两个\n你需要在5秒内失去等同于你“当前”灵魂上限的灵魂值。\n体验濒临枯竭的绝境来激发潜能，或许……主动压低上限也是一种捷径？",
+    "desc": "前置要求：点亮[休养死息二级]、[精准度优化一级]、[参点防腐剂一级]、[逐渐麻木一级]中的任意两个\n【封印】你需要在5秒内失去等同于你“当前”灵魂上限的灵魂值。\n体验濒临枯竭的绝境来激发潜能，或许……主动压低上限也是一种捷径？",
     "icon": "mem_skill_body_lock_spirit"
   },
   "mem_spirit_link": {
@@ -418,7 +418,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_BODY_LOCK_EXP",
     "title": "路径锁定",
-    "desc": "前置要求：同时拥有[幽灵体质]与[野兽体质]\n你需要切身体验一次粉身碎骨的瞬间（因爆炸而死亡1次）。\n唯有直面毁灭的冲击，这具躯壳才能学会如何将残存的能量化作绚丽的余烬。",
+    "desc": "前置要求：同时拥有[幽灵体质]与[野兽体质]\n【封印】你需要切身体验一次粉身碎骨的瞬间（因爆炸而死亡1次）。\n唯有直面毁灭的冲击，这具躯壳才能学会如何将残存的能量化作绚丽的余烬。",
     "icon": "mem_skill_body_lock_exp"
   },
   "mem_explosive_body": {
@@ -463,7 +463,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_BODY_LOCK_MEDICINE",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[隐蔽本能二级]\n让10种不同的生灵折服于你并奉你为主。\n唯有深刻体悟不同躯壳的差异与共性，才能随心所欲地调配它们的本源。",
+    "desc": "前置要求：点亮[隐蔽本能二级]\n【封印】让10种不同的生灵折服于你并奉你为主。\n唯有深刻体悟不同躯壳的差异与共性，才能随心所欲地调配它们的本源。",
     "icon": "mem_skill_body_lock_medicine"
   },
   "mem_skill_instinct_hide_2": {
@@ -509,7 +509,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_BODY_LOCK_CORPSE",
     "title": "路径锁定",
-    "desc": "前置要求：同时点亮[参点防腐剂三级]与[幽灵体质]或[野兽体质]与[幽灵体质]\n亲手缝制66种不同的随身装备，或让 6 种因为位面能量死而复生的生物彻底安息。\n借由不断编织外物与剖析复生者的躯壳，你终将参透重塑死体的奥秘。",
+    "desc": "前置要求：同时点亮[参点防腐剂三级]与[幽灵体质]或[野兽体质]与[幽灵体质]\n【封印】亲手缝制66种不同的随身装备，或让 6 种因为位面能量死而复生的生物彻底安息。\n借由不断编织外物与剖析复生者的躯壳，你终将参透重塑死体的奥秘。",
     "icon": "mem_skill_body_lock_corpse"
   },
   "mem_corpse_mastery": {

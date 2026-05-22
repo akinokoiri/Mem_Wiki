@@ -1,9 +1,3 @@
-<MediaCard 
-  src="/box_sxlh.png" 
-  caption="发着光的鬼火和魂魄刻印" 
-  width="100%" 
-/>
-
 <div class="rich-text">
 
 > [!NOTE]生效范围<DSTIcon icon="mod"/>
@@ -14,3 +8,9 @@
 > - [电锯惊魂]开启[刻印形态]时的鬼火特效。
 
 </div>
+
+<MediaCard 
+  src="/box_bsdgm.png" 
+  caption="发着光的电锯惊魂和魂魄刻印" 
+  width="100%" 
+/>

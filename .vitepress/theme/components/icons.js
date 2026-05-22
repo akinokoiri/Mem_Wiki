@@ -41,7 +41,7 @@ export const nounMap = {
   '被侵蚀的虚影': 'shadow-gestalt',
   '尸体防腐核心': 'tomb-upgrader',
   '芒芒尸体的设计图': 'mem_corpse_site',
-  '魂墙': 'soul_wall',
+  '魂墙(物品)': 'soul_wall',
   '电锯惊魂': 'dj',
   '刻印形态': 'kyxt',
   '电锯轰鸣': "djhm",
@@ -75,6 +75,7 @@ export const nounMap = {
   '灵魂裂痕': 'state',
   '捕猎姿态': 'beast',
   '分头行动': 'ftxd',
+  '意识转移': 'ftxd',
   '死亡回归': 'mod',
   '友善随从': 'mod',
   '天基激光': 'tenkibeam',
@@ -95,6 +96,8 @@ export const nounMap = {
   '汇合行动(解散)': 'command',
   '分头行动(友善的荒尹沐)': 'command',
   '潜伏恐惧': 'mem_ruinsnightmare',
+  '腐烂时间': 'spoil',
+  '腐烂速率': 'spoil',
 };
 
 export const iconMap = {
@@ -151,6 +154,7 @@ export const iconMap = {
   command: '/icons/icon_command.png',
   shadowmem_pet_body: '/shadowmem_pet_body.png',
   mem_ruinsnightmare: '/mem_ruinsnightmare.png',
+  spoil: '/icons/icon_spoil.png',
 
 
 
@@ -214,6 +218,7 @@ export const colorMap = {
   command: { h: 240, s: 67, l: 72 },
   shadowmem_pet_body: { h: 0, s: 1, l: 36 },
   mem_ruinsnightmare: { h: 358, s: 53, l: 22 },
+  spoil: { h: 170, s: 12, l: 47 },
 
 
   mod: { h: 199, s: 92, l: 60 },

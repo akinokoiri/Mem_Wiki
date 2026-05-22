@@ -5,7 +5,7 @@
         <div class="guide-content">
           <h3>{{ isDescMissing ? '暂无详细解说' : '操作介绍' }}</h3>
           <p v-if="isDescMissing" class="flavor-text">
-            * 这个技能没有非常复杂的隐藏机制，所以详细描述已经被芒伊木吃掉了😋...
+            * 这个技能没有非常复杂的隐藏机制，或者已在前文中有详细解释。所以这里的详细描述已经被芒伊木吃掉了😋...
           </p>
           <ul>
             <li><strong>双击</strong> 高亮的可用技能节点</li>
