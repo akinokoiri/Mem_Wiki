@@ -88,6 +88,8 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['select']);
+
 const unlockedSkills = ref(new Set());
 const selectedNodeId = ref(null);
 
@@ -188,10 +190,12 @@ function getNodeStatus(id) {
 
 function handleNodeClick(id) {
   selectedNodeId.value = id;
+  emit('select', id);
 }
 
 function handleNodeDoubleClick(id) {
   selectedNodeId.value = id;
+  emit('select', id);
   if (canLearnDisplayNode.value) {
     learnDisplayNode();
   }
@@ -256,6 +260,7 @@ function handleNodeRightClick(id) {
 function resetSkills() {
   unlockedSkills.value.clear();
   selectedNodeId.value = null;
+  emit('select', null);
 }
 
 const displayTitle = computed(() => {
@@ -273,12 +278,10 @@ const displayDesc = computed(() => {
 .simulator-wrapper {
   position: relative;
   width: 100%;
-  max-width: 950px; 
-  margin: 0 auto;
-  margin-bottom: 12%; /* 增加底部外边距，给向下溢出的背景图留出空间 */
+  /* 移除 max-width: 950px; 和 margin: 0 auto; */
+  margin-bottom: 12%; 
   font-family: sans-serif;
   color: #333;
-  /* 游戏内强制将背景图拉伸为 600x460 */
   aspect-ratio: 600 / 460; 
 }
 
