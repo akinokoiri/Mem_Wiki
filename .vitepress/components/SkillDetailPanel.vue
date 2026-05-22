@@ -1,9 +1,12 @@
 <template>
   <div class="skill-detail-panel">
     <transition name="fade-slide" mode="out-in">
-      <div v-if="!skillId" class="default-guide" key="default">
+      <div v-if="!skillId || isDescMissing" class="default-guide" :key="isDescMissing ? 'missing-' + skillId : 'default'">
         <div class="guide-content">
-          <h3>操作介绍</h3>
+          <h3>{{ isDescMissing ? '暂无详细解说' : '操作介绍' }}</h3>
+          <p v-if="isDescMissing" class="flavor-text">
+            * 这个技能没有非常复杂的隐藏机制，所以详细描述已经被芒伊木吃掉了😋...
+          </p>
           <ul>
             <li><strong>双击</strong> 高亮的可用技能节点</li>
             <li>或选中技能后点击 <u>学习</u></li>
@@ -15,16 +18,12 @@
       <div v-else-if="AsyncDesc" class="skill-info" :key="skillId">
         <component :is="AsyncDesc" />
       </div>
-      
-      <!-- 未配置的技能，面板显示为空 -->
-      <div v-else class="skill-info empty-state" :key="'empty-' + skillId">
-      </div>
     </transition>
   </div>
 </template>
 
 <script setup>
-import { defineAsyncComponent, shallowRef, watch } from 'vue';
+import { defineAsyncComponent, shallowRef, ref, watch } from 'vue';
 
 const props = defineProps({
   skillId: {
@@ -34,12 +33,15 @@ const props = defineProps({
 });
 
 const AsyncDesc = shallowRef(null);
+const isDescMissing = ref(false);
 
 watch(() => props.skillId, (newId) => {
+  isDescMissing.value = false;
   if (newId) {
     AsyncDesc.value = defineAsyncComponent(() => 
       import(`../../mechanics/skills_desc/${newId}.md`).catch(() => {
-        // 如果文件不存在，返回空渲染
+        // 如果文件不存在，标记为缺失并返回空组件
+        isDescMissing.value = true;
         return { render: () => null };
       })
     );
@@ -66,6 +68,17 @@ watch(() => props.skillId, (newId) => {
 .guide-content h3 {
   margin-top: 0;
   color: #5c3a21;
+}
+.flavor-text {
+  color: #8b7355;
+  font-style: italic;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  background: rgba(92, 58, 33, 0.05);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #dcd1ba;
 }
 .fade-slide-enter-active,
 .fade-slide-leave-active {
