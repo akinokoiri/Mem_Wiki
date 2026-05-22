@@ -1,6 +1,6 @@
 ---
 aside: false
-pageClass: wide-page
+pageClass: skilltree-page
 ---
 这里是《芒伊木》模组的专属技能树深度模拟器。你可以在这里自由分配技能点，预览各种加点路线的机制与效果。
 
@@ -37,10 +37,11 @@ const onSkillSelect = (id) => {
 <style>
 .skill-page-layout {
   display: grid;
-  grid-template-columns: 6.5fr 3.5fr;
-  gap: 20px;
+  grid-template-columns: 6fr 3.2fr; /* 稍微缩小右侧比例 */
+  gap: 30px; /* 增加两列之间的呼吸感 */
   align-items: start;
   margin-top: 20px;
+  max-width: 92%; /* 限制整体最大宽度，避免完全贴紧浏览器右侧边缘 */
 }
 
 @media (max-width: 960px) {
