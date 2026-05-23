@@ -79,6 +79,7 @@ body {
   background-color: var(--mem-bg);
   background-image: radial-gradient(var(--mem-dot) 0.5px, transparent 0.5px);
   background-size: 20px 20px;
+  overflow-x: hidden;
 }
 
 /* 自定义滚动条 */
@@ -213,7 +214,7 @@ body {
 }
 
 /* ============================================================
-   浮动组件定位 (Infobox/MediaCard)
+   浮动组件定位 (Infobox/MediaCard) / 无感卡片双栏网格 (Subtle Card Grid)
    ============================================================ */
 
 .infobox, .media-card {
@@ -229,6 +230,54 @@ body {
 
 .clear {
   clear: both;
+}
+
+/* 无感卡片双栏网格核心样式 */
+.vp-doc .item-card {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: start;
+  background: var(--mem-bg);
+  border: 1px dashed var(--mem-border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 12px rgba(92, 58, 33, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.vp-doc .item-card:hover {
+  border-color: var(--mem-heading-sub);
+  box-shadow: 0 6px 16px rgba(92, 58, 33, 0.08);
+}
+
+/* 智能无属性卡片单栏回退 */
+.vp-doc .item-card:not(:has(.infobox)) {
+  grid-template-columns: 1fr;
+}
+
+.vp-doc .item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 消除卡片内首尾段落外边距对布局的挤压 */
+.vp-doc .item-content > *:first-child {
+  margin-top: 0 !important;
+}
+.vp-doc .item-content > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 响应式折叠：在手机和中屏下自动转换为单栏 */
+@media (max-width: 959px) {
+  .vp-doc .item-card {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+    padding: 16px;
+  }
 }
 
 /* 黑幕 (Heimu) - 鼠标悬停显示文字 */
@@ -260,8 +309,9 @@ body {
 /* 桌面端基础 (大于等于 960px) */
 @media (min-width: 960px) {
   .VPContent.has-sidebar {
-    margin-left: var(--vp-sidebar-width) !important;
-    padding-left: 0 !important;
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   .VPDoc {
