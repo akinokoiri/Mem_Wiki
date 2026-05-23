@@ -88,6 +88,7 @@ export const nounMap = {
   '横扫': 'atk',
   '冲刺': 'atk',
   '劈砍': 'atk',
+  '近战反击': 'atk',
   '暗影观察者': 'shadowseer',
   '收回': 'command',
   '战斗': 'command',
@@ -138,7 +139,6 @@ export const iconMap = {
   kyxt: '/icons/icon_kyxt.png',
   hpky: '/icons/icon_hpky.png',
   ghost_fire: '/icons/icon_ghost_fire.png',
-  spoil: '/icons/icon_spoil.png',
   mem_corpse_site: '/icons/icon_mem_corpse_site.png',
   ftxd: '/icons/icon_ftxd.png',
   moonaligned: '/icons/icon_moonaligned.png',
@@ -218,9 +218,25 @@ export const colorMap = {
   command: { h: 240, s: 67, l: 72 },
   shadowmem_pet_body: { h: 0, s: 1, l: 36 },
   mem_ruinsnightmare: { h: 358, s: 53, l: 22 },
-  spoil: { h: 170, s: 12, l: 47 },
 
 
   mod: { h: 199, s: 92, l: 60 },
   original: { h: 40, s: 54, l: 52 },
 }
+
+export const linkMap = {
+  '天基激光': '/mechanics/enemies.html#def-天基激光',
+  '埋葬': '/mechanics/items.html#def-maizang',
+  '芒伊月': '/mechanics/enemies.html#芒伊月',
+  '荒尹沐': '/mechanics/enemies.html#荒尹沐',
+  '电锯惊魂': '/mechanics/items.html#电锯惊魂',
+  '灵魂池': '/mechanics/core.html#灵魂池系统',
+  '死亡回归': '/mechanics/core.html#死亡回归',
+  '狐狸的凶宅': '/mechanics/items.html#狐狸的凶宅',
+  '封印项圈lv4·暗': '/mechanics/items.html#封印项圈-lv4暗',
+  '封印项圈lv4·月': '/mechanics/items.html#封印项圈-lv4月',
+};
+
+export const officialTerms = [
+  '生命值', '理智值', '精神值', '饱食度', '腐烂速率', '腐烂时间'
+];

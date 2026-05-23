@@ -1,14 +1,21 @@
 <template>
-  <span class="dst-noun" :style="themeStyle" :title="`模组词条: ${nounText}`">
+  <component 
+    :is="targetLink ? 'a' : 'span'"
+    :href="targetLink ? withBase(targetLink) : undefined"
+    class="dst-noun" 
+    :class="{ 'has-link': targetLink }"
+    :style="themeStyle" 
+    :title="hoverTitle"
+  >
     <img :src="withBase(iconSrc)" class="noun-icon" @error="handleImageError" />
     <slot></slot>
-  </span>
+  </component>
 </template>
 
 <script setup>
 import { computed, useSlots, ref } from 'vue'
 import { withBase } from 'vitepress'
-import { iconMap, colorMap } from './icons.js'
+import { iconMap, colorMap, linkMap, officialTerms } from './icons.js'
 
 const props = defineProps({
   icon: String, // health, sanity, hunger, soul, beast, ghost, collar, etc.
@@ -39,6 +46,17 @@ const nounText = computed(() => {
     return extractText(slots.default())
   }
   return ''
+})
+
+const targetLink = computed(() => {
+  return linkMap[nounText.value] || null
+})
+
+const hoverTitle = computed(() => {
+  if (officialTerms.includes(nounText.value)) {
+    return '官方词条'
+  }
+  return `模组词条: ${nounText.value}`
 })
 
 const iconSrc = computed(() => {
@@ -92,6 +110,11 @@ const handleImageError = () => {
   cursor: help;
   position: relative;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dst-noun.has-link {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .dst-noun:hover {

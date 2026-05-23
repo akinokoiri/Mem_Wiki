@@ -1,5 +1,5 @@
 <template>
-  <aside class="infobox" :style="{ width: width }">
+  <aside :class="['infobox', 'pos-' + position]" :style="{ width: width }">
     <div class="infobox-title">{{ title }}</div>
     <div v-if="image" class="infobox-image">
       <img :src="withBase(image)" :alt="title" />
@@ -33,6 +33,10 @@ defineProps({
     type: String,
     default: '320px'
   },
+  position: {
+    type: String,
+    default: 'right'
+  },
   stats: Array, // [{ label: '生命', value: '75', icon: '/health_icon.png' }]
   details: Array // [{ label: '代码名', value: 'mem' }]
 })
@@ -45,18 +49,41 @@ const formatValue = (val) => {
 
 <style scoped>
 .infobox {
-  float: right;
-  clear: right; /* 确保多个卡片垂直排列 */
   width: 320px;
   background: #fdfaf5;
   border: 2px solid #5c3a21;
   border-radius: 8px;
-  margin: 0 0 24px 32px; /* 增加一点左侧留白让文字呼吸 */
   font-size: 0.9em;
   box-shadow: 4px 4px 0px rgba(92, 58, 33, 0.1);
   overflow: hidden;
   z-index: 10;
   transition: transform 0.2s ease;
+}
+
+.infobox.pos-right {
+  float: right;
+  clear: right; /* 确保多个卡片垂直排列 */
+  margin: 0 0 24px 32px; /* 增加一点左侧留白让文字呼吸 */
+}
+
+.infobox.pos-left {
+  float: left;
+  clear: left;
+  margin: 0 32px 24px 0;
+}
+
+.infobox.pos-center {
+  float: none;
+  clear: both;
+  margin: 24px auto;
+  display: block;
+}
+
+.infobox.pos-inline {
+  float: none;
+  margin: 0;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .infobox:hover {

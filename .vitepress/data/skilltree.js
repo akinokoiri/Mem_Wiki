@@ -1,7 +1,7 @@
 export const SKILL_NODES = {
   "mem_skill_soul_fire_1": {
     "id": "mem_skill_soul_fire_1",
-    "x": -105,
+    "x": -103,
     "y": 115,
     "connects": [
       "mem_skill_soul_fire_2"
@@ -16,7 +16,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_fire_2": {
     "id": "mem_skill_soul_fire_2",
-    "x": -105,
+    "x": -103,
     "y": 62,
     "connects": [
       "mem_skill_soul_fire_3"
@@ -31,7 +31,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_fire_3": {
     "id": "mem_skill_soul_fire_3",
-    "x": -105,
+    "x": -103,
     "y": 10,
     "connects": [
       "mem_skill_soul_lock_3"
@@ -46,7 +46,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_hand": {
     "id": "mem_skill_soul_hand",
-    "x": -156,
+    "x": -153,
     "y": 62,
     "connects": [
       "mem_skill_soul_melt"
@@ -61,7 +61,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_melt": {
     "id": "mem_skill_soul_melt",
-    "x": -156,
+    "x": -153,
     "y": 10,
     "connects": [
       "mem_skill_soul_lock_1"
@@ -76,7 +76,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_rest_1": {
     "id": "mem_skill_soul_rest_1",
-    "x": -53,
+    "x": -51,
     "y": 62,
     "connects": [
       "mem_skill_soul_rest_2"
@@ -91,7 +91,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_rest_2": {
     "id": "mem_skill_soul_rest_2",
-    "x": -53,
+    "x": -51,
     "y": 10,
     "connects": [
       "mem_skill_soul_lock_2",
@@ -107,7 +107,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_lock_1": {
     "id": "mem_skill_soul_lock_1",
-    "x": -155,
+    "x": -153,
     "y": -34,
     "connects": [
       "mem_skill_soul_light"
@@ -122,7 +122,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_light": {
     "id": "mem_skill_soul_light",
-    "x": -157,
+    "x": -154,
     "y": -79,
     "connects": [],
     "locks": [
@@ -152,7 +152,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_split": {
     "id": "mem_skill_soul_split",
-    "x": -104,
+    "x": -102,
     "y": -79,
     "connects": [],
     "locks": [
@@ -363,7 +363,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_body_numb_3": {
     "id": "mem_skill_body_numb_3",
-    "x": 148,
+    "x": 146,
     "y": -47,
     "connects": [
       "mem_skill_instinct_ghostly"
@@ -378,7 +378,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_instinct_beastly": {
     "id": "mem_skill_instinct_beastly",
-    "x": 198,
+    "x": 196,
     "y": 37,
     "connects": [
       "mem_skill_body_lock_exp"
@@ -393,7 +393,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_instinct_ghostly": {
     "id": "mem_skill_instinct_ghostly",
-    "x": 198,
+    "x": 196,
     "y": -14,
     "connects": [
       "mem_skill_body_lock_exp"
@@ -408,7 +408,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_body_lock_exp": {
     "id": "mem_skill_body_lock_exp",
-    "x": 198,
+    "x": 194,
     "y": -53,
     "connects": [
       "mem_explosive_body"
@@ -423,7 +423,7 @@ export const SKILL_NODES = {
   },
   "mem_explosive_body": {
     "id": "mem_explosive_body",
-    "x": 198,
+    "x": 196,
     "y": -90,
     "connects": [],
     "locks": [
@@ -438,7 +438,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_body_medicine": {
     "id": "mem_skill_body_medicine",
-    "x": 254,
+    "x": 251,
     "y": 113,
     "connects": [],
     "locks": [
@@ -453,7 +453,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_body_lock_medicine": {
     "id": "mem_skill_body_lock_medicine",
-    "x": 254,
+    "x": 251,
     "y": 73,
     "connects": [
       "mem_skill_body_medicine"
@@ -468,7 +468,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_instinct_hide_2": {
     "id": "mem_skill_instinct_hide_2",
-    "x": 254,
+    "x": 251,
     "y": 35,
     "connects": [
       "mem_skill_body_lock_medicine"
@@ -483,7 +483,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_instinct_hide_1": {
     "id": "mem_skill_instinct_hide_1",
-    "x": 254,
+    "x": 251,
     "y": -16,
     "connects": [
       "mem_skill_instinct_hide_2",
@@ -499,7 +499,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_body_lock_corpse": {
     "id": "mem_skill_body_lock_corpse",
-    "x": 254,
+    "x": 251,
     "y": -55,
     "connects": [
       "mem_corpse_mastery"
@@ -514,7 +514,7 @@ export const SKILL_NODES = {
   },
   "mem_corpse_mastery": {
     "id": "mem_corpse_mastery",
-    "x": 254,
+    "x": 251,
     "y": -92,
     "connects": [],
     "locks": [

@@ -1,5 +1,5 @@
 <template>
-  <aside class="media-card" :style="{ width: width }">
+  <aside :class="['media-card', 'pos-' + position]" :style="{ width: width }">
     <div class="media-container">
       <video v-if="isVideo" :src="withBase(src)" autoplay loop muted playsinline class="media-content"></video>
       <img v-else-if="src" :src="withBase(src)" :alt="caption" class="media-content" />
@@ -21,6 +21,10 @@ const props = defineProps({
   width: {
     type: String,
     default: '280px'
+  },
+  position: {
+    type: String,
+    default: 'right'
   }
 })
 
@@ -36,9 +40,6 @@ const formattedCaption = computed(() => {
 
 <style scoped>
 .media-card {
-  float: right;
-  clear: right;
-  margin: 0 0 24px 32px;
   background: #fdfaf5;
   border: 2px solid #5c3a21;
   border-radius: 8px;
@@ -47,6 +48,32 @@ const formattedCaption = computed(() => {
   z-index: 10;
   transition: transform 0.2s ease;
   box-sizing: border-box;
+}
+
+.media-card.pos-right {
+  float: right;
+  clear: right;
+  margin: 0 0 24px 32px;
+}
+
+.media-card.pos-left {
+  float: left;
+  clear: left;
+  margin: 0 32px 24px 0;
+}
+
+.media-card.pos-center {
+  float: none;
+  clear: both;
+  margin: 24px auto;
+  display: block;
+}
+
+.media-card.pos-inline {
+  float: none;
+  margin: 0;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .media-card:hover {
