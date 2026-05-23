@@ -23,8 +23,21 @@
 - 靠解锁 **芒芒科技**。
 </div>
 
+<div class="item-card">
+<div class="item-content">
+
 ### [#芒芒的尸体]芒芒的尸体 <DSTIcon icon="corpse" />
-<div class="clearfix">
+
+- 等同于死亡留下的[芒芒的尸体]。
+- 可以被`分解法杖`或[电锯惊魂]分解为：1 个[芒头]、2 个[芒手]、1 个[芒身]、2 个[芒腿]。
+- 具有新鲜度，默认腐烂时间 3 天。
+  
+<MediaCard 
+  src="/videos/fh_web.webm" 
+  caption="身体正在用“升级了所有形态的电锯惊魂，\n并且开启了刻印形态和电锯轰鸣状态”的电锯惊魂\n攻击牛群" 
+/>
+
+</div>
 
 <Infobox 
   title="芒芒的尸体"
@@ -34,10 +47,6 @@
     { label: '腐烂时间', value: '3 天', icon: '/icons/icon_spoil.png' },
   ]"
 />
-
-- 等同于死亡留下的[芒芒的尸体]。
-- 可以被`分解法杖`或[电锯惊魂]分解为：1 个[#芒头][芒头]、2 个[#芒手][芒手]、1 个[#芒身][芒身]、2 个[#芒腿][芒腿]。
-- 具有新鲜度，默认腐烂时间 3 天。
 </div>
 
 ### [#芒芒的坟墓]芒芒的墓碑 / 芒芒的坟墓 <DSTIcon icon="mb" />
@@ -236,9 +245,8 @@
 #### 特殊工作模式
 
 <MediaCard 
-  src="/box_item_1.png" 
+  src="/videos/ftxd_web.webm" 
   caption="身体正在用“升级了所有形态的电锯惊魂，\n并且开启了刻印形态和电锯轰鸣状态”的电锯惊魂\n攻击牛群" 
-  width="320px"
 />
 
 > [!IMPORTANT]战斗附加：刻印形态<DSTIcon icon="kyxt" />
