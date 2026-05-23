@@ -214,7 +214,7 @@ body {
 }
 
 /* ============================================================
-   浮动组件定位 (Infobox/MediaCard) / 无感卡片双栏网格 (Subtle Card Grid)
+   浮动组件定位 (Infobox/MediaCard)
    ============================================================ */
 
 .infobox, .media-card {
@@ -232,19 +232,23 @@ body {
   clear: both;
 }
 
-/* 无感卡片双栏网格核心样式 */
+/* ============================================================
+   无感卡片双栏网格 (Subtle Card Grid)
+   ============================================================ */
+
 .vp-doc .item-card {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr; /* 默认单栏 */
   gap: 32px;
   align-items: start;
   background: var(--mem-bg);
   border: 1px dashed var(--mem-border);
   border-radius: 8px;
   padding: 24px;
-  margin-bottom: 32px;
-  box-shadow: 0 4px 12px rgba(92, 58, 33, 0.04);
+  margin: 24px 0 32px;
+  box-shadow: 0 4px 12px var(--mem-table-shadow);
   transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
 }
 
 .vp-doc .item-card:hover {
@@ -252,9 +256,11 @@ body {
   box-shadow: 0 6px 16px rgba(92, 58, 33, 0.08);
 }
 
-/* 智能无属性卡片单栏回退 */
-.vp-doc .item-card:not(:has(.infobox)) {
-  grid-template-columns: 1fr;
+/* 当卡片直接或间接含有属性面板、右侧媒体卡片或侧栏容器时，自动变为双栏 */
+.vp-doc .item-card:has(.infobox),
+.vp-doc .item-card:has(> .media-card),
+.vp-doc .item-card:has(.item-aside) {
+  grid-template-columns: 1fr 320px;
 }
 
 .vp-doc .item-content {
@@ -271,6 +277,84 @@ body {
   margin-bottom: 0 !important;
 }
 
+/* 右侧侧栏堆叠容器 */
+.vp-doc .item-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
+  box-sizing: border-box;
+}
+
+/* 卡片内部属性卡片与多媒体卡片重置 */
+.vp-doc .item-card .infobox,
+.vp-doc .item-card .media-card {
+  margin: 0 !important;
+  float: none !important;
+  clear: none !important;
+  max-width: 100% !important;
+}
+
+.vp-doc .item-card .infobox {
+  width: 100% !important; /* 属性栏宽度撑满 */
+}
+
+.vp-doc .item-card .media-card {
+  margin: 0 auto !important; /* 右侧媒体卡片水平居中 */
+}
+
+/* 卡片内部嵌套的多媒体卡片样式保留（如段落中的 MediaCard 居中） */
+.vp-doc .item-content .media-card {
+  margin: 16px auto !important;
+  float: none !important;
+  clear: none !important;
+}
+
+/* 子卡片与子网格系统 (Sub-Card & Sub-Grid System) */
+.vp-doc .item-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.vp-doc .sub-card {
+  background: var(--mem-bg-soft);
+  border: 1px solid var(--mem-border);
+  border-radius: 6px;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.vp-doc .sub-card:hover {
+  border-color: var(--mem-heading-sub);
+  box-shadow: 0 4px 12px rgba(92, 58, 33, 0.04);
+}
+
+.vp-doc .sub-card > *:first-child {
+  margin-top: 0 !important;
+}
+.vp-doc .sub-card > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 侧栏微调对齐工具 (仅在桌面端生效，并具有高权重以覆盖 reset 的 margin: 0) */
+@media (min-width: 960px) {
+  .vp-doc .item-card .media-card.aside-push-60 {
+    margin-top: 60px !important;
+  }
+  .vp-doc .item-card .media-card.aside-push-120 {
+    margin-top: 120px !important;
+  }
+  .vp-doc .item-card .media-card.aside-push-300 {
+    margin-top: 300px !important;
+  }
+  .vp-doc .item-card .media-card.aside-push-450 {
+    margin-top: 450px !important;
+  }
+}
+
 /* 响应式折叠：在手机和中屏下自动转换为单栏 */
 @media (max-width: 959px) {
   .vp-doc .item-card {
@@ -278,7 +362,21 @@ body {
     gap: 20px;
     padding: 16px;
   }
+  
+  .vp-doc .item-aside {
+    width: 100% !important;
+  }
+  
+  .vp-doc .item-card .infobox,
+  .vp-doc .item-card .media-card {
+    margin: 16px auto !important;
+  }
+  
+  .vp-doc .item-sub-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
+
 
 /* 黑幕 (Heimu) - 鼠标悬停显示文字 */
 .heimu {

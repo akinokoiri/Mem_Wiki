@@ -106,6 +106,8 @@ export const nounMap = {
   '去把这个当目标！': 'key',
   '别捣鼓了，回来！': 'key',
   '启迪强化': 'mod',
+  '嘲讽': 'mod',
+  '三个灵魂': 'state',
 };
 
 export const iconMap = {
@@ -256,6 +258,7 @@ export const linkMap = {
   '死亡回归': '/mechanics/core.html#def-死亡回归',
   '暗影观察者': '/mechanics/core.html#def-暗影观察者',
   '最低三维比例': '/mechanics/core.html#def-最低三维比例',
+  '嘲讽': '/mechanics/core.html#def-嘲讽',
   '芒伊月': '/mechanics/enemies.html#def-芒伊月',
   '荒尹沐': '/mechanics/enemies.html#def-荒尹沐',
   '友善的芒伊月': '/mechanics/enemies.html#def-友善的芒伊月',
@@ -299,6 +302,7 @@ export const linkMap = {
   '解散': '/mechanics/enemies.html#def-解散',
   '潜伏恐惧': '/mechanics/enemies.html#def-潜伏恐惧',
   '启迪强化': '/mechanics/enemies.html#def-启迪强化',
+  '三个灵魂': '/mechanics/enemies.html#def-三个灵魂',
   '芒芒的尸体': '/mechanics/items.html#def-芒芒的尸体',
   '封印项圈': '/mechanics/items.html#def-封印项圈',
   '暗项圈': '/mechanics/items.html#def-暗项圈',

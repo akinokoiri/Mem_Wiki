@@ -3,13 +3,26 @@ layout: page
 sidebar: false
 ---
 
+<script setup>
+import { onMounted, onUnmounted } from 'vue'
+
+onMounted(() => {
+  document.documentElement.classList.add('is-home')
+})
+
+onUnmounted(() => {
+  document.documentElement.classList.remove('is-home')
+})
+</script>
+
 <div class="mem-custom-home">
   <div class="mem-hero-center">
-    <a href="/_RAW_DATA_SOURCE" title="点击进入 Wiki" class="mem-logo-link">
-      <img src="/names_mem.png" alt="芒伊木" class="mem-logo" />
-    </a>
+    <img src="/names_mem.png" alt="芒伊木" class="mem-logo" />
     <div class="mem-links">
-      <a href="/mechanics/core" class="mem-enter-button">进入 Wiki</a>
+      <!-- 进入 Wiki 的入口 -->
+      <a href="/mechanics/core" title="进入 Wiki" class="mem-text-link">
+        进入WIKI
+      </a>
       <a href="#" target="_blank" title="Steam 创意工坊" class="mem-icon-link">
         <img src="/steam.svg" alt="Steam" />
       </a>
@@ -23,15 +36,33 @@ sidebar: false
   </div>
 </div>
 
+<style>
+/* 仅在首页挂载时（html 标签带有 .is-home 类）才全局隐藏侧边栏和顶栏，避免 SPA 路由污染 */
+.is-home .VPNav,
+.is-home .VPSidebar,
+.is-home .VPLocalNav {
+  display: none !important;
+}
+
+/* 仅在首页覆盖 VitePress 默认的内容区 padding，实现真正的全屏 */
+.is-home .VPDoc {
+  padding: 0 !important;
+}
+
+.is-home .vp-doc {
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.is-home .vp-doc > div {
+  margin: 0 !important;
+}
+</style>
+
 <style scoped>
 .mem-custom-home {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
   height: 100vh;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,7 +70,11 @@ sidebar: false
   background: radial-gradient(circle at center, #2a2a2a 0%, #151515 60%, #050505 100%);
   color: #e0e0e0;
   overflow: hidden;
-  z-index: 999999; /* 保证能遮盖所有 VitePress 默认元素 */
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
 .mem-hero-center {
@@ -51,18 +86,8 @@ sidebar: false
   animation: float 6s ease-in-out infinite;
 }
 
-.mem-logo-link {
-  display: block;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.mem-logo-link:hover {
-  transform: scale(1.02);
-}
-
 .mem-logo {
-  max-width: 85vw;
+  max-width: 85%;
   width: 480px;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.05)) drop-shadow(0 0 30px rgba(0, 0, 0, 0.9));
   user-select: none;
@@ -73,7 +98,7 @@ sidebar: false
   display: flex;
   align-items: center;
   gap: 2rem;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: opacity 0.3s;
 }
 
@@ -81,31 +106,30 @@ sidebar: false
   opacity: 1;
 }
 
-.mem-enter-button {
-  font-family: sans-serif;
+.mem-text-link {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #e0e0e0;
+  color: #a0a0a0;
   text-decoration: none;
-  padding: 0.6rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #555;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-  margin-right: 1rem;
+  transition: all 0.2s;
+  letter-spacing: 2px;
+  font-family: serif;
 }
 
-.mem-enter-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+.mem-text-link:hover {
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
 }
 
 .mem-icon-link {
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s;
   filter: grayscale(100%) brightness(0.6) sepia(20%);
 }
@@ -144,5 +168,4 @@ sidebar: false
   50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 }
-
 </style>
