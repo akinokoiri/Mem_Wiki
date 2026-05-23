@@ -303,6 +303,13 @@ const displayDesc = computed(() => {
   if (!displayNodeId.value) return '';
   return SKILL_NODES[displayNodeId.value].desc;
 });
+
+defineExpose({
+  selectNode: (id) => {
+    selectedNodeId.value = id;
+    emit('select', id);
+  }
+});
 </script>
 
 <style scoped>

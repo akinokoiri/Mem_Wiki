@@ -15,7 +15,7 @@
 <script setup>
 import { computed, useSlots, ref } from 'vue'
 import { withBase } from 'vitepress'
-import { iconMap, colorMap, linkMap, officialTerms } from './icons.js'
+import { iconMap, colorMap, linkMap, officialTerms, nounMap } from './icons.js'
 
 const props = defineProps({
   icon: String, // health, sanity, hunger, soul, beast, ghost, collar, etc.
@@ -53,8 +53,12 @@ const targetLink = computed(() => {
 })
 
 const hoverTitle = computed(() => {
-  if (officialTerms.includes(nounText.value)) {
-    return '官方词条'
+  const iconKey = props.icon ? props.icon.toLowerCase().trim() : 'mod'
+  // Fallback to nounMap if icon prop is not provided
+  const resolvedIcon = iconKey !== 'mod' ? iconKey : (nounMap[nounText.value] || 'mod')
+  
+  if (officialTerms.includes(resolvedIcon)) {
+    return '官方属性/词条'
   }
   return `模组词条: ${nounText.value}`
 })
@@ -102,7 +106,7 @@ const handleImageError = () => {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.25);
-  color: hsl(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l));
+  color: hsl(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l)) !important;
   
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);

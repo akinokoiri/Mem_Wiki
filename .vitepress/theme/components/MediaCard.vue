@@ -40,11 +40,11 @@ const formattedCaption = computed(() => {
 
 <style scoped>
 .media-card {
-  background: #fdfaf5;
-  border: 2px solid #5c3a21;
+  background: var(--mem-bg);
+  border: 2px solid var(--mem-heading);
   border-radius: 8px;
   padding: 6px;
-  box-shadow: 4px 4px 0px rgba(92, 58, 33, 0.1);
+  box-shadow: 4px 4px 0px var(--mem-table-shadow);
   z-index: 10;
   transition: transform 0.2s ease;
   box-sizing: border-box;
@@ -81,8 +81,8 @@ const formattedCaption = computed(() => {
 }
 
 .media-container {
-  background: #fff;
-  border: 1px solid #dcd1ba;
+  background: var(--mem-bg-soft);
+  border: 1px solid var(--mem-border);
   border-radius: 4px;
   overflow: hidden;
   display: flex;
@@ -102,7 +102,7 @@ const formattedCaption = computed(() => {
   margin-top: 8px;
   text-align: center;
   font-size: 0.85em;
-  color: #5c3a21;
+  color: var(--mem-heading);
   line-height: 1.4;
   padding: 0 4px;
   position: relative;
@@ -112,7 +112,7 @@ const formattedCaption = computed(() => {
 .caption-decorator {
   width: 30px;
   height: 2px;
-  background: #dcd1ba;
+  background: var(--mem-border);
   margin: 0 auto 6px;
 }
 

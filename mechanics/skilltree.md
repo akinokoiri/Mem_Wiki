@@ -14,21 +14,56 @@ pageClass: skilltree-page
 > - 进度在`天体传送门`换人或重置技能点后依然保留。
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SkillTreeSimulator from '../.vitepress/components/SkillTreeSimulator.vue'
 import SkillDetailPanel from '../.vitepress/components/SkillDetailPanel.vue'
 
 const currentSkillId = ref(null);
+const simulatorRef = ref(null);
 
 const onSkillSelect = (id) => {
   currentSkillId.value = id;
+  if (typeof window !== 'undefined') {
+    if (id) {
+      window.history.replaceState(null, '', `#${id}`);
+    } else {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
 }
+
+const syncHash = () => {
+  if (typeof window !== 'undefined') {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#')) {
+      const id = hash.slice(1).replace(/^def-/, '');
+      if (simulatorRef.value) {
+        simulatorRef.value.selectNode(id);
+      } else {
+        nextTick(() => {
+          if (simulatorRef.value) simulatorRef.value.selectNode(id);
+        });
+      }
+    }
+  }
+};
+
+onMounted(() => {
+  syncHash();
+  window.addEventListener('hashchange', syncHash);
+});
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('hashchange', syncHash);
+  }
+});
 </script>
 
 <ClientOnly>
   <div class="skill-page-layout">
     <div class="skill-column-left">
-      <SkillTreeSimulator :maxPoints="15" @select="onSkillSelect"></SkillTreeSimulator>
+      <SkillTreeSimulator ref="simulatorRef" :maxPoints="15" @select="onSkillSelect"></SkillTreeSimulator>
     </div>
     <div class="skill-column-right">
       <SkillDetailPanel :skillId="currentSkillId"></SkillDetailPanel>

@@ -1,29 +1,74 @@
 :root {
-  /* DST 风格配色 */
-  --vp-c-brand: #b19cd9; /* 芒伊木灵魂紫 */
+  /* DST 风格配色 (核心保留) */
+  --vp-c-brand: #b19cd9;
   --vp-c-brand-light: #c8b9e6;
   --vp-c-brand-lighter: #dfd6f2;
   --vp-c-brand-dark: #8e7cc3;
   --vp-c-brand-darker: #674ea7;
 
-  /* 背景与文字 - 更加温暖的羊皮纸色 */
-  --vp-c-bg: #fdfaf5; 
-  --vp-c-bg-soft: #f4eee1;
-  --vp-c-bg-mute: #ebe2d0;
+  /* 自定义主题变量 (Light Mode - 羊皮纸风格) */
+  --mem-bg: #fdfaf5;
+  --mem-bg-soft: #f4eee1;
+  --mem-bg-mute: #ebe2d0;
   
-  --vp-c-text-1: #3d2e2e; /* 经典深褐 */
-  --vp-c-text-2: #5c4a4a;
+  --mem-text-1: #3d2e2e;
+  --mem-text-2: #5c4a4a;
+  
+  --mem-heading: #5c3a21;
+  --mem-heading-sub: #7d5a44;
+  
+  --mem-border: #dcd1ba;
+  --mem-dot: #dcd1ba;
+  
+  --mem-quote-bg: rgba(220, 209, 186, 0.2);
+  --mem-table-shadow: rgba(92, 58, 33, 0.05);
+  --mem-table-th-text: #fff;
+  
+  --mem-nav-bg: rgba(253, 250, 245, 0.9);
+  
+  --mem-capsule-bg: rgba(92, 58, 33, 0.85);
+  --mem-capsule-bg-hover: rgba(92, 58, 33, 0.95);
+
+  /* 覆盖 VitePress 的基础变量，让它的内置组件也变色 */
+  --vp-c-bg: var(--mem-bg);
+  --vp-c-bg-soft: var(--mem-bg-soft);
+  --vp-c-bg-mute: var(--mem-bg-mute);
+  --vp-c-text-1: var(--mem-text-1);
+  --vp-c-text-2: var(--mem-text-2);
 
   /* 密度调整核心变量 */
   --vp-font-size-base: 14px; 
   --vp-nav-height: 56px;           /* 导航栏高度 */
 
-  /* 布局核心变量 (调整以匹配 Wiki 风格) */
-  --vp-sidebar-width: 260px;       /* 左侧边栏宽度 */
-  --vp-layout-max-width: 1560px;   /* 调整为更稳重的宽度 */
-  
-  /* 调小侧边栏内部的文字层级缩进，增加利用率 */
+  /* 布局核心变量 */
+  --vp-sidebar-width: 260px;
+  --vp-layout-max-width: 1560px;
   --vp-sidebar-item-padding: 8px 12px;
+}
+
+.dark {
+  /* Dark Mode - 暗影/暗黑风格 */
+  --mem-bg: #121212;
+  --mem-bg-soft: #1e1e1e;
+  --mem-bg-mute: #2a2a2a;
+  
+  --mem-text-1: #e4e4e7;
+  --mem-text-2: #a1a1aa; 
+  
+  --mem-heading: #c8b9e6; /* 灵魂紫发光标题 */
+  --mem-heading-sub: #b19cd9;
+  
+  --mem-border: #333333; 
+  --mem-dot: #2a2a2a;    
+  
+  --mem-quote-bg: rgba(177, 156, 217, 0.1); 
+  --mem-table-shadow: rgba(0, 0, 0, 0.5);
+  --mem-table-th-text: #121212;
+  
+  --mem-nav-bg: rgba(18, 18, 18, 0.9);
+  
+  --mem-capsule-bg: rgba(30, 30, 30, 0.85);
+  --mem-capsule-bg-hover: rgba(45, 45, 45, 0.95);
 }
 
 /* ============================================================
@@ -31,8 +76,8 @@
    ============================================================ */
 
 body {
-  background-color: #fdfaf5;
-  background-image: radial-gradient(#dcd1ba 0.5px, transparent 0.5px);
+  background-color: var(--mem-bg);
+  background-image: radial-gradient(var(--mem-dot) 0.5px, transparent 0.5px);
   background-size: 20px 20px;
 }
 
@@ -42,16 +87,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #fdfaf5;
+  background: var(--mem-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #dcd1ba;
+  background: var(--mem-border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c5b79e;
+  background: var(--mem-heading-sub);
 }
 
 /* ============================================================
@@ -60,26 +105,26 @@ body {
 
 .VPSidebar {
   width: var(--vp-sidebar-width) !important;
-  background-color: #f4eee1 !important;
-  border-right: 1px solid #dcd1ba !important;
+  background-color: var(--mem-bg-soft) !important;
+  border-right: 1px solid var(--mem-border) !important;
   padding: 16px 12px !important;
   box-sizing: border-box;
 }
 
 .VPSidebarItem .text {
-  white-space: normal !important; /* 允许换行 */
+  white-space: normal !important; 
   word-break: break-all;
   line-height: 1.4;
   display: block;
 }
 
-.VPSidebarItem.level-0 .text { font-size: 15px; font-weight: 800; color: #5c3a21; }
+.VPSidebarItem.level-0 .text { font-size: 15px; font-weight: 800; color: var(--mem-heading); }
 .VPSidebarItem.level-1 .text { font-size: 14px; }
 
 .VPNavBar {
-  background-color: rgba(253, 250, 245, 0.9) !important;
+  background-color: var(--mem-nav-bg) !important;
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #dcd1ba !important;
+  border-bottom: 1px solid var(--mem-border) !important;
 }
 
 /* ============================================================
@@ -87,7 +132,7 @@ body {
    ============================================================ */
 
 .vp-doc h1, .vp-doc h2, .vp-doc h3 {
-  color: #5c3a21;
+  color: var(--mem-heading);
   font-family: "Georgia", serif;
   letter-spacing: 0.02em;
   overflow: hidden;
@@ -108,7 +153,7 @@ body {
   display: block;
   width: 100px;
   height: 3px;
-  background: #5c3a21;
+  background: var(--mem-heading);
   margin: 8px auto;
   border-radius: 2px;
 }
@@ -117,7 +162,7 @@ body {
   margin-top: 32px; 
   margin-bottom: 16px; 
   font-size: 24px; 
-  border-bottom: 2px solid #dcd1ba;
+  border-bottom: 2px solid var(--mem-border);
   padding-bottom: 4px;
 }
 
@@ -125,17 +170,17 @@ body {
   margin-top: 24px; 
   margin-bottom: 12px; 
   font-size: 18px; 
-  color: #7d5a44;
+  color: var(--mem-heading-sub);
 }
 
 .vp-doc blockquote {
   margin: 16px 0;
   padding: 12px 20px;
-  background: rgba(220, 209, 186, 0.2);
-  border-left: 4px solid #5c3a21;
+  background: var(--mem-quote-bg);
+  border-left: 4px solid var(--mem-heading);
   border-radius: 0 4px 4px 0;
   font-style: italic;
-  color: #5c4a4a;
+  color: var(--mem-text-2);
 }
 
 .vp-doc li + li { margin-top: 4px; }
@@ -147,24 +192,24 @@ body {
   clear: none !important;
   margin: 24px 0;
   border: none;
-  border-top: 1px solid #dcd1ba;
+  border-top: 1px solid var(--mem-border);
 }
 
 .vp-doc table {
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(92, 58, 33, 0.05);
+  box-shadow: 0 2px 8px var(--mem-table-shadow);
 }
 
 .vp-doc th {
-  background-color: #5c3a21;
-  color: #fff;
+  background-color: var(--mem-heading);
+  color: var(--mem-table-th-text);
   font-weight: 600;
-  border: 1px solid #5c3a21;
+  border: 1px solid var(--mem-heading);
 }
 
 .vp-doc td {
-  border: 1px solid #dcd1ba;
+  border: 1px solid var(--mem-border);
 }
 
 /* ============================================================
@@ -188,8 +233,8 @@ body {
 
 /* 黑幕 (Heimu) - 鼠标悬停显示文字 */
 .heimu {
-  background-color: #3d2e2e;
-  color: #3d2e2e;
+  background-color: var(--mem-text-1);
+  color: var(--mem-text-1);
   text-shadow: none;
   transition: color 0.3s ease;
   cursor: help;
@@ -198,17 +243,7 @@ body {
 }
 
 .heimu:hover {
-  color: #fff;
-}
-
-/* 适配深色模式（如果有） */
-.dark .heimu {
-  background-color: #000;
-  color: #000;
-}
-
-.dark .heimu:hover {
-  color: #fff;
+  color: var(--mem-bg);
 }
 
 /* ============================================================
@@ -233,7 +268,6 @@ body {
     padding: 32px 32px 96px !important; 
   }
 
-  /* 强力锁定外层靠左对齐，压制默认的主题居中设置 */
   .VPDoc .container {
     max-width: 100% !important;
     margin: 0 !important;
@@ -243,14 +277,12 @@ body {
     padding-left: 24px !important;
   }
 
-  /* 强力解除父容器 .content 的宽度锁死限制 */
   .VPDoc .content {
     max-width: 100% !important;
     margin: 0 !important;
     flex: 1 !important;
   }
 
-  /* 阶梯式正文宽度控制 */
   .VPDoc .content-container {
     max-width: 960px !important;
     margin: 0 !important;
@@ -258,203 +290,8 @@ body {
   }
 }
 
-/* 侧边大纲栏 (Aside) 断点 (大于等于 1280px) */
+/* 侧边大纲栏 断点 (大于等于 1280px) */
 @media (min-width: 1280px) {
-  /* 确保高分辨率下不会回退到默认主题的居中大白边 */
-  .VPDoc .container {
-    max-width: 100% !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-  }
-
-  .VPDoc .content {
-    max-width: 100% !important;
-    margin: 0 !important;
-  }
-
-  .VPDoc .content-container {
-    max-width: 1000px !important;
-    margin: 0 !important;
-  }
-
-  .VPDoc.has-aside .aside {
-    width: 280px !important;
-    padding-left: 24px !important;
-    margin-right: 0 !important;
-    display: block !important;
-    flex-shrink: 0 !important;
-  }
-
-  .VPDoc.has-aside .aside-container {
-    width: 280px !important;
-  }
-}
-
-/* 宽屏优化 (大于等于 1560px) */
-@media (min-width: 1560px) {
-  .VPDoc .container {
-    max-width: 100% !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-  }
-
-  .VPDoc .content-container {
-    max-width: 1100px !important;
-    margin: 0 !important;
-  }
-  
-  .VPDoc.has-aside .aside {
-    padding-left: 32px !important;
-  }
-}
-
-/* 宽屏深度优化 (大于等于 1600px) */
-@media (min-width: 1600px) {
-  .VPDoc .container {
-    max-width: 100% !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    gap: 40px !important;
-  }
-
-  .VPDoc .content-container {
-    max-width: 1200px !important; 
-    margin: 0 !important;
-  }
-}
-
-/* 确保基础内边距统一 */
-.VPDoc {
-  padding: 32px 32px 96px !important;
-}
-
-/* 修复 custom-block 与浮动组件（如 MediaCard）重叠的问题 */
-.vp-doc li + li { margin-top: 4px; }
-.vp-doc ul, .vp-doc ol { margin: 12px 0; padding-left: 24px; }
-
-.vp-doc hr {
-  overflow: hidden; 
-  display: block;
-  clear: none !important;
-  margin: 24px 0;
-  border: none;
-  border-top: 1px solid #dcd1ba;
-}
-
-.vp-doc table {
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(92, 58, 33, 0.05);
-}
-
-.vp-doc th {
-  background-color: #5c3a21;
-  color: #fff;
-  font-weight: 600;
-  border: 1px solid #5c3a21;
-}
-
-.vp-doc td {
-  border: 1px solid #dcd1ba;
-}
-
-/* ============================================================
-   浮动组件定位 (Infobox/MediaCard)
-   ============================================================ */
-
-.infobox, .media-card {
-  position: relative;
-  z-index: 1;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.clear {
-  clear: both;
-}
-
-/* 黑幕 (Heimu) - 鼠标悬停显示文字 */
-.heimu {
-  background-color: #3d2e2e;
-  color: #3d2e2e;
-  text-shadow: none;
-  transition: color 0.3s ease;
-  cursor: help;
-  padding: 0 2px;
-  border-radius: 2px;
-}
-
-.heimu:hover {
-  color: #fff;
-}
-
-/* 适配深色模式（如果有） */
-.dark .heimu {
-  background-color: #000;
-  color: #000;
-}
-
-.dark .heimu:hover {
-  color: #fff;
-}
-
-/* ============================================================
-   响应式布局与媒体查询
-   ============================================================ */
-
-/* 移动端 (小于 960px) */
-@media (max-width: 959px) {
-  .VPDoc .container {
-    display: block !important;
-  }
-}
-
-/* 桌面端基础 (大于等于 960px) */
-@media (min-width: 960px) {
-  .VPContent.has-sidebar {
-    margin-left: var(--vp-sidebar-width) !important;
-    padding-left: 0 !important;
-  }
-
-  .VPDoc {
-    padding: 32px 32px 96px !important; 
-  }
-
-  /* 强力锁定外层靠左对齐，压制默认的主题居中设置 */
-  .VPDoc .container {
-    max-width: 100% !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    gap: 40px !important;
-    padding-left: 24px !important;
-  }
-
-  /* 强力解除父容器 .content 的宽度锁死限制 */
-  .VPDoc .content {
-    max-width: 100% !important;
-    margin: 0 !important;
-    flex: 1 !important;
-  }
-
-  /* 阶梯式正文宽度控制 */
-  .VPDoc .content-container {
-    max-width: 960px !important;
-    margin: 0 !important;
-    flex: 1;
-  }
-}
-
-/* 侧边大纲栏 (Aside) 断点 (大于等于 1280px) */
-@media (min-width: 1280px) {
-  /* 确保高分辨率下不会回退到默认主题的居中大白边 */
   .VPDoc .container {
     max-width: 100% !important;
     margin: 0 !important;
@@ -534,7 +371,7 @@ body {
 /* 针对技能树模拟器的全宽页面配置 */
 .skilltree-page .VPDoc .container {
   max-width: 100% !important;
-  padding-right: 32px !important; /* 补充一点右侧安全边距 */
+  padding-right: 32px !important;
 }
 .skilltree-page .VPDoc .content-container {
   max-width: 100% !important;
@@ -544,37 +381,158 @@ body {
    DST 词条锚点高亮特效 (Target Highlight)
    ============================================================ */
 
-/* 预埋的隐形锚点，需要向上偏移抵消导航栏高度 */
 .dst-anchor {
   display: block;
   position: relative;
-  top: -80px; /* 补偿固定的导航栏 */
+  top: -80px; 
   visibility: hidden;
 }
 
-/* 高亮流光呼吸特效 */
+/* 高亮流光呼吸特效 (强化版) */
 @keyframes dst-highlight-pulse {
   0% {
     background-color: transparent;
     box-shadow: 0 0 0 rgba(177, 156, 217, 0);
+    outline: 2px solid transparent;
   }
-  20% {
-    background-color: rgba(177, 156, 217, 0.15);
-    box-shadow: 0 0 20px rgba(177, 156, 217, 0.3);
+  10% {
+    background-color: rgba(177, 156, 217, 0.4);
+    box-shadow: 0 0 30px rgba(177, 156, 217, 0.8);
+    outline: 2px solid #b19cd9;
+    outline-offset: 4px;
     border-radius: 4px;
   }
-  80% {
-    background-color: rgba(177, 156, 217, 0.15);
-    box-shadow: 0 0 20px rgba(177, 156, 217, 0.3);
+  70% {
+    background-color: rgba(177, 156, 217, 0.2);
+    box-shadow: 0 0 20px rgba(177, 156, 217, 0.5);
+    outline: 2px solid rgba(177, 156, 217, 0.5);
+    outline-offset: 4px;
     border-radius: 4px;
   }
   100% {
     background-color: transparent;
     box-shadow: 0 0 0 rgba(177, 156, 217, 0);
+    outline: 2px solid transparent;
+    outline-offset: 4px;
   }
 }
 
 .dst-highlight-pulse {
-  animation: dst-highlight-pulse 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: dst-highlight-pulse 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   position: relative;
+}
+
+/* ============================================================
+   折返胶囊 (Return Capsule)
+   ============================================================ */
+
+.return-capsule {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background-color: var(--mem-capsule-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  user-select: none;
+  overflow: hidden;
+}
+
+.return-capsule:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  background-color: var(--mem-capsule-bg-hover);
+}
+
+.return-capsule:active {
+  transform: translateY(1px);
+}
+
+.return-capsule-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 10px 20px;
+  cursor: pointer;
+}
+
+.return-capsule-main:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.return-capsule-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.return-capsule-text {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.return-capsule-divider {
+  width: 1px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.return-capsule-close {
+  padding: 10px 20px 10px 16px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.return-capsule-close:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .return-capsule {
+    bottom: 24px;
+    right: 50%;
+    transform: translateX(50%);
+    padding: 8px 16px;
+  }
+  
+  .return-capsule:hover {
+    transform: translateX(50%) translateY(-2px);
+  }
+  
+  .return-capsule:active {
+    transform: translateX(50%) translateY(1px);
+  }
+}
+
+/* 胶囊的进入退出动画 */
+.capsule-enter-active,
+.capsule-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.capsule-enter-from,
+.capsule-leave-to {
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+}
+
+@media (max-width: 768px) {
+  .capsule-enter-from,
+  .capsule-leave-to {
+    opacity: 0;
+    transform: translateX(50%) translateY(20px) scale(0.9);
+  }
 }

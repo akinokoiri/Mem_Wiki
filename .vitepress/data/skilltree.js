@@ -167,7 +167,7 @@ export const SKILL_NODES = {
   },
   "mem_skill_soul_lock_2": {
     "id": "mem_skill_soul_lock_2",
-    "x": -49,
+    "x": -51,
     "y": -34,
     "connects": [
       "mem_skill_soul_wall"

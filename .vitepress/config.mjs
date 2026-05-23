@@ -37,6 +37,10 @@ export default defineConfig({
     docFooter: {
       prev: '上一页',
       next: '下一页'
+    },
+
+    search: {
+      provider: 'local'
     }
   },
 
@@ -73,6 +77,31 @@ export default defineConfig({
         }
 
         state.pos = end + 2;
+        return true;
+      });
+
+      // 注册 [#词条名] 语法糖，转化为隐形锚点
+      md.inline.ruler.before('emphasis', 'dst-anchor-sugar', (state, silent) => {
+        const start = state.pos;
+        if (state.src.charCodeAt(start) !== 0x5B || state.src.charCodeAt(start + 1) !== 0x23) return false; // [#
+
+        let end = -1;
+        for (let i = start + 2; i < state.posMax; i++) {
+          if (state.src.charCodeAt(i) === 0x5D) { // ]
+            end = i;
+            break;
+          }
+        }
+
+        if (end === -1) return false;
+
+        if (!silent) {
+          const idName = state.src.slice(start + 2, end).trim();
+          const token = state.push('html_inline', '', 0);
+          token.content = `<span id="def-${idName}" class="dst-anchor"></span>`;
+        }
+
+        state.pos = end + 1;
         return true;
       });
 

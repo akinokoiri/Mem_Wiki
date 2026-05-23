@@ -37,9 +37,9 @@ defineProps({
   min-width: 0;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(92, 58, 33, 0.15);
-  background: #fdfaf5;
-  border: 2px solid #5c3a21;
+  box-shadow: 0 10px 20px var(--mem-table-shadow);
+  background: var(--mem-bg);
+  border: 2px solid var(--mem-heading);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +52,7 @@ defineProps({
   display: block;
 }
 .media-placeholder {
-  color: #a09285;
+  color: var(--mem-text-2);
   font-size: 0.9em;
   padding: 40px;
 }

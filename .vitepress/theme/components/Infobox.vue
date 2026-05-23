@@ -50,11 +50,11 @@ const formatValue = (val) => {
 <style scoped>
 .infobox {
   width: 320px;
-  background: #fdfaf5;
-  border: 2px solid #5c3a21;
+  background: var(--mem-bg);
+  border: 2px solid var(--mem-heading);
   border-radius: 8px;
   font-size: 0.9em;
-  box-shadow: 4px 4px 0px rgba(92, 58, 33, 0.1);
+  box-shadow: 4px 4px 0px var(--mem-table-shadow);
   overflow: hidden;
   z-index: 10;
   transition: transform 0.2s ease;
@@ -100,8 +100,8 @@ const formatValue = (val) => {
 }
 
 .infobox-title {
-  background: #5c3a21;
-  color: #fff;
+  background: var(--mem-heading);
+  color: var(--mem-table-th-text);
   padding: 8px;
   text-align: center;
   font-weight: bold;
@@ -110,9 +110,9 @@ const formatValue = (val) => {
 
 .infobox-image {
   padding: 10px;
-  background: #f5efe4;
+  background: var(--mem-bg-soft);
   text-align: center;
-  border-bottom: 1px solid #dcd1ba;
+  border-bottom: 1px solid var(--mem-border);
 }
 
 .infobox-image img {
@@ -124,11 +124,11 @@ const formatValue = (val) => {
 }
 
 .infobox-section {
-  background: #ebe2d0;
-  color: #5c3a21;
+  background: var(--mem-bg-mute);
+  color: var(--mem-heading);
   padding: 4px 8px;
   font-weight: bold;
-  border-bottom: 1px solid #dcd1ba;
+  border-bottom: 1px solid var(--mem-border);
   font-size: 0.85em;
   text-align: center;
 }
@@ -141,7 +141,7 @@ const formatValue = (val) => {
   display: flex;
   justify-content: space-between;
   padding: 4px 12px;
-  border-bottom: 1px solid #f4eee1;
+  border-bottom: 1px solid var(--mem-bg-soft);
 }
 
 .infobox-stat-row:last-child {
@@ -152,7 +152,7 @@ const formatValue = (val) => {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #5c4a4a;
+  color: var(--mem-text-2);
 }
 
 .stat-mini-icon {
@@ -163,7 +163,7 @@ const formatValue = (val) => {
 
 .infobox-stat-value {
   font-weight: bold;
-  color: #3d2e2e;
+  color: var(--mem-text-1);
   white-space: pre-line; /* 支持换行符 */
 }
 
@@ -178,12 +178,12 @@ const formatValue = (val) => {
 
 .detail-label {
   font-weight: bold;
-  color: #5c4a4a;
+  color: var(--mem-text-2);
   margin-right: 6px;
 }
 
 .detail-value {
-  color: #3d2e2e;
+  color: var(--mem-text-1);
   white-space: pre-line; /* 支持换行符 */
 }
 </style>
