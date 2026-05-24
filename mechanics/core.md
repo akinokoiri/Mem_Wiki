@@ -2,12 +2,12 @@
 
 <Infobox 
   title="芒伊木 (本体)"
-  image="/mem_card.png"
+  image="/mem_card.webp"
   :stats="[
-    { label: '生命值', value: '75', icon: '/icons/icon_health.png' },
-    { label: '理智值', value: '200', icon: '/icons/icon_sanity.png' },
-    { label: '饱食度', value: '150', icon: '/icons/icon_hunger.png' },
-    { label: '灵魂值', value: '150', icon: '/icons/icon_soul.png' }
+    { label: '生命值', value: '75', icon: '/icons/icon_health.webp' },
+    { label: '理智值', value: '200', icon: '/icons/icon_sanity.webp' },
+    { label: '饱食度', value: '150', icon: '/icons/icon_hunger.webp' },
+    { label: '灵魂值', value: '150', icon: '/icons/icon_soul.webp' }
   ]"
   :details="[
     { label: '初始物品', value: '封印项圈Lv1' },
@@ -47,7 +47,7 @@
 <span class="heimu" title="游戏之外的幕后">这是一个纯粹为了所谓的“游戏平衡性”添加的设定，实际上在虚构层上非常牵强</span>
 
 <MediaCard 
-  src="/box_3.png" 
+  src="/box_3.webp" 
   caption="灵魂裂痕和灵魂震荡叠加导致的三维上限损失" 
   width="320px"
 />
@@ -73,7 +73,7 @@
 - **评价**：无任何特殊机制，最虚弱但最稳定的探索状态。
 
 <MediaCard 
-  src="/box_1.png" 
+  src="/box_1.webp" 
   caption="兽化下的攻速对比" 
   width="320px"
 />

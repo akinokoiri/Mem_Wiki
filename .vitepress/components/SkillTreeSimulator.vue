@@ -9,29 +9,29 @@
         <div class="top-decorations">
           <!-- 左侧标签 (纯装饰) -->
           <div class="top-tab tab-left">
-            <img src="/skills/office_icon/tab_skills_unselected.png" class="tab-bg" draggable="false" />
+            <img src="/skills/office_icon/tab_skills_unselected.webp" class="tab-bg" draggable="false" />
           </div>
           
           <!-- 中间主标题 -->
           <div class="top-title-banner">
-            <img src="/skills/office_icon/playerinfo_bg.png" class="title-bg" draggable="false" />
+            <img src="/skills/office_icon/playerinfo_bg.webp" class="title-bg" draggable="false" />
             <span class="title-text">技能树模拟器</span>
           </div>
           
           <!-- 右侧标签 (假装当前选中) -->
           <div class="top-tab tab-right">
-            <img src="/skills/office_icon/tab_skills_unselected.png" class="tab-bg" draggable="false" />
+            <img src="/skills/office_icon/tab_skills_unselected.webp" class="tab-bg" draggable="false" />
           </div>
         </div>
 
         <!-- 游戏内卷轴作为最底层背景 -->
-        <img src="/skills/office_icon/background.png" class="main-bg" draggable="false" />
+        <img src="/skills/office_icon/background.webp" class="main-bg" draggable="false" />
         
         <div class="content-layer">
           <!-- 顶部中心：剩余洞察点数显示 -->
           <div class="insight-points" @click.stop>
             <div class="insight-icon-wrapper">
-              <img src="/skills/office_icon/skill_icon_textbox.png" class="insight-bg" draggable="false" />
+              <img src="/skills/office_icon/skill_icon_textbox.webp" class="insight-bg" draggable="false" />
               <span class="insight-number">{{ availablePoints }}</span>
             </div>
             <span class="insight-text">剩余洞察</span>
@@ -39,7 +39,7 @@
 
           <!-- 技能树背景与交互区 -->
           <div class="skilltree-container">
-            <img src="/skills/mem_background/mem_background.png" class="bg-img" draggable="false" />
+            <img src="/skills/mem_background/mem_background.webp" class="bg-img" draggable="false" />
             
             <SkillTreeNode
               v-for="node in SKILL_NODES"
@@ -55,7 +55,7 @@
 
           <!-- 底部信息面板 -->
           <div class="info-panel" @click.stop>
-            <img src="/skills/office_icon/wilson_background_text.png" class="info-bg" draggable="false" />
+            <img src="/skills/office_icon/wilson_background_text.webp" class="info-bg" draggable="false" />
             <div class="info-content">
               <h3 class="info-title">{{ displayTitle }}</h3>
               <p class="info-desc">{{ displayDesc }}</p>
@@ -489,7 +489,7 @@ defineExpose({
 }
 
 .action-btn {
-  background-image: url('/skills/office_icon2/button_carny_long_normal.png');
+  background-image: url('/skills/office_icon2/button_carny_long_normal.webp');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -509,22 +509,22 @@ defineExpose({
 }
 
 .action-btn:hover:not(:disabled) {
-  background-image: url('/skills/office_icon2/button_carny_long_hover.png');
+  background-image: url('/skills/office_icon2/button_carny_long_hover.webp');
 }
 
 .action-btn:active:not(:disabled) {
-  background-image: url('/skills/office_icon2/button_carny_long_down.png');
+  background-image: url('/skills/office_icon2/button_carny_long_down.webp');
   transform: translateY(2px);
 }
 
 .action-btn:disabled {
-  background-image: url('/skills/office_icon2/button_carny_long_disabled.png');
+  background-image: url('/skills/office_icon2/button_carny_long_disabled.webp');
   color: #7a6652;
   cursor: not-allowed;
 }
 
 .action-btn.is-learned:disabled {
-  background-image: url('/skills/office_icon/skilltree_backgroundart.png');
+  background-image: url('/skills/office_icon/skilltree_backgroundart.webp');
   color: #332414;
 }
 

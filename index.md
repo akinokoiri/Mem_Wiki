@@ -17,7 +17,7 @@ onUnmounted(() => {
 
 <div class="mem-custom-home">
   <div class="mem-hero-center">
-    <img src="/names_mem.png" alt="芒伊木" class="mem-logo" />
+    <img src="/names_mem.webp" alt="芒伊木" class="mem-logo" />
     <div class="mem-links">
       <!-- 进入 Wiki 的入口 -->
       <a href="/mechanics/core" title="进入 Wiki" class="mem-text-link">

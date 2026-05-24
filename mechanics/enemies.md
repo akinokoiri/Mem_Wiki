@@ -12,7 +12,7 @@
 位面寄生分为 [暗影位面寄生] 和 [月亮位面寄生]，两种寄生复活的 Boss 不同。
 
 <MediaCard 
-  src="/box_jisheng.png" 
+  src="/box_jisheng.webp" 
   caption="准备寄生尸体的入侵型虚影(左)\n和即将被暗域先驱寄生的尸体(右)" 
   width="400px"
 />
@@ -46,9 +46,9 @@
 
 <Infobox 
   title="芒伊月"
-  image="/mem_yue.png"
+  image="/mem_yue.webp"
   :stats="[
-    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '根据武器决定'},
     { label: '物理防御', value: '根据护甲决定' },
     { label: '位面伤害', value: '武器面板 + 10' },
@@ -56,8 +56,8 @@
     { label: '移动速度', value: '6 → 11' },
     { label: '攻击距离', value: '12 → 3 (三连击) / 12 (跳劈)' },
     { label: '攻击间隔', value: '4 → 10 (三连击) / 0 (跳劈)' },
-    { label: '理智光环', value: '+40/60 → -40/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '月亮 → 暗影', icon: '/icons/icon_moonaligned.png' },
+    { label: '理智光环', value: '+40/60 → -40/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '月亮 → 暗影', icon: '/icons/icon_moonaligned.webp' },
     { label: '阵营加成', value: '-10% 来自月亮阵营的伤害 / +10% 对暗影阵营的伤害\n↓\n-10% 来自暗影阵营的伤害 / +10% 对月亮阵营的伤害' },
   ]"
   :details="[
@@ -173,7 +173,7 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
   - 内部的[敌意虚影·启迪]也会直接消失。
 
 <MediaCard 
-  src="/box_dyxy.png" 
+  src="/box_dyxy.webp" 
   caption="敌意虚影·启迪(左)和敌意虚影(右)" 
   width="320px"
 />
@@ -229,9 +229,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 <Infobox 
   title="荒尹沐"
-  image="/shadowmem.png"
+  image="/shadowmem.webp"
   :stats="[
-    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '38 (暗影收割者面板)'},
     { label: '物理防御', value: '20% (面具面板)' },
     { label: '位面伤害', value: '18 (暗影收割者面板) + 20' },
@@ -239,8 +239,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '4' },
     { label: '攻击距离', value: '3' },
     { label: '攻击间隔', value: '3' },
-    { label: '理智光环', value: '-40/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.png' },
+    { label: '理智光环', value: '-40/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.webp' },
     { label: '阵营加成', value: '-20% 来自暗影阵营的伤害 \n +20% 对月亮阵营的伤害' },
   ]"
   :details="[
@@ -288,7 +288,7 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 > - 头部不会主动追击、不具备攻击手段、不被地形阻挡
 
 <MediaCard 
-  src="/box_hym.png" 
+  src="/box_hym.webp" 
   caption="正在四散前往站位的沐尹荒(左)\n正在追击玩家的荒尹沐的身体(下)\n正在逃跑的芒伊木(右)" 
   width="400px"
 />
@@ -324,9 +324,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 <Infobox 
   title="沐尹荒（影子）"
-  image="/shadowmem_minion.png"
+  image="/shadowmem_minion.webp"
   :stats="[
-    { label: '生命值', value: '250 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '250 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '68 (暗夜剑面板)'},
     { label: '物理防御', value: '0' },
     { label: '位面伤害', value: '20' },
@@ -334,8 +334,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '4' },
     { label: '攻击距离', value: '3' },
     { label: '攻击间隔', value: '4' },
-    { label: '理智光环', value: '-40/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.png' },
+    { label: '理智光环', value: '-40/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.webp' },
     { label: '阵营加成', value: '-20% 来自暗影阵营的伤害 \n +20% 对月亮阵营的伤害' },
   ]"
   :details="[
@@ -414,9 +414,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 <Infobox 
   title="友善的芒伊月"
-  image="/mem_yue_pet.png"
+  image="/mem_yue_pet.webp"
   :stats="[
-    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '根据武器决定'},
     { label: '物理防御', value: '根据护甲决定' },
     { label: '位面伤害', value: '根据武器决定' },
@@ -424,8 +424,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '6 → 11' },
     { label: '攻击距离', value: '12 → 3 (三连击) / 12 (跳劈)' },
     { label: '攻击间隔', value: '6 → 8 (三连击) / 0 (跳劈)' },
-    { label: '理智光环', value: '对主人 +25/60\n对非主人 +12.5/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '月亮', icon: '/icons/icon_moonaligned.png' },
+    { label: '理智光环', value: '对主人 +25/60\n对非主人 +12.5/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '月亮', icon: '/icons/icon_moonaligned.webp' },
   ]"
   :details="[
     { label: '主动仇恨', value: '暗影阵营' },
@@ -521,9 +521,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 <Infobox 
   title="友善的荒尹沐"
-  image="/shadowmem_pet.png"
+  image="/shadowmem_pet.webp"
   :stats="[
-    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '根据武器决定'},
     { label: '物理防御', value: '根据护甲决定' },
     { label: '位面伤害', value: '根据武器决定' },
@@ -531,8 +531,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '4' },
     { label: '攻击距离', value: '99 (不具备实际意义)' },
     { label: '攻击间隔', value: '∞ ‌(不具备实际意义)' },
-    { label: '理智光环', value: '对主人 +12.5/60\n对非主人 -25/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.png' },
+    { label: '理智光环', value: '对主人 +12.5/60\n对非主人 -25/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.webp' },
   ]"
   :details="[
     { label: '主动仇恨', value: '月亮阵营 (仅战斗模式)' },
@@ -644,9 +644,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 <Infobox 
   title="友善的沐尹荒（影子）"
-  image="/shadowmem_minion_pet.png"
+  image="/shadowmem_minion_pet.webp"
   :stats="[
-    { label: '生命值', value: '250 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '250 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '20 / 根据本体武器决定 (仅强化)'},
     { label: '物理防御', value: '0' },
     { label: '位面伤害', value: '0 / 根据本体武器决定 (仅强化)' },
@@ -654,8 +654,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '4' },
     { label: '攻击距离', value: '3' },
     { label: '攻击间隔', value: '4' },
-    { label: '理智光环', value: '对持有先驱意志以外的人\n -12.5/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.png' },
+    { label: '理智光环', value: '对持有先驱意志以外的人\n -12.5/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.webp' },
   ]"
   :details="[
     { label: '主动仇恨', value: '月亮阵营 (仅战斗模式)' },
@@ -684,9 +684,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 </div>
 <Infobox 
   title="身体(友善的荒尹沐)"
-  image="/shadowmem_pet_body.png"
+  image="/shadowmem_pet_body.webp"
   :stats="[
-    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '1000 (根据模组设置决定)', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '20 / 根据本体武器决定 (仅强化)'},
     { label: '物理防御', value: '0' },
     { label: '位面伤害', value: '0 / 根据本体武器决定 (仅强化)' },
@@ -694,8 +694,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '4' },
     { label: '攻击距离', value: '3' },
     { label: '攻击间隔', value: '3' },
-    { label: '理智光环', value: '对持有先驱意志以外的人\n -12.5/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.png' },
+    { label: '理智光环', value: '对持有先驱意志以外的人\n -12.5/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.webp' },
   ]"
   :details="[
     { label: '主动仇恨', value: '月亮阵营 (仅战斗模式)' },
@@ -741,9 +741,9 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
 
 <Infobox 
   title="潜伏恐惧"
-  image="/mem_ruinsnightmare.png"
+  image="/mem_ruinsnightmare.webp"
   :stats="[
-    { label: '生命值', value: '850', icon: '/icons/icon_health.png' },
+    { label: '生命值', value: '850', icon: '/icons/icon_health.webp' },
     { label: '物理伤害', value: '50'},
     { label: '物理防御', value: '0' },
     { label: '位面伤害', value: '25 (仅位面强化)' },
@@ -751,8 +751,8 @@ P2 阶段的芒伊月获得 **根性**（最低保留 1 点生命值）。生命
     { label: '移动速度', value: '5 (行走) / 6 (奔跑)' },
     { label: '攻击距离', value: '3.5' },
     { label: '攻击间隔', value: '1.5' },
-    { label: '理智光环', value: '-100/60', icon: '/icons/icon_sanity.png' },
-    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.png' },
+    { label: '理智光环', value: '-100/60', icon: '/icons/icon_sanity.webp' },
+    { label: '阵营', value: '暗影', icon: '/icons/icon_shadowaligned.webp' },
   ]"
   :details="[
     { label: '主动仇恨', value: '疯狂状态下的玩家' },

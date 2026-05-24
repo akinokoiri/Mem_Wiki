@@ -9,7 +9,7 @@
 </div>
 
 <MediaCard 
-  src="/box_sxlh.png" 
+  src="/box_sxlh.webp" 
   caption="四象离魂的最大环绕半径示意图" 
   width="100%" 
 />

@@ -37,7 +37,7 @@ defineProps({
     type: String,
     default: 'right'
   },
-  stats: Array, // [{ label: '生命', value: '75', icon: '/health_icon.png' }]
+  stats: Array, // [{ label: '生命', value: '75', icon: '/health_icon.webp' }]
   details: Array // [{ label: '代码名', value: 'mem' }]
 })
 

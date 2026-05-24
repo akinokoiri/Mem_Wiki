@@ -9,9 +9,9 @@
     @mouseleave="onLeave"
   >
     <div class="node-content" :class="{ 'is-lock': node.isLock }">
-      <img :src="withBase(`/skills/office_icon/${statusImage}.png`)" class="status-layer" />
-      <img v-if="!node.isLock" :src="withBase(`/skills/${node.icon}.png`)" class="icon-layer" />
-      <img v-show="isFocused" :src="withBase(`/skills/office_icon/${frameImage}.png`)" class="frame-layer" />
+      <img :src="withBase(`/skills/office_icon/${statusImage}.webp`)" class="status-layer" />
+      <img v-if="!node.isLock" :src="withBase(`/skills/${node.icon}.webp`)" class="icon-layer" />
+      <img v-show="isFocused" :src="withBase(`/skills/office_icon/${frameImage}.webp`)" class="frame-layer" />
     </div>
   </div>
 </template>

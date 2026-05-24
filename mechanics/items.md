@@ -20,7 +20,7 @@
 </div>
 
 <MediaCard 
-  src="/mem_hlxz_open-0.png" 
+  src="/mem_hlxz_open-0.webp" 
   caption="狐狸的凶宅" 
   width="240px"
 />
@@ -45,10 +45,10 @@
 
 <Infobox 
   title="芒芒的尸体"
-  image="/death2-54.png"
+  image="/death2-54.webp"
   :stats="[
     { label: '配方', value: '6 小肉 + 3 噩梦燃料' },
-    { label: '腐烂时间', value: '3 天', icon: '/icons/icon_spoil.png' },
+    { label: '腐烂时间', value: '3 天', icon: '/icons/icon_spoil.webp' },
   ]"
 />
 </div>
@@ -76,7 +76,7 @@
 
 <Infobox 
   title="芒芒的墓碑"
-  image="/mem_fm.png"
+  image="/mem_fm.webp"
   :stats="[
     { label: '配方', value: '3 铥矿 + 3 深色花瓣 + 1 紫宝石' },
   ]"
@@ -100,7 +100,7 @@
 
 <Infobox 
   title="魂墙(物品)"
-  image="/wall_segment-14.png"
+  image="/wall_segment-14.webp"
   :stats="[
     { label: '配方', value: '1 灵魂值' },
     { label: '耐久', value: '1 生命值' }
@@ -141,7 +141,7 @@
 
 <Infobox 
   title="芒式修补工具"
-  image="/mem_repair-0.png"
+  image="/mem_repair-0.webp"
   :stats="[
     { label: '配方', value: '5 月岩 + 5 活木 + 1 彩虹宝石' },
     { label: '耐久', value: '50' }
@@ -174,7 +174,7 @@
 
 <Infobox 
   title="尸体防腐核心"
-  image="/mem_tomb_upgrader-0.png"
+  image="/mem_tomb_upgrader-0.webp"
   :stats="[
     { label: '配方', value: '1 蓝宝石 + 1 盐 + 1 注能月亮玻璃碎片' },
   ]"
@@ -227,7 +227,7 @@
 
 <Infobox 
   title="封印项圈"
-  image="/mem_xq-0.png"
+  image="/mem_xq-0.webp"
   :stats="[
     { label: 'Lv1配方', value: '6 噩梦燃料'},
     { label: 'Lv2配方', value: '1 Lv1项圈 + 2 绳子 + 1 木板' },
@@ -283,7 +283,7 @@
 <div class="item-aside">
 <Infobox 
   title="电锯惊魂"
-  image="/mem_dj-0.png"
+  image="/mem_dj-0.webp"
   :stats="[
     { label: '配方', value: '1 电子元件 + 2 烂电线 \n+ 3 废料 + 6 噩梦燃料' },
     { label: '伤害', value: '49 物理伤害' },

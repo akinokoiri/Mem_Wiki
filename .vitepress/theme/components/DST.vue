@@ -65,10 +65,10 @@ const hoverTitle = computed(() => {
 
 const iconSrc = computed(() => {
   if (imageError.value) {
-    return '/icons/icon_mod.png'
+    return '/icons/icon_mod.webp'
   }
   const iconKey = props.icon ? props.icon.toLowerCase().trim() : 'mod'
-  return iconMap[iconKey] || '/icons/icon_mod.png'
+  return iconMap[iconKey] || '/icons/icon_mod.webp'
 })
 
 const themeStyle = computed(() => {

@@ -11,7 +11,7 @@
 </div>
 
 <MediaCard 
-  src="/box_bsdgm.png" 
+  src="/box_bsdgm.webp" 
   caption="发着光的魂魄刻印和电锯惊魂" 
   width="100%" 
 />
