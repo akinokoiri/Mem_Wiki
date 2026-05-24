@@ -99,7 +99,8 @@ export const nounMap = {
   '腐烂速率': 'spoil',
   '最低三维比例': 'mod',
   '灵魂实体专精': 'mem_skill_soul_fire_3',
-  '彼世的光芒': 'mem_corpse_mastery',
+  '彼世的光芒': 'mem_skill_soul_light',
+  '死体精通': 'mem_corpse_mastery',
   '死体精通': 'mem_skill_soul_split',
   '魂墙(技能)': 'mem_skill_soul_wall',
   '埋葬': 'key',
@@ -166,9 +167,11 @@ export const iconMap = {
   spoil: '/icons/icon_spoil.png',
   mem_skill_soul_fire_3: '/skills/mem_skill_soul_fire_3.png',
   mem_corpse_mastery: '/skills/mem_corpse_mastery.png',
-  mem_skill_soul_split: '/skills/mem_skill_soul_split.png',
+  mem_skill_soul_light: '/skills/mem_skill_soul_light.png',
   key: '/icons/icon_action.png',
   mem_skill_soul_wall: '/skills/mem_skill_soul_wall.png',
+  mem_skill_soul_split: '/skills/mem_skill_soul_split.png',
+  mem_repair: '/mem_repair-0.png',
 
 
 
@@ -234,8 +237,9 @@ export const colorMap = {
   mem_ruinsnightmare: { h: 358, s: 53, l: 22 },
   mem_skill_soul_fire_3: { h: 258, s: 55, l: 45 },
   mem_corpse_mastery: { h: 258, s: 55, l: 45 },
-  mem_skill_soul_split: { h: 258, s: 55, l: 45 },
+  mem_skill_soul_light: { h: 258, s: 55, l: 45 },
   mem_skill_soul_wall: { h: 258, s: 55, l: 45 },
+  mem_skill_soul_split: { h: 258, s: 55, l: 45 },
   key: { h: 210, s: 90, l: 56 },
 
 
@@ -343,6 +347,8 @@ export const linkMap = {
   '彼世的光芒': '/mechanics/skilltree.html#mem_skill_soul_light',
   '死体精通': '/mechanics/skilltree.html#mem_corpse_mastery',
   '魂墙(技能)': '/mechanics/skilltree.html#mem_skill_soul_wall',
+  '意识转移': '/mechanics/skilltree.html#mem_spirit_link',
+  '四象离魂': '/mechanics/skilltree.html#mem_skill_soul_split',
 };
 
 export const officialTerms = [
@@ -370,4 +376,6 @@ export const specialLinks = {
   '彼世的光芒': '/mechanics/skilltree.html#mem_skill_soul_light',
   '死体精通': '/mechanics/skilltree.html#mem_corpse_mastery',
   '魂墙(技能)': '/mechanics/skilltree.html#mem_skill_soul_wall',
+  '意识转移': '/mechanics/skilltree.html#mem_spirit_link',
+  '四象离魂': '/mechanics/skilltree.html#mem_skill_soul_split',
 };
