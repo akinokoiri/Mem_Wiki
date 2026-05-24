@@ -5,6 +5,7 @@ import { nounMap } from './theme/components/icons.js'
 export default defineConfig({
   title: "芒伊木 Wiki",
   description: "饥荒：联机版 芒伊木模组全效果说明书",
+  srcExclude: ['CLAUDE.md', 'GEMINI.md', '_RAW_DATA_SOURCE.md', 'scratch/**', '.antigravity/**', '**/superpowers/**', '**/README.md'],
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
