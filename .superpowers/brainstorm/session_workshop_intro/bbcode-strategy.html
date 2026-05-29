@@ -1,0 +1,63 @@
+<h2>🛡️ 破局之策：Steam BBCode 极限排版与混合策略</h2>
+<p class="subtitle">避开原生 BBCode 渲染深渊，用“切图海报 + 黄金排版”实现大厂质感</p>
+
+<div class="pros-cons" style="margin-bottom: 2rem;">
+  <div class="pros">
+    <h4>🎨 混合设计策略 (首选方案)</h4>
+    <ul>
+      <li><b>外链图床切图 (Visual Banners)</b>：将排版复杂度高、有特色立绘的“大标题”和“机制核心卖点图”在本地设计成精美长条图，用 <code>[img]URL[/img]</code> 外链显示。</li>
+      <li><b>高兼容性文本 (Clean BBCode)</b>：正文、更新日志、直达 Wiki 链接采用原生 BBCode 代码，保证文字可复制、链接可直接点击、完美适应不同分辨率与深色模式。</li>
+      <li><b>WIKI 黄金导流 (Wiki-First CTA)</b>：在页面顶部与底部设计显眼的“直达完整百科”按钮图/文字链接，把重度玩家引导至我们完美的 Wiki 模拟器。</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h4>⚠️ 纯 BBCode 排版的局限</h4>
+    <ul>
+      <li>Steam 的富文本渲染引擎非常古老，对表格、居中、甚至部分字号的支持在不同客户端/网页端表现不一致。</li>
+      <li>强行用 BBCode 画表格和多栏布局会导致代码极其臃肿，一旦玩家修改分辨率就会发生灾难性的折行和错位。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h3>🧪 BBCode 兼容性极端压力测试</h3>
+  <p class="subtitle">我们已经为您在项目中生成了 <code>scratch/steam_bbcode_test.txt</code> 测试文件。请复制其中的内容，粘贴到您的私人测试模组创意工坊描述中进行渲染测试。</p>
+  
+  <div class="placeholder" style="text-align: left; font-family: monospace; font-size: 0.85rem; background: var(--bg-secondary); padding: 1.5rem; line-height: 1.6; border: 1px solid var(--border);">
+    [h1]🚀 标题一测试：芒伊木 MEM-WIKI 极限测试[/h1]<br>
+    [h2]🌟 标题二测试：三大形态与新生态系统[/h2]<br>
+    [h3]📌 标题三测试：机制概要[/h3]<br>
+    <br>
+    [b]这是粗体测试[/b] | [i]这是斜体测试[/i] | [u]这是下划线测试[/u] | [strike]这是删除线测试[/strike]<br>
+    <br>
+    [hr]<br>
+    [b]🔗 外部链接测试[/b]：<br>
+    [url=https://akinokoiri.github.io/Mem_Wiki/]点击直接进入《芒伊木》百科 WIKI 文档站[/url]<br>
+    <br>
+    [hr]<br>
+    [b]🖼️ 外链图床图片测试（支持 HTTPS 直接渲染）[/b]：<br>
+    [img]https://raw.githubusercontent.com/akinokoiri/Mem_Wiki/main/public/mem_card.webp[/img]<br>
+    <br>
+    [hr]<br>
+    [b]📊 标准表格测试（检查框线与对齐）[/b]：<br>
+    [table]<br>
+      [tr]<br>
+        [th]属性[/th][th]人类形态[/th][th]兽化 (狐狸)[/th][th]怨灵形态[/th]<br>
+      [/tr]<br>
+      [tr]<br>
+        [td]攻击倍率[/td][td]0.5倍[/td][td]1.0倍[/td][td]最高 1.5倍[/td]<br>
+      [/tr]<br>
+      [tr]<br>
+        [td]移动速度[/td][td]默认[/td][td]+35%[/td][td]默认[/td]<br>
+      [/tr]<br>
+    [/table]<br>
+    <br>
+    [hr]<br>
+    [b]📝 无序列表测试[/b]：<br>
+    [list]<br>
+      [*] 随从宠物：影萌宠物三段攻击、精准追击<br>
+      [*] 全新强敌：高难度宿敌生态挑战<br>
+      [*] 重构技能：独创【封印与觉醒】机制技能树<br>
+    [/list]<br>
+  </div>
+</div>

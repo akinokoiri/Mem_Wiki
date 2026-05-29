@@ -74,7 +74,8 @@ export const nounMap = {
   '捕猎姿态': 'beast',
   '分头行动': 'ftxd',
   '意识转移': 'ftxd',
-  '死亡回归': 'mod',
+  '死亡回归': 'key',
+  '灵魂出窍': 'key',
   '友善随从': 'mod',
   '天基激光': 'tenkibeam',
   '月能激光': 'yuebeam',
@@ -110,10 +111,16 @@ export const nounMap = {
   '启迪强化': 'mod',
   '嘲讽': 'mod',
   '三个灵魂': 'state',
+  '无灵魂生物': 'mod',
+  '注能消耗': 'mod',
+  '暗影负载': 'mod',
+  '澎湃心核': 'shadow_heart',
+  '永恒心核': 'shadow_heart',
 };
 
 export const iconMap = {
   health: '/icons/icon_health.webp',
+  shadow_heart: '/icons/icon_shadow_heart.webp',
   sanity: '/icons/icon_sanity.webp',
   hunger: '/icons/icon_hunger.webp',
   soul: '/icons/icon_soul.webp',
@@ -184,6 +191,7 @@ export const iconMap = {
 // HSL 颜色配置：h (色相), s (饱和度%), l (亮度%)
 export const colorMap = {
   health: { h: 0, s: 100, l: 65 },
+  shadow_heart: { h: 0, s: 100, l: 65 },
   sanity: { h: 48, s: 100, l: 60 },
   hunger: { h: 30, s: 100, l: 60 },
   soul: { h: 275, s: 96, l: 75 },
@@ -261,7 +269,10 @@ export const linkMap = {
   '灵魂裂痕': '/mechanics/core.html#def-灵魂裂痕',
   '捕猎姿态': '/mechanics/core.html#def-捕猎姿态',
   '死亡回归': '/mechanics/core.html#def-死亡回归',
+  '澎湃心核': '/mechanics/core.html#def-澎湃心核',
+  '永恒心核': '/mechanics/core.html#def-永恒心核',
   '暗影观察者': '/mechanics/core.html#def-暗影观察者',
+  '灵魂出窍': '/mechanics/core.html#def-灵魂出窍',
   '最低三维比例': '/mechanics/core.html#def-最低三维比例',
   '嘲讽': '/mechanics/core.html#def-嘲讽',
   '芒伊月': '/mechanics/enemies.html#def-芒伊月',
@@ -272,7 +283,6 @@ export const linkMap = {
   '先驱意志': '/mechanics/enemies.html#def-先驱意志',
   '被囚禁的虚影': '/mechanics/enemies.html#def-被囚禁的虚影',
   '被侵蚀的虚影': '/mechanics/enemies.html#def-被侵蚀的虚影',
-  '电锯轰鸣': '/mechanics/items.html#def-电锯轰鸣',
   '沐尹荒': '/mechanics/enemies.html#def-沐尹荒',
   '友善的沐尹荒': '/mechanics/enemies.html#def-友善的沐尹荒',
   '身体(友善的荒尹沐)': '/mechanics/enemies.html#def-身体(友善的荒尹沐)',
@@ -324,10 +334,8 @@ export const linkMap = {
   '芒芒尸体的设计图': '/mechanics/items.html#def-芒芒尸体的设计图',
   '电锯惊魂': '/mechanics/items.html#def-电锯惊魂',
   '刻印形态': '/mechanics/items.html#def-刻印形态',
-  '魂魄刻印': '/mechanics/items.html#def-魂魄刻印',
   '芒芒的肢体': '/mechanics/items.html#def-芒芒的肢体',
   '分头行动': '/mechanics/items.html#def-分头行动',
-  '腐烂速率': '/mechanics/items.html#def-腐烂速率',
   '埋葬': '/mechanics/items.html#def-埋葬',
   '别捣鼓了，回来！': '/mechanics/items.html#def-别捣鼓了，回来！',
   '灵魂值': '/mechanics/core.html#def-灵魂值系统',
@@ -349,6 +357,11 @@ export const linkMap = {
   '魂墙(技能)': '/mechanics/skilltree.html#mem_skill_soul_wall',
   '意识转移': '/mechanics/skilltree.html#mem_spirit_link',
   '四象离魂': '/mechanics/skilltree.html#mem_skill_soul_split',
+  '电锯轰鸣': '/mechanics/items.html#def-电锯轰鸣',
+  '无灵魂生物': '/mechanics/skilltree.html#mem_skill_soul_hand',
+  '注能消耗': '/mechanics/enemies.html#def-注能消耗',
+  '暗影负载': '/mechanics/enemies.html#def-暗影负载',
+  '魂魄刻印': '/mechanics/items.html#def-魂魄刻印',
 };
 
 export const officialTerms = [
@@ -378,4 +391,5 @@ export const specialLinks = {
   '魂墙(技能)': '/mechanics/skilltree.html#mem_skill_soul_wall',
   '意识转移': '/mechanics/skilltree.html#mem_spirit_link',
   '四象离魂': '/mechanics/skilltree.html#mem_skill_soul_split',
+  '无灵魂生物': '/mechanics/skilltree.html#mem_skill_soul_hand',
 };

@@ -1,5 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vitepress'
+
+const router = useRouter()
 
 const isVisible = ref(false)
 const returnTitle = ref('')
@@ -22,7 +25,7 @@ const checkStorage = () => {
 
 const goBack = () => {
   if (returnUrl.value) {
-    window.location.href = returnUrl.value
+    router.go(returnUrl.value)
     dismiss()
   }
 }

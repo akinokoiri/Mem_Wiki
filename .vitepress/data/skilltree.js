@@ -41,7 +41,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_FIRE_3",
     "title": "灵魂实体专精三级",
-    "desc": "你发射的[鬼火]弹射次数变为6次；\n[友善的荒尹沐]发射的[鬼火]弹射次数变为8次，[友善的芒伊月]发射的[鬼火]伤害+9；\n现在[闪耀刻印]会额外在时间结束和层数溢出时，根据层数恢复你附加[魂魄刻印]时所消耗的灵魂值，\n溢出/消散时，若层数≥ 5/10，额外恢复 5%/10% [灵魂值]；若不存在[灵魂值系统]，则改为恢复生命值。",
+    "desc": "你发射的[鬼火]弹射次数变为6次；\n[友善的荒尹沐]发射的[鬼火]弹射次数变为8次，[友善的芒伊月]发射的[鬼火]伤害+9；\n现在[闪耀刻印]会额外在时间结束和层数溢出时，根据层数恢复你附加[魂魄刻印]时所消耗的灵魂值，\n溢出/消散时，若层数≥ 5/10，额外恢复 5%/10% [灵魂值]；若不存在[灵魂值系统]，则改为恢复少量生命值。",
     "icon": "mem_skill_soul_fire_3"
   },
   "mem_skill_soul_hand": {
@@ -205,7 +205,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_TELEPORT",
     "title": "落叶归根",
-    "desc": "你死后变成鬼魂时，可以打开地图\n右键点击自己的尸体、坟墓或住宅进行传送",
+    "desc": "你死后变成鬼魂时，可以打开地图\n右键点击自己的尸体、坟墓或住宅进行传送\n此外，死亡与复活时将不再受到[灵魂裂痕]惩罚",
     "icon": "mem_skill_instinct_teleport"
   },
   "mem_skill_body_lock_spirit": {
@@ -478,7 +478,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_HIDE_2",
     "title": "隐蔽本能二级",
-    "desc": "[兽化状态]下的你不会惊扰小动物；\n捕猎成功概率+20%；\n进入捕猎姿态后的移速+20%",
+    "desc": "[兽化状态]下的你不会惊扰小动物；\n捕猎成功概率+20%；\n进入捕猎姿态后的移速+40%",
     "icon": "mem_skill_instinct_hide_2"
   },
   "mem_skill_instinct_hide_1": {
@@ -494,7 +494,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_HIDE_1",
     "title": "隐蔽本能一级",
-    "desc": "[兽化状态]下的你不再被中立生物敌视；\n捕猎成功概率+10%；\n进入捕猎姿态后的移速+10%",
+    "desc": "[兽化状态]下的你不再被中立生物敌视；\n捕猎成功概率+10%；\n进入捕猎姿态后的移速+20%",
     "icon": "mem_skill_instinct_hide_1"
   },
   "mem_skill_body_lock_corpse": {

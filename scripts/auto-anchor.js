@@ -10,8 +10,8 @@ const nounMap = {};
 if (nounMapMatch) {
   const lines = nounMapMatch[1].split('\n');
   lines.forEach(line => {
-    const m = line.match(/'([^']+)':/);
-    if (m) nounMap[m[1]] = true;
+    const m = line.match(/'([^']+)':\s*'([^']+)'/);
+    if (m) nounMap[m[1]] = m[2];
   });
 }
 

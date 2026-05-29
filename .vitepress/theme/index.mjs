@@ -24,6 +24,8 @@ export default {
     app.component('ShowcaseBlock', ShowcaseBlock)
 
     if (typeof window !== 'undefined') {
+      let currentActiveUrl = location.href
+
       const triggerHighlight = () => {
         if (!location.hash) return
         setTimeout(() => {
@@ -43,8 +45,15 @@ export default {
         }, 150) // slight delay to ensure dom is ready and override native scroll
       }
 
+      const normalizePathname = (pathname) => {
+        return pathname.replace(/\.html$/, '').replace(/\/$/, '')
+      }
+
       window.addEventListener('hashchange', triggerHighlight)
-      router.onAfterRouteChanged = () => triggerHighlight()
+      router.onAfterRouteChanged = () => {
+        currentActiveUrl = location.href
+        triggerHighlight()
+      }
       
       // Global click interceptor to record "Return Capsule" state
       document.addEventListener('click', (e) => {
@@ -55,12 +64,16 @@ export default {
         if (!e.target.closest('.vp-doc')) return
         
         const url = new URL(a.href)
-        const currentUrl = new URL(location.href)
+        const currentUrl = new URL(currentActiveUrl)
         
-        // If it's a cross-page jump or a hash jump
-        if (url.origin === currentUrl.origin && (url.pathname !== currentUrl.pathname || url.hash)) {
+        const urlPath = normalizePathname(url.pathname)
+        const currentPath = normalizePathname(currentUrl.pathname)
+        const isSamePage = urlPath === currentPath
+        
+        // If it's a cross-page jump or a hash jump on the same page
+        if (url.origin === currentUrl.origin && (!isSamePage || url.hash)) {
            // If it's an in-page jump, calculate distance to avoid "too close" jumps
-           if (url.pathname === currentUrl.pathname && url.hash) {
+           if (isSamePage && url.hash) {
              try {
                const targetId = decodeURIComponent(url.hash)
                const targetEl = document.querySelector(targetId)
@@ -79,21 +92,33 @@ export default {
              }
            }
 
-           // Find nearest heading
+           // Find nearest heading and its anchor ID
            let foundHeading = null
+           let headingId = null
            const headings = Array.from(document.querySelectorAll('.vp-doc h1, .vp-doc h2, .vp-doc h3, .vp-doc h4'))
            for (let i = headings.length - 1; i >= 0; i--) {
               // Find the closest heading BEFORE the clicked link
               if (headings[i].compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING) {
                  // Remove trailing '#' anchor link characters added by markdown
                  foundHeading = headings[i].textContent.replace(/#$/, '').trim()
+                 
+                 const anchor = headings[i].querySelector('.dst-anchor, span[id]')
+                 headingId = anchor ? anchor.id : headings[i].id
                  break
               }
            }
            
            const titleText = foundHeading || document.title.split('|')[0].trim()
            sessionStorage.setItem('mem_wiki_return_text', titleText)
-           sessionStorage.setItem('mem_wiki_return_url', location.href)
+           
+           // Append the closest heading ID as hash to the return URL for precise scroll positioning
+           const returnUrlObj = new URL(currentActiveUrl)
+           if (headingId) {
+             returnUrlObj.hash = headingId.startsWith('#') ? headingId : `#${headingId}`
+           } else {
+             returnUrlObj.hash = ''
+           }
+           sessionStorage.setItem('mem_wiki_return_url', returnUrlObj.href)
            
            // Dispatch event so ReturnCapsule can pick it up if it's an in-page hash jump
            setTimeout(() => {
