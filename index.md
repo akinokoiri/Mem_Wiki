@@ -23,16 +23,16 @@ onUnmounted(() => {
       <a href="/mechanics/core" title="进入 Wiki" class="mem-text-link">
         进入WIKI
       </a>
-      <a href="#" target="_blank" title="Steam 创意工坊" class="mem-icon-link">
+      <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3734900216" target="_blank" title="Steam 创意工坊" class="mem-icon-link">
         <img src="/steam.svg" alt="Steam" />
       </a>
-      <a href="#" target="_blank" title="Bilibili" class="mem-icon-link">
+      <a href="https://space.bilibili.com/415674" target="_blank" title="Bilibili" class="mem-icon-link">
         <img src="/bilibili.svg" alt="Bilibili" />
       </a>
     </div>
   </div>
   <div class="mem-easter-egg">
-    这是一个首页，并没有什么实质性内容。
+    这是一个首页，并没有什么实质性内容。如果你看到了这个说明，说明你是大笨蛋。
   </div>
 </div>
 
