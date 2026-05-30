@@ -58,8 +58,7 @@
 
 任意复活手段将触发下述三项灵魂维度的重度减益（所有减益最低保留 25% 属性上限）：
 
-<div class="item-sub-grid">
-<div class="sub-card">
+<div class="sub-card" style="margin-bottom: 16px;">
 
 #### [#复生虚弱]1. 复生虚弱 <DSTIcon icon="state" />
 任意复活后附加的 **永久** 负面状态。最高 3 层。
@@ -72,7 +71,7 @@
 - **递减规则**：多层时，倒计时结束只**下降 1 层**并重置倒计时（例如 3 层在永恒心核下需 90 秒清空）。
 </div>
 
-<div class="sub-card">
+<div class="sub-card" style="margin-bottom: 16px;">
 
 #### [#灵魂震荡]2. 灵魂震荡 <DSTIcon icon="state" />
 若死亡地点和复活地点不一致，根据距离产生不同程度的惩罚。
@@ -81,13 +80,12 @@
 - **技能免疫**：该状态可被 **[魂墙(技能)]** 直接免疫。
 </div>
 
-<div class="sub-card" style="grid-column: span 2;">
+<div class="sub-card">
 
 #### [#灵魂裂痕]3. 灵魂裂痕 <DSTIcon icon="state" />
 每次复活失去 **25% [灵魂值]上限**。
 - **修补机制**：**[灵魂池]** 会以 1:1 的比例优先修补该裂痕。
 - **技能免疫**：该状态可被 **[落叶归根]** 技能直接免疫。
-</div>
 </div>
 
 </div>
@@ -129,8 +127,7 @@
 
 - **转换消耗**：进入扣除 **20% 饱食度**；退出扣除 **20% 理智值**。
 
-<div class="item-sub-grid">
-<div class="sub-card">
+<div class="sub-card" style="margin-bottom: 16px;">
 
 #### 🦊 兽化数值强化
 - **空手撕咬**：1.0 攻击倍率，空手伤害 30，距离 +0.3，且空手攻速大幅提升（极限攻速达 2.5~3.75）。
@@ -139,7 +136,7 @@
 - **自然惩罚**：饱食度消耗翻倍；自带 <DST icon="sanity">+3/60</DST> 理智值光环；会被猪人等中立生物视为怪物。
 </div>
 
-<div class="sub-card">
+<div class="sub-card" style="margin-bottom: 16px;">
 
 #### ⚠️ 兽化局限与代价
 - **装备限制**：无法佩戴手部装备 and 绝大部分身体/头部遮耳装备。
@@ -147,7 +144,7 @@
 - **消化负担**：食物收益<b>减半</b>，但<b>免疫食物所有负面影响</b>（仅对基础三维生效，不影响<code>恐怖国王饼</code>替换效果或<code>深色花瓣茶</code>的理智扣减）。
 </div>
 
-<div class="sub-card">
+<div class="sub-card" style="margin-bottom: 16px;">
 
 #### 🌪️ 专属形态技能
 - **跳跃 (`R` 键)** <DSTIcon icon="key" />：根据移速决定距离，跨越地形且期间霸体。静止时朝鼠标方向跳，距离不够不跳以防落海（可在设置调整）。
@@ -170,7 +167,6 @@
   - [捕猎姿态] 的移速削弱从 -60% 缓和为 **-20%**。
 - **学习 [精准度“优化”]**：
   - 采集速度大幅提升。
-</div>
 </div>
 
 </div>
