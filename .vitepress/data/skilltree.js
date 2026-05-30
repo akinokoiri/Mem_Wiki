@@ -388,7 +388,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_BEASTLY",
     "title": "野兽体质",
-    "desc": "[兽化状态]时你可以空手工作，\n工作效率仅有正常的 40%，且工作时肚子会饿；\n并且你可以在[兽化状态]时指挥身体工作",
+    "desc": "[兽化]时可空手工作（但效率仅有40%且工作时肚子会饿）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃速度+40%（跳跃滞空的时间变得更短）；\n藏食物时刨的土坑的可维持得时间翻倍",
     "icon": "mem_skill_instinct_beastly"
   },
   "mem_skill_instinct_ghostly": {
@@ -463,7 +463,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_BODY_LOCK_MEDICINE",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[隐蔽本能二级]\n【封印】让10种不同的生灵折服于你并奉你为主。\n唯有深刻体悟不同躯壳的差异与共性，才能随心所欲地调配它们的本源。",
+    "desc": "前置要求：点亮[隐藏本能二级]\n【封印】让10种不同的生灵折服于你并奉你为主。\n唯有深刻体悟不同躯壳的差异与共性，才能随心所欲地调配它们的本源。",
     "icon": "mem_skill_body_lock_medicine"
   },
   "mem_skill_instinct_hide_2": {
@@ -477,7 +477,7 @@ export const SKILL_NODES = {
     "root": false,
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_HIDE_2",
-    "title": "隐蔽本能二级",
+    "title": "隐藏本能二级",
     "desc": "[兽化状态]下的你不会惊扰小动物；\n捕猎成功概率+20%；\n进入捕猎姿态后的移速+40%",
     "icon": "mem_skill_instinct_hide_2"
   },
@@ -493,7 +493,7 @@ export const SKILL_NODES = {
     "root": true,
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_HIDE_1",
-    "title": "隐蔽本能一级",
+    "title": "隐藏本能一级",
     "desc": "[兽化状态]下的你不再被中立生物敌视；\n捕猎成功概率+10%；\n进入捕猎姿态后的移速+20%",
     "icon": "mem_skill_instinct_hide_1"
   },
