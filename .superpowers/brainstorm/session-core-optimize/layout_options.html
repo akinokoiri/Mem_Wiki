@@ -1,0 +1,81 @@
+<h2>选择排版优化方案</h2>
+<p class="subtitle">针对《芒伊木》Wiki <code>core.md</code> 中“死亡复活惩罚”和“兽化形态”大段文字的重构方向进行决策</p>
+
+<div class="section">
+  <h3>为什么当前看的眼睛累？</h3>
+  <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+    原因在于<b>信息层级不够立体</b>。目前的排版中，包含各种复杂的数据变化（如：复生虚弱的层数倒计时、兽化形态下的数值增益与佩戴代价），所有的文本都在同一个层级平铺展开，缺乏呼吸感与快速定位锚点。
+  </p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>方案 A：子网格双栏卡片化（强烈推荐 ⭐⭐⭐）</h3>
+      <p>使用 Wiki 现有的 <code>.item-card</code>、<code>.item-sub-grid</code> 和 <code>.sub-card</code> 样式进行模块化重构。</p>
+      <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary); background: var(--bg-tertiary); padding: 0.75rem; border-radius: 6px;">
+        <strong>重构效果：</strong>
+        <ul style="margin-left: 1.2rem; margin-top: 0.25rem;">
+          <li><b>死亡复活惩罚：</b>改造成一个大的 <code>item-card</code>。左侧使用 3 栏/2 栏 <code>item-sub-grid</code> 将 <b>复生虚弱</b>、<b>灵魂震荡</b>、<b>灵魂裂痕</b> 置于独立的 <code>sub-card</code> 卡片中，右侧放置尸体/裂痕示意图 <code>MediaCard</code>。</li>
+          <li><b>兽化形态：</b>主栏使用 <code>item-sub-grid</code> 将<b>数值强化、特殊机制（跳跃/捕猎）、高级天赋强化</b>划分为 3 个独立的 <code>sub-card</code>，右侧与极限攻速对比图完美并排，极具视觉冲击力。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>方案 B：原版风手风琴折叠（折叠面板）</h3>
+      <p>使用 <code>&lt;details&gt;</code> 标签将复杂细则进行折叠隐藏，只暴露最核心的结论标题。</p>
+      <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary); background: var(--bg-tertiary); padding: 0.75rem; border-radius: 6px;">
+        <strong>重构效果：</strong>
+        <ul style="margin-left: 1.2rem; margin-top: 0.25rem;">
+          <li><b>死亡复活惩罚：</b>默认只显示“三项永久/动态减益”，用户点击“展开细则”后才会拉开食用各种心房的清除机制列表，主页保持极度干净。</li>
+          <li><b>兽化形态：</b>按“属性加成与代价”、“专属主动技能”、“相关升级技能”折叠，仅保留 3 行大标题，点击后才平滑展开。缺点是需要用户额外点击，影响直观检索效率。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>方案 C：紧凑矩阵对比图表（数据图表化）</h3>
+      <p>将长段落的判定和数值全盘转化为紧凑的无边框对比表格（类似物品/料理配方表格）。</p>
+      <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary); background: var(--bg-tertiary); padding: 0.75rem; border-radius: 6px;">
+        <strong>重构效果：</strong>
+        <ul style="margin-left: 1.2rem; margin-top: 0.25rem;">
+          <li><b>死亡复活惩罚：</b>制作一个“清除/缓解复生虚弱对照表”，第一列为清除材料（告密的心、暗影心房等），第二列为效果（持续时间变短、层数变化、获得澎湃心核等）。</li>
+          <li><b>兽化形态：</b>把属性变化做成紧凑的两列，左侧为强化（+35% 移速、+120保暖等），右侧为限制（无法手部装备等），搭配微型图标。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 2rem;">
+  <h3>视觉方案对比预览</h3>
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>方案 A (卡片格栅) 的优势</h4>
+      <ul>
+        <li><b>视觉一致性高：</b>完美继承现有 Wiki <code>items.md</code> 已经极度成熟且高级的 CSS 布局系统。</li>
+        <li><b>呼吸感强：</b>卡片外边框、内阴影和自适应双栏可以让长文字获得绝佳的“透气”空间。</li>
+        <li><b>扫视效率高：</b>用户一拉到底能瞬间认出“这是一个独立机制模块”。</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>方案 B (手风琴) / 方案 C (图表) 的不足</h4>
+      <ul>
+        <li><b>手风琴：</b>隐藏了过多内容，导致关键属性无法被浏览器 Ctrl+F 瞬间搜到或直观浏览。</li>
+        <li><b>图表：</b>纯数据表格对于有大量虚构层或复杂机制文案（如：跳跃防止落海、藏食物刨坑保鲜等细节）会显得过于僵硬，塞不下长文字。</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+  <p style="font-weight: bold; color: var(--accent);">请在上方选择您倾向的方案，然后在终端中告诉我您的想法！</p>
+</div>

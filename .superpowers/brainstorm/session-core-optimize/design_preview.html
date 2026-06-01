@@ -1,0 +1,298 @@
+<style>
+  /* 模拟 Vitepress 和 custom.css 的样式系统 */
+  :root {
+    --mem-bg: #fdfaf5;
+    --mem-bg-soft: #f4eee1;
+    --mem-bg-mute: #ebe2d0;
+    --mem-text-1: #3d2e2e;
+    --mem-text-2: #5c4a4a;
+    --mem-heading: #5c3a21;
+    --mem-heading-sub: #7d5a44;
+    --mem-border: #dcd1ba;
+    --mem-table-shadow: rgba(92, 58, 33, 0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --mem-bg: #121212;
+      --mem-bg-soft: #1e1e1e;
+      --mem-bg-mute: #2a2a2a;
+      --mem-text-1: #e4e4e7;
+      --mem-text-2: #a1a1aa; 
+      --mem-heading: #c8b9e6;
+      --mem-heading-sub: #b19cd9;
+      --mem-border: #333333;
+      --mem-table-shadow: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  /* Wiki 核心卡片样式模拟 */
+  .wiki-preview {
+    font-family: "Georgia", system-ui, serif;
+    background-color: var(--mem-bg);
+    color: var(--mem-text-1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--mem-border);
+    margin-top: 1.5rem;
+  }
+
+  .wiki-preview h3 {
+    color: var(--mem-heading);
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--mem-border);
+    padding-bottom: 4px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .wiki-preview h4 {
+    color: var(--mem-heading-sub);
+    font-size: 1.05rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .item-card {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    background: var(--mem-bg);
+    border: 1px dashed var(--mem-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px var(--mem-table-shadow);
+  }
+
+  @media (max-width: 900px) {
+    .item-card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .item-sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  @media (max-width: 600px) {
+    .item-sub-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sub-card {
+    background: var(--mem-bg-soft);
+    border: 1px solid var(--mem-border);
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 0.9rem;
+    color: var(--mem-text-2);
+  }
+
+  .sub-card strong {
+    color: var(--mem-text-1);
+  }
+
+  .media-card-mock {
+    background: var(--mem-bg-soft);
+    border: 1px solid var(--mem-border);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    align-self: start;
+  }
+
+  .media-card-mock img {
+    max-width: 100%;
+    border-radius: 4px;
+    height: auto;
+    display: block;
+    margin: 0 auto 8px;
+  }
+
+  .media-card-mock .caption {
+    font-size: 0.75rem;
+    color: var(--mem-text-2);
+    line-height: 1.3;
+  }
+
+  .badge-icon {
+    display: inline-flex;
+    align-items: center;
+    background: var(--mem-bg-mute);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--mem-heading-sub);
+  }
+
+  .heimu-mock {
+    background-color: var(--mem-text-1);
+    color: var(--mem-text-1);
+    transition: color 0.3s ease;
+    cursor: help;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .heimu-mock:hover {
+    color: var(--mem-bg);
+  }
+
+  ul {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0;
+  }
+  li {
+    margin-bottom: 0.25rem;
+  }
+</style>
+
+<h2>方案 A：双栏卡片化设计预览</h2>
+<p class="subtitle">我们在浏览器中 100% 还原 Wiki 配色环境，为您直观展现重构后的视觉排版效果。</p>
+
+<div class="wiki-preview">
+  
+  <!-- 死亡复活惩罚 预览 -->
+  <div class="item-card">
+    <div class="item-content">
+      <h3>已死之人：死亡与复活惩罚</h3>
+      <p style="font-size: 0.9rem; margin-top: 0;">
+        <span class="heimu-mock" title="游戏之外的幕后">这是一个纯粹为了所谓的“游戏平衡性”添加的设定，实际上在虚构层上非常牵强</span>
+      </p>
+      <p style="font-size: 0.9rem; color: var(--mem-text-2);">
+        任意复活手段将触发下述三项灵魂维度的重度减益（最低保留25%属性上限）：
+      </p>
+      
+      <div class="item-sub-grid">
+        <div class="sub-card">
+          <h4>💔 1. 复生虚弱 <span class="badge-icon">状态</span></h4>
+          任意复活后附加的<strong>永久</strong>负面状态。最高 3 层。
+          <ul>
+            <li><strong>属性减益：</strong>移速 -20%，每层 -25% 工作效率与攻击伤害，每 3 秒扣除 1% 最大血量。</li>
+            <li><strong>清除机制：</strong>
+              <ul>
+                <li><strong>死亡回归：</strong>通过该手段复活清除所有层数。</li>
+                <li><strong>告密的心：</strong>降低 1 层。仅剩 1 层时永久变为<strong>持续 60 秒</strong>。</li>
+                <li><strong>暗影心房：</strong>降为 1 层且变为<strong>持续 60 秒</strong>；赋予自身 3 层 <b>[澎湃心核]</b>（每次复活虚弱改为持续 60 秒）。</li>
+                <li><strong>附身暗影心房：</strong>降为 1 层且变为<strong>持续 30 秒</strong>；赋予自身 <b>[永恒心核]</b>（复活虚弱无限次变为持续 30 秒）。</li>
+              </ul>
+            </li>
+            <li><strong>递减规则：</strong>倒计时结束只下降 1 层并重置倒计时。</li>
+          </ul>
+        </div>
+
+        <div class="sub-card">
+          <h4>🌀 2. 灵魂震荡 <span class="badge-icon">状态</span></h4>
+          若死亡地点和复活地点不一致，根据距离产生不同程度的惩罚。
+          <ul>
+            <li><strong>属性减益：</strong>持续期间<strong>无法恢复[灵魂值]</strong>，且受到 <strong>1%~225% 的三维上限惩罚</strong>（随机分配至生命与理智，饱食度除外，单项最低保留 25%）。</li>
+            <li><strong>自我恢复：</strong>每 5 秒将自动恢复一部分损失的三维上限，直至完全恢复。</li>
+            <li><strong>技能免疫：</strong>该状态可被 <strong>[魂墙(技能)]</strong> 直接免疫。</li>
+          </ul>
+        </div>
+
+        <div class="sub-card" style="grid-column: span 2;">
+          <h4>⚡ 3. 灵魂裂痕 <span class="badge-icon">状态</span></h4>
+          每次复活失去 <strong>25% [灵魂值]上限</strong>。
+          <ul>
+            <li><strong>修补机制：</strong><strong>[灵魂池]</strong> 会以 1:1 的比例优先修补该裂痕（最低保留 25%）。</li>
+            <li><strong>技能免疫：</strong>该状态可被 <strong>[落叶归根]</strong> 技能直接免疫。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="media-card-mock" style="margin-top: 45px;">
+      <div style="background: #3a2c20; height: 180px; display: flex; align-items: center; justify-content: center; color: #8a735c; border-radius: 4px; font-weight: bold; border: 1px solid var(--mem-border);">
+        [ 📷 box_3.webp 示意图占位 ]
+      </div>
+      <div class="caption" style="margin-top: 8px;">
+        灵魂裂痕与灵魂震荡叠加导致的三维上限损失<br>具有澎湃心核的灵魂值边框出现些微变化
+      </div>
+    </div>
+  </div>
+
+  <!-- 兽化形态 预览 -->
+  <div class="item-card">
+    <div class="item-content">
+      <h3>🦊 2. 兽化形态 (狐狸) <span class="badge-icon">形态</span></h3>
+      <p style="font-size: 0.9rem; margin-top: 0; color: var(--mem-text-2);">
+        芒伊木按下 <code>V</code> 键可变身为狐狸。拥有极强的机动性与空手作战/采集能力，但代价是极端的装备限制与食物消化负担。
+      </p>
+      <p style="font-size: 0.9rem; color: var(--mem-text-1);">
+        <strong>转换消耗：</strong>进入扣除 <strong>20% 饱食度</strong>；退出扣除 <strong>20% 理智值</strong>。
+      </p>
+      
+      <div class="item-sub-grid">
+        <div class="sub-card">
+          <h4>🦁 兽化数值强化</h4>
+          <ul>
+            <li><strong>空手撕咬：</strong>1.0 攻击倍率，空手伤害 30，距离 +0.3，且空手攻速大幅提升（极限攻速达 2.5~3.75）。</li>
+            <li><strong>极速飞奔：</strong>移动速度 +35%。</li>
+            <li><strong>生存抗性：</strong>减伤 +65%，防水 +50%，保暖 +120（<em>夏天变为 -120 隔热</em>），潮湿度下降速率 -90%。</li>
+            <li><strong>自然惩罚：</strong>饱食度消耗翻倍；自带理智值光环 <b>+3/60</b>；会被猪人等中立生物视为怪物。</li>
+          </ul>
+        </div>
+
+        <div class="sub-card">
+          <h4>⚠️ 兽化局限与代价</h4>
+          <ul>
+            <li><strong>装备限制：</strong>无法佩戴手部装备和绝大部分身体/头部遮耳装备。
+              <ul>
+                <li>依然可穿背包、衬衫和开放型帽子（草帽等），但<strong>防御效果不生效</strong>且<strong>不扣耐久</strong>。</li>
+                <li><code>启迪之冠</code>攻击小虚影、<code>铥矿皇冠</code>无敌盾等<strong>附加效果依然生效</strong>。</li>
+              </ul>
+            </li>
+            <li><strong>消化负担：</strong>食物收益<strong>减半</strong>，但<strong>免疫食物所有负面影响</strong>（仅基础三维生效，不免除扣减理智等附加效果）。</li>
+          </ul>
+        </div>
+
+        <div class="sub-card">
+          <h4>🌪️ 专属形态技能</h4>
+          <ul>
+            <li><strong>跳跃 (R 键)：</strong>跨地形且期间霸体。静止时朝鼠标方向跳，距离不够不跳以防落水（可在设置调整）。</li>
+            <li><strong>捕猎 (X 键)：</strong>进入捕猎姿态抓小动物/飞虫（基础率 50%）。移速 -60%（学习隐藏本能后为 -20%），40% 概率索敌被无视。</li>
+            <li><strong>藏食物：</strong>地挖坑埋食物（<b>75% 盐盒级保鲜</b>）。单坑限存当前鼠标食物，上限 4 个存 1 天（兽化仅消耗 1 饱食度）。</li>
+          </ul>
+        </div>
+
+        <div class="sub-card">
+          <h4>🧬 技能树天赋强化</h4>
+          <ul>
+            <li><strong>[野兽体质]：</strong>兽化下空手可进行绝大部分工作（砍伐/挖掘等）；跳跃速度提升；藏食物刨坑存在时间<strong>翻倍</strong>（2天）。</li>
+            <li><strong>[隐藏本能]：</strong>不再被猪人视为怪物，不惊扰小动物，且捕猎减速缓和为 -20%。</li>
+            <li><strong>[精准度“优化”]：</strong>采集速度大幅提升。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="media-card-mock" style="margin-top: 55px;">
+      <div style="background: #3a2c20; height: 180px; display: flex; align-items: center; justify-content: center; color: #8a735c; border-radius: 4px; font-weight: bold; border: 1px solid var(--mem-border);">
+        [ 📷 box_1.webp 极限攻速对比图 ]
+      </div>
+      <div class="caption" style="margin-top: 8px;">
+        兽化下的极限攻速对比
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+  <p style="font-weight: bold; color: var(--success);">✨ 这是方案 A 在 Wiki 真实配色下的完美呈现！如果您感到满意，请在终端批准，我们将开始编写规格和计划！</p>
+</div>

@@ -15,7 +15,7 @@
 <script setup>
 import { computed, useSlots, ref } from 'vue'
 import { withBase } from 'vitepress'
-import { iconMap, colorMap, linkMap, officialTerms, nounMap } from './icons.js'
+import { iconMap, colorMap, linkMap, officialTerms, nounMap, iconToNounMap } from './icons.js'
 
 const props = defineProps({
   icon: String, // health, sanity, hunger, soul, beast, ghost, collar, etc.
@@ -48,8 +48,27 @@ const nounText = computed(() => {
   return ''
 })
 
+const isModifier = computed(() => {
+  const text = nounText.value.trim()
+  return /^[+-]?\d+/.test(text)
+})
+
 const targetLink = computed(() => {
-  return linkMap[nounText.value] || null
+  const directLink = linkMap[nounText.value]
+  if (directLink) return directLink
+
+  if (isModifier.value && props.icon) {
+    const iconKey = props.icon.toLowerCase().trim()
+    // 官方词条无需跳转
+    if (officialTerms.includes(iconKey)) {
+      return null
+    }
+    const canonicalNoun = iconToNounMap[iconKey]
+    if (canonicalNoun && linkMap[canonicalNoun]) {
+      return linkMap[canonicalNoun]
+    }
+  }
+  return null
 })
 
 const hoverTitle = computed(() => {
@@ -60,6 +79,18 @@ const hoverTitle = computed(() => {
   if (officialTerms.includes(resolvedIcon)) {
     return '官方属性/词条'
   }
+  
+  if (isModifier.value && props.icon) {
+    const iconKeyLower = props.icon.toLowerCase().trim()
+    if (officialTerms.includes(iconKeyLower)) {
+      return '官方属性/词条'
+    }
+    const canonicalNoun = iconToNounMap[iconKeyLower]
+    if (canonicalNoun) {
+      return `模组词条: ${canonicalNoun}`
+    }
+  }
+  
   return `模组词条: ${nounText.value}`
 })
 

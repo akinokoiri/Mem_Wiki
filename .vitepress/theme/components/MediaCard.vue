@@ -1,5 +1,5 @@
 <template>
-  <aside :class="['media-card', 'pos-' + position]" :style="{ width: width }">
+  <aside :class="['media-card', 'pos-' + position]" :style="{ width: width, '--aside-push': push }">
     <div class="media-container">
       <video v-if="isVideo" :src="withBase(src)" autoplay loop muted playsinline class="media-content"></video>
       <img v-else-if="src" :src="withBase(src)" :alt="caption" class="media-content" />
@@ -25,6 +25,10 @@ const props = defineProps({
   position: {
     type: String,
     default: 'right'
+  },
+  push: {
+    type: String,
+    default: '0px'
   }
 })
 

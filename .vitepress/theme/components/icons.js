@@ -8,6 +8,7 @@ export const nounMap = {
   '灵魂池': 'hpky',
   '兽化': 'beast',
   '跳跃': 'key',
+  '藏食物': 'key',
   '怨灵': 'ghost',
   '尸体': 'corpse',
   '芒头': 'corpse',
@@ -131,6 +132,7 @@ export const nounMap = {
   '暗影负载': 'mod',
   '澎湃心核': 'shadow_heart',
   '永恒心核': 'shadow_heart',
+  '月亮装备': 'mod',
 };
 
 export const iconMap = {
@@ -309,6 +311,7 @@ export const linkMap = {
   '灵魂池': '/mechanics/core.html#def-灵魂池',
   '兽化': '/mechanics/core.html#def-兽化',
   '跳跃': '/mechanics/core.html#def-跳跃',
+  '藏食物': '/mechanics/core.html#def-藏食物',
   '怨灵': '/mechanics/core.html#def-怨灵',
   '鬼火': '/mechanics/core.html#def-鬼火',
   '再一次的机会': '/mechanics/core.html#def-再一次的机会',
@@ -389,6 +392,7 @@ export const linkMap = {
   '别捣鼓了，回来！': '/mechanics/items.html#def-别捣鼓了，回来！',
   '灵魂值': '/mechanics/core.html#def-灵魂值系统',
   '月亮能量': '/mechanics/enemies.html#def-月亮位面寄生',
+  '月亮装备': '/mechanics/enemies.html#def-月亮装备',
   '芒手': '/mechanics/items.html#def-芒芒的肢体',
   '芒腿': '/mechanics/items.html#def-芒芒的肢体',
   '芒头': '/mechanics/items.html#def-芒芒的肢体',
@@ -429,6 +433,14 @@ export const linkMap = {
 export const officialTerms = [
   'health', 'sanity', 'hunger', 'spoil'
 ];
+
+export const iconToNounMap = {
+  soul: '灵魂值',
+  health: '生命值',
+  sanity: '理智值',
+  hunger: '饱食度',
+};
+
 
 export const aliasMap = {
   '灵魂值': '灵魂值系统',

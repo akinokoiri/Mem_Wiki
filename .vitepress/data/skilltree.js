@@ -388,7 +388,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_BEASTLY",
     "title": "野兽体质",
-    "desc": "[兽化]时可空手工作（但效率仅有40%且工作时肚子会饿）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃速度+40%（跳跃滞空的时间变得更短）；\n藏食物时刨的土坑的可维持得时间翻倍",
+    "desc": "[兽化]时可空手工作（但效率仅有40%且工作时肚子会饿）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃速度+40%（跳跃滞空的时间变得更短）；\n藏食物时刨的土坑的可维持的时间翻倍",
     "icon": "mem_skill_instinct_beastly"
   },
   "mem_skill_instinct_ghostly": {

@@ -341,6 +341,9 @@ body {
 
 /* 侧栏微调对齐工具 (仅在桌面端生效，并具有高权重以覆盖 reset 的 margin: 0) */
 @media (min-width: 960px) {
+  .vp-doc .item-card .media-card {
+    margin-top: var(--aside-push, 0px) !important;
+  }
   .vp-doc .item-card .media-card.aside-push-60 {
     margin-top: 60px !important;
   }
