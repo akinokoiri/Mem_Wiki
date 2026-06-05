@@ -34,6 +34,9 @@ onUnmounted(() => {
   <div class="mem-easter-egg">
     这是一个首页，并没有什么实质性内容。如果你看到了这个说明，说明你是大笨蛋。
   </div>
+  <a href="https://www.netlify.com" target="_blank" rel="noopener" class="mem-netlify-badge" title="Deploys by Netlify">
+    <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+  </a>
 </div>
 
 <style>
@@ -161,6 +164,26 @@ onUnmounted(() => {
 
 .mem-easter-egg:hover {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.mem-netlify-badge {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  opacity: 0.5;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 10;
+  filter: grayscale(100%) brightness(0.8);
+}
+
+.mem-netlify-badge:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  filter: grayscale(0%) brightness(1) drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+}
+
+.mem-netlify-badge img {
+  height: 32px;
 }
 
 @keyframes float {

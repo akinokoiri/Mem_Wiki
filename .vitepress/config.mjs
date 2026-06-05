@@ -27,7 +27,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/akinokoiri/Mem_Wiki' }
     ],
 
     outline: {
@@ -38,6 +38,11 @@ export default defineConfig({
     docFooter: {
       prev: '上一页',
       next: '下一页'
+    },
+
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2026-present akinokoiri <br/> <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" style="display:inline; margin-top:8px; height: 32px;" /></a>'
     },
 
     search: {
