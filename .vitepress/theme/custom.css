@@ -132,7 +132,7 @@ body {
    文档正文样式 (vp-doc)
    ============================================================ */
 
-.vp-doc h1, .vp-doc h2, .vp-doc h3 {
+.vp-doc h1, .vp-doc h2, .vp-doc h3, .vp-doc h4 {
   color: var(--mem-heading);
   font-family: "Georgia", serif;
   letter-spacing: 0.02em;
@@ -171,6 +171,13 @@ body {
   margin-top: 24px; 
   margin-bottom: 12px; 
   font-size: 18px; 
+  color: var(--mem-heading-sub);
+}
+
+.vp-doc h4 {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 15px;
   color: var(--mem-heading-sub);
 }
 
@@ -337,6 +344,17 @@ body {
 }
 .vp-doc .sub-card > *:last-child {
   margin-bottom: 0 !important;
+}
+
+.sub-card-title {
+  font-family: "Georgia", serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--mem-heading-sub);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* 侧栏微调对齐工具 (仅在桌面端生效，并具有高权重以覆盖 reset 的 margin: 0) */
@@ -686,4 +704,26 @@ body {
     opacity: 0;
     transform: translateX(50%) translateY(20px) scale(0.9);
   }
+}
+
+/* 弱化卡片样式：用于旧版/次要备用机制 */
+.vp-doc .sub-card.muted-card {
+  background: var(--mem-bg);
+  border: 1px dashed var(--mem-border);
+  opacity: 0.8;
+  filter: grayscale(10%);
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.vp-doc .sub-card.muted-card:hover {
+  opacity: 1;
+  filter: none;
+  border-color: var(--mem-heading-sub);
+  box-shadow: 0 4px 12px rgba(92, 58, 33, 0.04);
+}
+
+.vp-doc .sub-card.muted-card .sub-card-title {
+  color: var(--mem-text-2);
+  opacity: 0.9;
 }

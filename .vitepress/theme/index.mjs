@@ -6,6 +6,12 @@ import MediaCard from './components/MediaCard.vue'
 import DSTIcon from './components/DSTIcon.vue'
 import ShowcaseBlock from './components/ShowcaseBlock.vue'
 import ReturnCapsule from './components/ReturnCapsule.vue'
+import MechanicCard from './components/MechanicCard.vue'
+import MechanicItem from './components/MechanicItem.vue'
+import HighlightCard from './components/HighlightCard.vue'
+import InteractiveTimeline from './components/InteractiveTimeline.vue'
+import BossCard from './components/BossCard.vue'
+import RepairCalculator from './components/RepairCalculator.vue'
 
 import { h, nextTick } from 'vue'
 
@@ -22,6 +28,12 @@ export default {
     app.component('MediaCard', MediaCard)
     app.component('DSTIcon', DSTIcon)
     app.component('ShowcaseBlock', ShowcaseBlock)
+    app.component('MechanicCard', MechanicCard)
+    app.component('MechanicItem', MechanicItem)
+    app.component('HighlightCard', HighlightCard)
+    app.component('InteractiveTimeline', InteractiveTimeline)
+    app.component('BossCard', BossCard)
+    app.component('RepairCalculator', RepairCalculator)
 
     if (typeof window !== 'undefined') {
       let currentActiveUrl = location.href

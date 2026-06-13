@@ -1,5 +1,5 @@
 <template>
-  <img :src="withBase(iconSrc)" class="dst-inline-icon" :alt="icon" :title="icon" @error="handleImageError" />
+  <img :src="withBase(iconSrc)" class="dst-inline-icon" :alt="resolvedIconName" :title="resolvedIconName" @error="handleImageError" />
 </template>
 
 <script setup>
@@ -9,15 +9,20 @@ import { iconMap } from './icons.js'
 
 const props = defineProps({
   icon: String, // health, sanity, hunger, soul, etc.
+  name: String, // alias for icon
 })
 
 const imageError = ref(false)
+
+const resolvedIconName = computed(() => {
+  return props.icon || props.name || 'mod'
+})
 
 const iconSrc = computed(() => {
   if (imageError.value) {
     return '/icons/icon_mod.webp'
   }
-  const iconKey = props.icon ? props.icon.toLowerCase().trim() : 'mod'
+  const iconKey = resolvedIconName.value.toLowerCase().trim()
   return iconMap[iconKey] || '/icons/icon_mod.webp'
 })
 

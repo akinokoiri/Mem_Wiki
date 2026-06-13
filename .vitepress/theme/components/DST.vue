@@ -133,10 +133,8 @@ const handleImageError = () => {
   border-radius: 4px;
   
   /* Glassmorphism & HSL Gradient variables */
-  background: linear-gradient(135deg, hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.05), hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.15));
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.25);
+  background: linear-gradient(135deg, hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.08), hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.18));
+  border: 1px solid hsla(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l), 0.3);
   color: hsl(var(--dst-theme-h), var(--dst-theme-s), var(--dst-theme-l)) !important;
   
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);

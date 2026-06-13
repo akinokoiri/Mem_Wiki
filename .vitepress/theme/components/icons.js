@@ -16,6 +16,7 @@ export const nounMap = {
   '芒手': 'corpse',
   '芒腿': 'corpse',
   '芒芒的尸体': 'corpse',
+  '跳跃计算': 'mod',
   '封印项圈': 'collar',
   '封印项圈lv1': 'collar',
   '封印项圈lv2': 'collar-lv2',
@@ -136,6 +137,8 @@ export const nounMap = {
   '澎湃心核': 'shadow_heart',
   '永恒心核': 'shadow_heart',
   '月亮装备': 'mod',
+  '技能觉醒': 'mod',
+  '封印技能': 'mod',
 };
 
 export const iconMap = {
@@ -322,6 +325,7 @@ export const linkMap = {
   '灵魂震荡': '/mechanics/core.html#def-灵魂震荡',
   '灵魂裂痕': '/mechanics/core.html#def-灵魂裂痕',
   '食物中毒': '/mechanics/core.html#def-食物中毒',
+  '跳跃计算': '/mechanics/core.html#def-跳跃计算',
   '捕猎姿态': '/mechanics/core.html#def-捕猎姿态',
   '死亡回归': '/mechanics/core.html#def-死亡回归',
   '澎湃心核': '/mechanics/core.html#def-澎湃心核',
@@ -433,6 +437,8 @@ export const linkMap = {
   '魂魄逸散': '/mechanics/skilltree.html#mem_spirit_link',
   '融魂术': '/mechanics/skilltree.html#mem_skill_soul_melt',
   '本源协调': '/mechanics/skilltree.html#mem_skill_body_medicine',
+  '技能觉醒': '/mechanics/skilltree.html#def-技能觉醒',
+  '封印技能': '/mechanics/skilltree.html#def-技能觉醒',
 };
 
 export const officialTerms = [

@@ -20,9 +20,13 @@ onUnmounted(() => {
     <img src="/names_mem.webp" alt="芒伊木" class="mem-logo" />
     <div class="mem-links">
       <!-- 进入 Wiki 的入口 -->
-      <a href="/mechanics/core" title="进入 Wiki" class="mem-text-link">
-        进入WIKI
+      <a href="/mechanics/lite_draft" title="极速省流版人物介绍" class="mem-text-link primary">
+        极速上手「省流版」
       </a>
+      <a href="/mechanics/core" title="完整详细 WIKI 词条" class="mem-text-link secondary">
+        完整详细 WIKI
+      </a>
+      <div class="mem-divider-vertical"></div>
       <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3734900216" target="_blank" title="Steam 创意工坊" class="mem-icon-link">
         <img src="/steam.svg" alt="Steam" />
       </a>
@@ -110,23 +114,48 @@ onUnmounted(() => {
 }
 
 .mem-text-link {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: bold;
-  color: #a0a0a0;
   text-decoration: none;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #555;
-  border-radius: 4px;
-  transition: all 0.2s;
-  letter-spacing: 2px;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 1px;
   font-family: serif;
 }
 
-.mem-text-link:hover {
+.mem-text-link.primary {
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.35);
+  background: rgba(192, 132, 252, 0.04);
+}
+
+.mem-text-link.primary:hover {
   color: #fff;
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.05);
+  border-color: #c084fc;
+  background: rgba(192, 132, 252, 0.15);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.35);
+}
+
+.mem-text-link.secondary {
+  color: #a0a0a0;
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mem-text-link.secondary:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.mem-divider-vertical {
+  width: 1px;
+  height: 22px;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 0 0.5rem;
 }
 
 .mem-icon-link {

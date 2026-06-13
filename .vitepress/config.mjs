@@ -5,7 +5,17 @@ import { nounMap } from './theme/components/icons.js'
 export default defineConfig({
   title: "芒伊木 Wiki",
   description: "饥荒：联机版 芒伊木模组全效果说明书",
-  srcExclude: ['CLAUDE.md', 'GEMINI.md', '_RAW_DATA_SOURCE.md', 'scratch/**', '.antigravity/**', '**/superpowers/**', '**/README.md'],
+  srcExclude: [
+    'CLAUDE.md',
+    'GEMINI.md',
+    '_RAW_DATA_SOURCE.md',
+    'scratch/**',
+    '.antigravity/**',
+    '**/superpowers/**',
+    '**/README.md',
+    'CODE_OF_CONDUCT.md',
+    'items/**'
+  ],
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
@@ -17,6 +27,7 @@ export default defineConfig({
         text: '芒伊木 Wiki 词条',
         collapsed: false,
         items: [
+          { text: '★ 极速上手「省流版」', link: '/mechanics/lite_draft' },
           { text: '一、基础属性与常驻机制', link: '/mechanics/core' },
           { text: '二、建筑、物品、装备与料理', link: '/mechanics/items' },
           { text: '三、敌人与随从', link: '/mechanics/enemies' },
@@ -41,12 +52,22 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2026-present akinokoiri <br/> <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" style="display:inline; margin-top:8px; height: 32px;" /></a>'
+      message: 'Released under the <a href="https://github.com/akinokoiri/Mem_Wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>. | <a href="https://github.com/akinokoiri/Mem_Wiki/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a>',
+      copyright: 'Copyright © 2026-present akinokoiri <br/> <a href="https://www.netlify.com" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" style="display:inline; margin-top:8px; height: 32px;" /></a>'
     },
 
     search: {
-      provider: 'local'
+      provider: 'local',
+      options: {
+        _render(src, env, md) {
+          const relativePath = env.relativePath || ''
+          // 只渲染 mechanics 目录下的 markdown 文件供搜索索引使用
+          if (!relativePath.startsWith('mechanics/')) {
+            return ''
+          }
+          return md.render(src, env)
+        }
+      }
     }
   },
 
