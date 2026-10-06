@@ -11,7 +11,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_FIRE_1",
     "title": "灵魂实体专精一级",
-    "desc": "跟随你的[友善的荒尹沐]发射的[鬼火]弹射次数变为6次，[友善的芒伊月]发射的[鬼火]伤害+3，\n[鬼火]每弹射一次，下一次弹射的飞行速度和索敌范围+10%；\n你的[鬼火]引爆[魂魄刻印]后，会给自身添加同等层数的[闪耀刻印]状态，持续10秒；\n[闪耀刻印]期间，[电锯轰鸣]不会因为时间流逝而损失层数",
+    "desc": "你发射的[鬼火]首次命中后可额外弹射10次；\n每次弹射使下一次飞行速度和索敌范围按初始值+10%；\n[鬼火]引爆[魂魄刻印]后，给自身添加同等层数的[闪耀刻印]，持续10秒。",
     "icon": "mem_skill_soul_fire_1"
   },
   "mem_skill_soul_fire_2": {
@@ -26,7 +26,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_FIRE_2",
     "title": "灵魂实体专精二级",
-    "desc": "你发射的[鬼火]现在可以在敌人之间弹射3次；\n[友善的荒尹沐]发射的[鬼火]弹射次数变为7次，[友善的芒伊月]发射的[鬼火]伤害+6；\n现在每层[闪耀刻印]额外提供 5% 的受击闪避概率，闪避后层数减半",
+    "desc": "跟随你的[友善的荒尹沐]发射的[鬼火]弹射次数+5（5→10，不含首次命中）；\n跟随你的[友善的芒伊月]每颗[鬼火]伤害+67%。\n[闪耀刻印]的闪避为基础效果，无需学习本技能：每层5%，最高50%，成功闪避后层数减半。",
     "icon": "mem_skill_soul_fire_2"
   },
   "mem_skill_soul_fire_3": {
@@ -41,7 +41,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_FIRE_3",
     "title": "灵魂实体专精三级",
-    "desc": "你发射的[鬼火]弹射次数变为6次；\n[友善的荒尹沐]发射的[鬼火]弹射次数变为8次，[友善的芒伊月]发射的[鬼火]伤害+9；\n现在[闪耀刻印]会额外在时间结束和层数溢出时，根据层数恢复你附加[魂魄刻印]时所消耗的灵魂值，\n溢出/消散时，若层数≥ 5/10，额外恢复 5%/10% [灵魂值]；若不存在[灵魂值系统]，则改为恢复少量生命值。",
+    "desc": "[闪耀刻印]自然结束或层数溢出时，按结算层数返还附加[魂魄刻印]所消耗的[灵魂值]；\n结算层数≥5/10时，额外恢复最大[灵魂值]的5%/10%；无灵魂值系统的目标改为恢复少量生命值。\n分身的恢复效果反馈到玩家。",
     "icon": "mem_skill_soul_fire_3"
   },
   "mem_skill_soul_hand": {
@@ -56,7 +56,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_HAND",
     "title": "顷刻炼化",
-    "desc": "你空手命中敌人时，\n恢复造成伤害 3% 的灵魂值。\n此效果无法对墙、发条生物等无灵魂的生物生效",
+    "desc": "空手命中敌人时，恢复造成伤害3%的[灵魂值]。\n对墙、发条生物等无灵魂单位无效。",
     "icon": "mem_skill_soul_hand"
   },
   "mem_skill_soul_melt": {
@@ -71,7 +71,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_MELT",
     "title": "融魂术",
-    "desc": "你击杀大体型生物(血量>150)死亡，\n其生命的3%会被吸收为灵魂。\n此效果无法对墙、发条生物等无灵魂的生效",
+    "desc": "击杀最大生命值大于150、具有灵魂的目标时，恢复目标最大生命值3%的[灵魂值]。\n对墙、发条生物等无灵魂单位无效。",
     "icon": "mem_skill_soul_melt"
   },
   "mem_skill_soul_rest_1": {
@@ -86,7 +86,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_REST_1",
     "title": "休养死息一级",
-    "desc": "你的生命值溢出的治疗量转化为灵魂的比例，\n从20%提升至35%",
+    "desc": "溢出治疗、脱战时灵魂转生命、死亡时剩余生命转灵魂的转换率由30%提升至50%；\n制作栏生命/灵魂兑换消耗20点，产出9点（另损失10%转换收益）。",
     "icon": "mem_skill_soul_rest_1"
   },
   "mem_skill_soul_rest_2": {
@@ -102,7 +102,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_REST_2",
     "title": "休养死息二级",
-    "desc": "你的生命值溢出的治疗量转化为灵魂的比例，\n提升至50%",
+    "desc": "溢出治疗、脱战时灵魂转生命、死亡时剩余生命转灵魂的转换率提升至70%；\n制作栏生命/灵魂兑换消耗20点，产出12.6点（另损失10%转换收益）。",
     "icon": "mem_skill_soul_rest_2"
   },
   "mem_skill_soul_lock_1": {
@@ -117,7 +117,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_SOUL_LOCK_1",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[融魂术]\n【封印】你需要在黑暗中倾听危险的警告，逃回光照以积攒胆识。\n越是极限收益越高，但若被黑暗反噬受伤，你将会失去所有进度。",
+    "desc": "前置要求：点亮[融魂术]\n【封印】你需要在黑暗中倾听危险的警告，逃回光照以积攒胆识。\n越是极限收益越高，未达标时被夜袭击中，会失去95%的已有进度。",
     "icon": "mem_skill_soul_lock_1"
   },
   "mem_skill_soul_light": {
@@ -132,7 +132,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_LIGHT",
     "title": "彼世的光芒",
-    "desc": "由你或你的随从产生的[鬼火]或[魂魄刻印]可以提供照明效果",
+    "desc": "学习并生效后完全闪避查理夜袭，每次成功闪避获得1层[闪耀刻印]；\n由你或随从产生的[鬼火]、[魂魄刻印]提供照明；\n受击时随机获得1～5层[闪耀刻印]，持有任意层数时有发光鬼火附身；\n通过[闪耀刻印]成功闪避时，消耗的层数会转为攻击者身上的[魂魄刻印]，同样作用于[分头行动]/[意识转移]产生的分身。",
     "icon": "mem_skill_soul_light"
   },
   "mem_skill_soul_lock_3": {
@@ -162,7 +162,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_SPLIT",
     "title": "四象离魂",
-    "desc": "你可以按 G （默认按键）使自身环绕4个可索敌改变轨道的[鬼火]；\n开启瞬间损失 40 点灵魂值和灵魂值上限，关闭返还 40 点灵魂值上限，主动关闭额外返还灵魂值；\n开启时每秒消耗 1 灵魂值，[鬼火]碰撞到目标后，自身会额外扣减 0.5 灵魂值，\n并造成 10 点伤害，减少其 10% 的移动速度（可叠加4次）",
+    "desc": "按G（默认）使自身环绕4颗可索敌的[鬼火]；开启需至少5点[灵魂值]，启动消耗1点，默认此后每秒消耗0.5点；\n每次碰撞默认额外消耗0.5点灵魂，两项消耗均可在模组设置调整；默认造成10点伤害和10%减速（可叠4次）；\n[分头行动]/[意识转移]时身体与头部各环绕4颗，伤害和碰撞耗魂各减半，每秒耗魂不增加。",
     "icon": "mem_skill_soul_split"
   },
   "mem_skill_soul_lock_2": {
@@ -192,7 +192,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_WALL",
     "title": "魂墙",
-    "desc": "你现在免疫因复活产生的[灵魂震荡]；\n免疫[怨灵状态]/[意识转移]产生的[暗影观察者]；\n能消耗 1 灵魂值制造一个脆弱但足以阻挡去路的半透明墙体",
+    "desc": "免疫[灵魂裂痕]；[灵魂震荡]恢复速率+100%，不再免疫震荡；\n免疫[怨灵]/[意识转移]产生的[暗影观察者]；\n可消耗1点[灵魂值]制造脆弱但能挡路的[魂墙(物品)]。",
     "icon": "mem_skill_soul_wall"
   },
   "mem_skill_instinct_teleport": {
@@ -205,7 +205,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_TELEPORT",
     "title": "落叶归根",
-    "desc": "你死后变成鬼魂时，可以打开地图\n右键点击自己的尸体、坟墓或住宅进行传送\n此外，死亡与复活时将不再受到[灵魂裂痕]惩罚",
+    "desc": "从[芒芒的坟墓]复活不再破坏坟墓，改为1天冷却；\n在[狐狸的凶宅]休息时正常恢复理智；\n从[芒芒的尸体]复活会留下一朵一次性传送锚点[归途之花]，生成冷却1天。\n鬼魂地图传送已是基础能力；本技能不再免疫[灵魂裂痕]。",
     "icon": "mem_skill_instinct_teleport"
   },
   "mem_skill_body_lock_spirit": {
@@ -235,7 +235,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SPIRIT_LINK",
     "title": "魂魄逸散",
-    "desc": "你现在可以对自己执行特殊的[分头行动]：[意识转移]；\n[分头行动]下的身体在遭受攻击后的 1 秒内，受到的伤害 -80%；\n每损失 30 点灵魂值，你的下一次攻击命中将向发射一颗[鬼火]",
+    "desc": "可以对自己执行特殊的[分头行动]：[意识转移]。\n[分头行动]下的身体受击后 1 秒内，后续受到的伤害 -80%（首次受击不减伤）。\n累计损失 30 点[灵魂值]后，下一次攻击命中主目标时发射一颗[鬼火]。",
     "icon": "mem_spirit_link"
   },
   "mem_skill_body_precision_1": {
@@ -251,7 +251,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_PRECISION_1",
     "title": "精准度“优化”一级",
-    "desc": "[兽化状态]下，你的采集、收获速度+20%；\n但爪子不适合精细工作，制作速度-10%",
+    "desc": "[兽化状态]下，你的采集、收获速度+20%；\n但爪子不适合精细工作，制作速度-10%；\n兽化空手基础伤害累计+5%",
     "icon": "mem_skill_body_precision_1"
   },
   "mem_skill_body_precision_2": {
@@ -266,7 +266,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_PRECISION_2",
     "title": "精准度“优化”二级",
-    "desc": "[兽化状态]下，你的采集、收获速度+40%；\n制作速度-20%",
+    "desc": "[兽化状态]下，你的采集、收获速度+40%；\n制作速度-20%；\n兽化空手基础伤害累计+10%",
     "icon": "mem_skill_body_precision_2"
   },
   "mem_skill_body_precision_3": {
@@ -281,7 +281,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_PRECISION_3",
     "title": "精准度“优化”三级",
-    "desc": "[兽化状态]下，你的采集、收获速度+60%；\n制作速度-30%",
+    "desc": "[兽化状态]下，你的采集、收获速度+60%；\n制作速度-30%；\n兽化空手基础伤害累计+15%",
     "icon": "mem_skill_body_precision_3"
   },
   "mem_skill_body_preservative_1": {
@@ -297,7 +297,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_PRESERVATIVE_1",
     "title": "参点防腐剂一级",
-    "desc": "你身上的物品腐烂得[稍微慢一点]；\n尸体能存在更长时间",
+    "desc": "随身物品腐烂速率降至通常的90%，与保鲜容器原有效果乘算，也作用于挖掘的藏食物坑洞；\n[芒芒的尸体]在普通地面条件下的腐烂时间延长至约7天（受环境影响）。",
     "icon": "mem_skill_body_preservative_1"
   },
   "mem_skill_body_preservative_2": {
@@ -312,7 +312,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_PRESERVATIVE_2",
     "title": "参点防腐剂二级",
-    "desc": "你身上的物品腐烂得[更慢一些]；\n尸体能存在一周之久",
+    "desc": "随身物品腐烂速率降至通常的80%，与保鲜容器原有效果乘算，也作用于挖掘的藏食物坑洞；\n[芒芒的尸体]在普通地面条件下的腐烂时间延长至约14天（受环境影响）。",
     "icon": "mem_skill_body_preservative_2"
   },
   "mem_skill_body_preservative_3": {
@@ -327,7 +327,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_PRESERVATIVE_3",
     "title": "参点防腐剂三级",
-    "desc": "你身上的物品相对来说[难以腐烂]（速率30%）；\n尸体能存在半个季节之久",
+    "desc": "随身物品腐烂速率降至通常的70%，与保鲜容器原有效果乘算，也作用于挖掘的藏食物坑洞；\n[芒芒的尸体]在普通地面条件下的腐烂时间延长至约20天（受环境影响）。",
     "icon": "mem_skill_body_preservative_3"
   },
   "mem_skill_body_numb_1": {
@@ -388,7 +388,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_BEASTLY",
     "title": "野兽体质",
-    "desc": "[兽化]时可空手工作（但效率仅有40%且工作时肚子会饿）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃速度+40%（跳跃滞空的时间变得更短）；\n藏食物时刨的土坑的可维持的时间翻倍",
+    "desc": "[兽化]时可空手工作（但效率仅有40%且工作时肚子会饿）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃滞空时间缩短40%；\n藏食物时刨的土坑的可维持的时间翻倍",
     "icon": "mem_skill_instinct_beastly"
   },
   "mem_skill_instinct_ghostly": {
@@ -403,7 +403,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_GHOSTLY",
     "title": "幽灵体质",
-    "desc": "远处的敌人无法注意到你，身体只有一半情况下效果更甚；\n分头和接头瞬间可以让那些因你而生的暗影生物们以为你已经死了；\n击杀因你而生的暗影生物时，获得额外 50% 精神值恢复",
+    "desc": "降低远处敌人的察觉范围，[分头行动]时效果更强；\n分头时可让附近正以你为目标的恐惧类、梦魇类影怪失去仇恨；接头时也可对附近符合条件的影怪造成恐慌；\n击杀恐惧类影怪额外获得50%的理智恢复。",
     "icon": "mem_skill_instinct_ghostly"
   },
   "mem_skill_body_lock_exp": {
@@ -433,7 +433,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_EXPLOSIVE_BODY",
     "title": "易燃易爆",
-    "desc": "你就是艺术！\n你的尸体现在会爆炸；\n你可以把“肢体”投掷出去当摔炮使",
+    "desc": "[芒芒的尸体]可引爆，[芒芒的肢体]可投掷爆炸。\n每次肢体爆炸有25%概率返还小肉；四组基础技能每个等级+5个百分点，最高85%。\n完整尸体进行6次独立返肉判定，另有25%概率返还骨片；小肉新鲜度随机10%～33%。",
     "icon": "mem_explosive_body"
   },
   "mem_skill_body_medicine": {
@@ -448,7 +448,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_BODY_MEDICINE",
     "title": "本源协调",
-    "desc": "你和[友善的荒尹沐]的[鬼火]如果有弹射次数，那么将可以在友军和玩家之间弹射（不造成伤害）；\n[友善的芒伊月]的[近战模式]攻击后虚弱时间 -2 秒；同时，你的随从不再会因为阵营对立而互相攻击；\n你可以食用绝望石或者纯粹辉煌来让你和你的的随从加入对应阵营8分钟，\n以换取对同阵营的20%伤害减免和敌对阵营的伤害增加",
+    "desc": "你和[友善的荒尹沐]的[鬼火]如果有弹射次数，那么将可以在友军和玩家之间弹射（不造成伤害）；\n[友善的芒伊月]的[近战模式]攻击后虚弱时间 -2 秒；同时，你的随从不再会因为阵营对立而互相攻击；\n你可以食用绝望石或者纯粹辉煌来让你和你的随从加入对应阵营8分钟，\n以换取对同阵营的20%伤害减免和对敌对阵营的20%伤害增加",
     "icon": "mem_skill_body_medicine"
   },
   "mem_skill_body_lock_medicine": {
@@ -478,7 +478,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_HIDE_2",
     "title": "隐藏本能二级",
-    "desc": "[兽化状态]下的你不会惊扰小动物；\n捕猎成功概率+20%；\n进入捕猎姿态后的移速+40%",
+    "desc": "兽化下不会惊扰小动物；\n捕猎成功率累计+20个百分点，捕猎姿态移速累计+40%；\n姿态下从目标背后捕猎，成功率另+30个百分点；未锁定你的普通敌人索敌时忽视你的概率为60%。\n姿态下跳跃后，自动对周围最近的可捕获目标发起一次捕获。",
     "icon": "mem_skill_instinct_hide_2"
   },
   "mem_skill_instinct_hide_1": {
@@ -494,7 +494,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_HIDE_1",
     "title": "隐藏本能一级",
-    "desc": "[兽化状态]下的你不再被中立生物敌视；\n捕猎成功概率+10%；\n进入捕猎姿态后的移速+20%",
+    "desc": "兽化下不再被猪人等中立生物敌视；\n捕猎成功率累计+10个百分点，捕猎姿态移速累计+20%；\n姿态下从目标背后捕猎，成功率另+30个百分点；未锁定你的普通敌人索敌时忽视你的概率为50%。",
     "icon": "mem_skill_instinct_hide_1"
   },
   "mem_skill_body_lock_corpse": {
@@ -509,7 +509,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_BODY_LOCK_CORPSE",
     "title": "路径锁定",
-    "desc": "前置要求：同时点亮[参点防腐剂三级]与[幽灵体质]或[野兽体质]与[幽灵体质]\n【封印】亲手缝制66种不同的随身装备，或让 6 种因为位面能量死而复生的生物彻底安息。\n借由不断编织外物与剖析复生者的躯壳，你终将参透重塑死体的奥秘。",
+    "desc": "前置要求：学习[幽灵体质]，并在[参点防腐剂三级]、[野兽体质]中任选一个\n【封印】亲手缝制66种不同的随身装备，或击杀6种符合条件的月亮变异生物、友善随从或暗影寄生复生生物。\n借由不断编织外物与剖析复生者的躯壳，你终将参透重塑死体的奥秘。",
     "icon": "mem_skill_body_lock_corpse"
   },
   "mem_corpse_mastery": {

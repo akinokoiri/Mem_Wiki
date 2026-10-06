@@ -1,7 +1,14 @@
 <template>
   <div 
     class="skill-node" 
+    role="button"
+    tabindex="0"
+    :aria-label="skillTitle(node.id)"
+    :aria-pressed="isFocused"
+    :title="skillTitle(node.id)"
     :style="nodeStyle"
+    @keydown.enter.prevent.stop="handleClick"
+    @keydown.space.prevent.stop="handleClick"
     @click.stop="handleClick"
     @dblclick.stop="handleDoubleClick"
     @contextmenu.prevent.stop="handleRightClick"
@@ -9,9 +16,9 @@
     @mouseleave="onLeave"
   >
     <div class="node-content" :class="{ 'is-lock': node.isLock }">
-      <img :src="withBase(`/skills/office_icon/${statusImage}.webp`)" class="status-layer" />
-      <img v-if="!node.isLock" :src="withBase(`/skills/${node.icon}.webp`)" class="icon-layer" />
-      <img v-show="isFocused" :src="withBase(`/skills/office_icon/${frameImage}.webp`)" class="frame-layer" />
+      <img :src="withBase(`/skills/office_icon/${statusImage}.webp`)" class="status-layer" alt="" />
+      <img v-if="!node.isLock" :src="withBase(`/skills/${node.icon}.webp`)" class="icon-layer" alt="" />
+      <img v-show="isFocused" :src="withBase(`/skills/office_icon/${frameImage}.webp`)" class="frame-layer" alt="" />
     </div>
   </div>
 </template>
@@ -19,6 +26,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { withBase } from 'vitepress';
+import { skillTitle } from '../data/skill-presentation.js';
 
 const props = defineProps({
   node: Object,
@@ -92,6 +100,7 @@ const handleRightClick = () => {
 </script>
 
 <style scoped>
+.skill-node:focus-visible { outline: 2px solid #f0cc85; outline-offset: 5px; border-radius: 3px; }
 .skill-node {
   position: absolute;
   width: 32px;

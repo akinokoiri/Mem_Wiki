@@ -1,8 +1,11 @@
 <template>
-  <aside :class="['media-card', 'pos-' + position]" :style="{ width: width, '--aside-push': push }">
+  <aside :class="['media-card', 'pos-' + position]" :style="{ '--media-width': width, '--aside-push': push }">
     <div class="media-container">
-      <video v-if="isVideo" :src="withBase(src)" autoplay loop muted playsinline class="media-content"></video>
-      <img v-else-if="src" :src="withBase(src)" :alt="caption" class="media-content" />
+      <video v-if="isVideo" :src="withBase(src)" :width="intrinsicWidth" :height="intrinsicHeight" autoplay :controls="manual" preload="auto" :aria-label="caption" loop muted playsinline class="media-content"></video>
+      <button v-else-if="src" type="button" class="media-zoom-trigger" :aria-label="`放大图片：${caption || '机制演示'}`" aria-haspopup="dialog" @click="openImage">
+        <img :src="withBase(src)" :alt="caption || ''" :width="intrinsicWidth" :height="intrinsicHeight" :loading="loading" class="media-content" />
+        <span class="media-zoom-hint" aria-hidden="true">放大 ↗</span>
+      </button>
       <slot v-else></slot>
     </div>
     <div v-if="caption" class="media-caption">
@@ -10,14 +13,35 @@
       {{ formattedCaption }}
     </div>
   </aside>
+  <ClientOnly>
+    <Teleport to="body">
+      <dialog v-if="src && !isVideo" ref="imageDialog" class="media-lightbox" :aria-label="caption || '机制演示大图'" @click="closeOnBackdrop">
+        <div class="media-lightbox-content">
+          <button type="button" class="media-lightbox-close" autofocus @click="imageDialog.close()">关闭大图 ×</button>
+          <img :src="withBase(src)" :alt="caption || '机制演示'" :width="intrinsicWidth" :height="intrinsicHeight" loading="lazy" />
+          <p v-if="caption">{{ formattedCaption }}</p>
+        </div>
+      </dialog>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onBeforeUnmount } from 'vue'
 import { withBase } from 'vitepress'
+const imageDialog = ref(null)
+const openImage = () => imageDialog.value?.showModal()
+const closeOnBackdrop = event => {
+  if (event.target === imageDialog.value) imageDialog.value.close()
+}
+onBeforeUnmount(() => imageDialog.value?.close())
 const props = defineProps({
   src: String,
   caption: String,
+  manual: Boolean,
+  intrinsicWidth: Number,
+  intrinsicHeight: Number,
+  loading: String,
   width: {
     type: String,
     default: '280px'
@@ -44,6 +68,8 @@ const formattedCaption = computed(() => {
 
 <style scoped>
 .media-card {
+  width: var(--media-width, 280px);
+  max-width: 100%;
   background: var(--mem-bg);
   border: 2px solid var(--mem-heading);
   border-radius: 8px;
@@ -102,6 +128,46 @@ const formattedCaption = computed(() => {
   display: block;
 }
 
+.media-zoom-trigger {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.media-zoom-trigger:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: -3px; }
+.media-zoom-hint {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  border-radius: 3px;
+  padding: 2px 6px;
+  background: rgb(22 20 15 / .85);
+  color: #fffdf8;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.media-lightbox {
+  margin: auto;
+  padding: 16px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  box-shadow: 0 16px 64px #0006;
+}
+.media-lightbox::backdrop { background: rgb(0 0 0 / .78); }
+.media-lightbox-content { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.media-lightbox-close { align-self: flex-end; min-height: 44px; padding: 8px 12px; border: 1px solid var(--vp-c-divider); border-radius: 4px; cursor: pointer; }
+.media-lightbox-close:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
+.media-lightbox-content img { display: block; max-width: 100%; max-height: 72dvh; width: auto; height: auto; object-fit: contain; }
+.media-lightbox-content p { margin: 0; max-width: 65ch; font-size: 14px; line-height: 1.6; white-space: pre-line; }
+
 .media-caption {
   margin-top: 8px;
   text-align: center;
@@ -121,9 +187,12 @@ const formattedCaption = computed(() => {
 }
 
 @media (max-width: 768px) {
-  .media-card {
+  .media-card.pos-right,
+  .media-card.pos-left,
+  .media-card.pos-center,
+  .media-card.pos-inline {
     float: none;
-    width: 100% !important;
+    width: 100%;
     margin: 20px 0;
   }
 }

@@ -18,13 +18,14 @@ onUnmounted(() => {
 <div class="mem-custom-home">
   <div class="mem-hero-center">
     <img src="/names_mem.webp" alt="芒伊木" class="mem-logo" />
+    <p class="mem-home-intro">饥荒：联机版 · 芒伊木模组资料库</p>
     <div class="mem-links">
       <!-- 进入 Wiki 的入口 -->
-      <a href="/mechanics/lite_draft" title="极速省流版人物介绍" class="mem-text-link primary">
-        极速上手「省流版」
+      <a href="/mechanics/lite_draft" title="极速上手：玩法与开局建议" class="mem-text-link primary">
+        极速上手
       </a>
       <a href="/mechanics/core" title="完整详细 WIKI 词条" class="mem-text-link secondary">
-        完整详细 WIKI
+        角色机制
       </a>
       <div class="mem-divider-vertical"></div>
       <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3734900216" target="_blank" title="Steam 创意工坊" class="mem-icon-link">
@@ -69,14 +70,17 @@ onUnmounted(() => {
 <style scoped>
 .mem-custom-home {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
+  min-height: 100svh;
+  padding: 64px 24px 96px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: radial-gradient(circle at center, #2a2a2a 0%, #151515 60%, #050505 100%);
   color: #e0e0e0;
-  overflow: hidden;
+  overflow-y: auto;
+  font-family: "Noto Sans SC Variable", system-ui, sans-serif;
   width: 100vw;
   position: fixed;
   top: 0;
@@ -88,9 +92,18 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  width: min(100%, 760px);
+  gap: 2rem;
   z-index: 2;
   animation: float 6s ease-in-out infinite;
+}
+
+.mem-home-intro {
+  margin: 0;
+  color: #c2b9a9;
+  font-size: 14px;
+  letter-spacing: .08em;
+  text-align: center;
 }
 
 .mem-logo {
@@ -104,9 +117,9 @@ onUnmounted(() => {
 .mem-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  opacity: 0.85;
-  transition: opacity 0.3s;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .mem-links:hover {
@@ -122,24 +135,27 @@ onUnmounted(() => {
   border-radius: 6px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 1px;
-  font-family: serif;
+  font-family: inherit;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .mem-text-link.primary {
-  color: #c084fc;
-  border-color: rgba(192, 132, 252, 0.35);
-  background: rgba(192, 132, 252, 0.04);
+  color: #9dd3c8;
+  border-color: #6fb8ae80;
+  background: #6fb8ae14;
 }
 
 .mem-text-link.primary:hover {
   color: #fff;
-  border-color: #c084fc;
-  background: rgba(192, 132, 252, 0.15);
-  box-shadow: 0 0 20px rgba(192, 132, 252, 0.35);
+  border-color: #9dd3c8;
+  background: #6fb8ae30;
+  box-shadow: 0 0 20px #6fb8ae25;
 }
 
 .mem-text-link.secondary {
-  color: #a0a0a0;
+  color: #d7cfc1;
   border-color: rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.02);
 }
@@ -160,16 +176,19 @@ onUnmounted(() => {
 
 .mem-icon-link {
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
   transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s;
-  filter: grayscale(100%) brightness(0.6) sepia(20%);
+  filter: brightness(0) invert(.8);
 }
 
 .mem-icon-link:hover {
   transform: scale(1.15) translateY(-2px);
-  filter: grayscale(0%) brightness(1.2) drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  filter: brightness(0) invert(1) drop-shadow(0 5px 10px rgba(0,0,0,0.5));
 }
+
+.mem-links a:focus-visible { outline: 2px solid #9dd3c8; outline-offset: 5px; }
 
 .mem-icon-link img {
   width: 100%;
@@ -219,5 +238,18 @@ onUnmounted(() => {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
+}
+
+@media (max-width: 480px) {
+  .mem-hero-center { gap: 24px; }
+  .mem-links { gap: 12px; max-width: 280px; }
+  .mem-divider-vertical { display: none; }
+  .mem-text-link { justify-content: center; flex: 1 1 110px; }
+  .mem-easter-egg { left: 24px; bottom: 12px; text-align: right; }
+  .mem-netlify-badge { bottom: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mem-hero-center { animation: none; }
+  .mem-custom-home * { transition: none; }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <aside :class="['infobox', 'pos-' + position]" :style="{ width: width }">
+  <aside :class="['infobox', 'pos-' + position]" :style="{ '--infobox-width': width }">
     <div class="infobox-title">{{ title }}</div>
     <div v-if="image" class="infobox-image">
       <img :src="withBase(image)" :alt="title" />
@@ -49,7 +49,8 @@ const formatValue = (val) => {
 
 <style scoped>
 .infobox {
-  width: 320px;
+  width: var(--infobox-width, 320px);
+  max-width: 100%;
   background: var(--mem-bg);
   border: 2px solid var(--mem-heading);
   border-radius: 8px;
@@ -92,7 +93,10 @@ const formatValue = (val) => {
 
 
 @media (max-width: 768px) {
-  .infobox {
+  .infobox.pos-right,
+  .infobox.pos-left,
+  .infobox.pos-center,
+  .infobox.pos-inline {
     float: none;
     width: 100%;
     margin: 20px 0;

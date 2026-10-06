@@ -19,10 +19,63 @@ We are committed to providing a friendly, safe and welcoming environment for all
 ## 🚀 Development
 
 ### Prerequisites
-- Node.js
+- Node.js 24 (also recorded in `.nvmrc` and `netlify.toml`)
 
 ### Local Setup
 ```bash
-npm install
+npm ci
 npm run docs:dev
 ```
+
+### Checks and production build
+```bash
+npm test
+npm run docs:build
+npm run docs:preview
+```
+
+Every build checks noun links against rendered page anchors and skill IDs, and
+checks that aliases and special links agree with the noun map. A broken target
+fails the build. To recheck an existing build, run `npm run docs:check` (or
+`npm run docs:check -- path/to/output` for a custom output directory).
+
+When adding or renaming a term, keep `.vitepress/theme/components/icons.js`
+and its `[#词条名]` definition anchor in sync. Skill links must use an existing ID
+from `.vitepress/data/skilltree.js`. The existing auto-anchor scripts rewrite
+source files; review their diff and run a build after using them.
+
+### Netlify deployment
+Netlify builds from the Git repository using the root `netlify.toml`: tests run
+first, then VitePress builds and validates links; `.vitepress/dist` is published.
+Build output and cache directories are generated locally and are not tracked
+in Git. A fresh checkout needs `npm ci` and a build, not committed HTML files.
+
+### Dependency maintenance
+VitePress remains on stable 1.6.4. The `speech-rule-engine` override updates its
+pinned XML parser to the security-patched `@xmldom/xmldom` 0.9.12; re-evaluate the
+override when its parent dependency changes.
+
+As of 2026-10-04, `npm audit` still flags the VitePress / Vite 5 / esbuild chain.
+Resolving that chain requires a framework/toolchain compatibility change, so it
+is deferred rather than forced across the declared dependency ranges. These
+reports concern development/build tooling; the published site is static.
+Keep the development server local (the default), and assess these advisories
+before using `--host` to expose it to a network. Recheck with `npm audit` when
+updating dependencies.
+
+### Layout maintenance
+The base document layout lives in `.vitepress/theme/custom.css`. The archive
+pages share `archive.css`, with page-specific rules in `items.css` and
+`enemies.css`. Columns use the named `wiki-content` container and depend on
+available article width, not just browser width. Archive articles fill the
+space between navigation and the outline; do not reinstate a fixed 860px cap.
+
+In an `.archive-illustrated` block, place inline media before `.archive-copy`.
+At an article width of at least 760px, media floats right and text returns to
+full width below it; narrower articles stack their content. Preserve the copy
+width constraints so long formulas cannot expand the page. Long formulas and
+comparison tables scroll within their own region. Repeated noun links retain
+their icons so readers can identify terms wherever they enter a long page.
+
+Use lowercase native HTML tags in Markdown (for example, `<u>`). Uppercase `<U>`
+was interpreted differently during server rendering and browser hydration.

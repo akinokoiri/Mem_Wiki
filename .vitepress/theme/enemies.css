@@ -1,0 +1,81 @@
+/* Creature records use the same paper and rules as the mechanics and item chapters. */
+.archive-enemies .vp-doc .creature-dossier { display: grid; grid-template-columns: 144px minmax(0, 1fr); gap: 20px 28px; margin: 20px 0 32px; padding: 24px; border: 1px solid var(--ink-line); border-radius: 3px; background: var(--ink-soft); }
+.creature-portrait { min-width: 0; text-align: center; }
+.creature-portrait > img { display: block; width: 128px; height: 168px; object-fit: contain; margin: 0 auto; }
+.archive-enemies .vp-doc .creature-portrait > p { margin: 12px 0 0; color: var(--ink-secondary); font-size: 12px; letter-spacing: .08em; }
+.creature-stats { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 28px; min-width: 0; margin: 0; }
+.creature-stats > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-content: start; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--ink-line); font-size: 14px; line-height: 1.6; }
+.creature-stats dt { color: var(--ink-secondary); }
+.creature-stats dt img { display: inline-block; width: 1em; height: 1em; margin-right: 4px; vertical-align: -.15em; }
+.creature-stats dd, .creature-traits dd { margin: 0; white-space: pre-line; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.creature-traits { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px 32px; margin: 0; padding-top: 16px; border-top: 1px solid var(--ink-rule); font-size: 14px; line-height: 1.7; }
+.creature-traits > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px; }
+.creature-traits dt { color: var(--ink-secondary); font-weight: 600; }
+.archive-enemies .vp-doc .archive-table { margin: 16px 0 24px; }
+.archive-enemies .vp-doc .archive-table-scroll :is(th, td) { white-space: normal; vertical-align: top; }
+.archive-enemies .vp-doc .archive-table-scroll th { white-space: nowrap; }
+.archive-enemies .vp-doc .archive-table-scroll :is(th, td):first-child { min-width: 120px; }
+.archive-enemies .vp-doc .command-table :is(th, td):last-child { width: 128px; min-width: 128px; }
+.archive-enemies .vp-doc .drop-table :is(th, td):nth-child(2) { min-width: 88px; }
+.archive-enemies .vp-doc .phase-condition { padding: 10px 14px; margin: 12px 0 20px; border-left: 3px solid var(--ink-link); background: var(--ink-soft); font-size: 15px; }
+.archive-enemies .vp-doc .phase-links { padding-bottom: 12px; border-bottom: 1px solid var(--ink-line); font-size: 14px; }
+.archive-enemies .vp-doc .phase-links a { display: inline-block; margin-block: 4px; }
+.archive-enemies .vp-doc .energy-table table { min-width: 680px; table-layout: fixed; }
+.archive-enemies .vp-doc .energy-table :is(th, td):first-child { min-width: 88px; width: 88px; }
+.archive-enemies .vp-doc .energy-table :is(th, td):last-child { width: 136px; }
+.archive-enemies .vp-doc .energy-exclusion { display: block; margin-top: 4px; color: var(--ink-secondary); font-size: 13px; line-height: 1.6; }
+.archive-enemies .vp-doc h5 { margin: 24px 0 12px; font-size: 17px; line-height: 1.5; color: var(--ink-text); }
+/* Creature, phase or usage section, behavior category, then ordinary prose. */
+.archive-enemies .vp-doc :is(.yue-combat, .shadow-combat, .pet-guide, .terror-guide) > h3 { font-size: 28px; }
+.archive-enemies .vp-doc :is(.yue-combat, .shadow-combat, .pet-guide, .terror-guide) > h4 { clear: both; margin: 44px 0 18px; padding-top: 20px; border-top: 1px solid var(--ink-rule); font-size: 24px; }
+.archive-enemies .vp-doc :is(.yue-combat, .shadow-combat, .pet-guide, .terror-guide) h5 { margin: 30px 0 14px; font-size: 20px; line-height: 1.45; font-weight: 700; }
+.archive-enemies .vp-doc .shadow-role-table table { min-width: 580px; }
+.archive-enemies .vp-doc .moon-count-table table { min-width: 0; table-layout: fixed; }
+.archive-enemies .vp-doc .moon-count-table :is(th, td) { min-width: 0; white-space: normal; }
+.archive-enemies .vp-doc .shadow-combat .archive-illustrated + h5 { clear: both; }
+.archive-enemies .vp-doc :is(.pet-guide, .terror-guide) .archive-illustrated + h5 { clear: both; }
+.archive-enemies .vp-doc .creature-entry { display: flow-root; }
+.archive-enemies .vp-doc .status-reference { margin: 20px 0; padding: 16px 20px; border: 1px solid var(--ink-line); border-left: 3px solid var(--ink-stroke); background: var(--ink-soft); border-radius: 3px; }
+.archive-enemies .vp-doc .status-reference > :first-child { margin-top: 0; }
+.archive-enemies .vp-doc .status-reference > :last-child { margin-bottom: 0; }
+.archive-enemies .vp-doc .status-reference .archive-subheading { font-size: 17px; font-weight: 700; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-reference { clear: both; margin: 32px 0; padding-top: 20px; border-top: 2px solid var(--ink-stroke); }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-reference > .archive-subheading { margin: 0 0 12px; font-size: 20px; font-weight: 700; }
+.imprint-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 14px 18px; margin: 20px 0; background: var(--ink-soft); border-block: 1px solid var(--ink-line); }
+.imprint-facts dt { color: var(--ink-secondary); font-size: 13px; }
+.imprint-facts dd { margin: 4px 0 0; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.imprint-facts small { display: inline-block; margin-left: 8px; color: var(--ink-secondary); font-size: 13px; font-weight: 400; }
+.imprint-recovery { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin: 20px 0; }
+.imprint-recovery > section { min-width: 0; padding-top: 12px; border-top: 1px solid var(--ink-rule); }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery p { margin: 10px 0; font-size: 14px; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery .imprint-label { margin-top: 0; color: var(--ink-link); font-weight: 600; font-size: 15px; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery .imprint-equation { margin: 16px 0; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery table { display: table; width: 100%; margin: 14px 0; font-size: 14px; box-shadow: none; border-radius: 0; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery :is(th, td) { padding: 7px 10px; white-space: normal; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery :is(th, td):first-child { width: 96px; white-space: nowrap; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-recovery section > p:last-child { color: var(--ink-secondary); }
+.imprint-links { margin: 16px 0; }
+.imprint-links > div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-top: 1px solid var(--ink-line); }
+.imprint-links dt { font-size: 14px; font-weight: 600; }
+.imprint-links dd { margin: 0; }
+:is(.archive-enemies, .archive-statuses) .vp-doc .imprint-links dd > p { margin: 0; }
+@container wiki-content (min-width: 760px) {
+  .imprint-recovery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+}
+@container wiki-content (min-width: 860px) {
+  .creature-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .creature-stats > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .creature-traits { grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr); }
+}
+@media (max-width: 639px) {
+  .archive-enemies .vp-doc :is(.yue-combat, .shadow-combat, .pet-guide, .terror-guide) > h3 { font-size: 24px; }
+  .archive-enemies .vp-doc :is(.yue-combat, .shadow-combat, .pet-guide, .terror-guide) > h4 { margin-top: 36px; font-size: 22px; }
+  .archive-enemies .vp-doc :is(.yue-combat, .shadow-combat, .pet-guide, .terror-guide) h5 { font-size: 19px; }
+  .archive-enemies .vp-doc .creature-dossier { grid-template-columns: minmax(0, 1fr); padding: 16px; gap: 16px; }
+  .creature-portrait > img { width: 100px; height: 128px; }
+  .creature-stats > div { grid-template-columns: 96px minmax(0, 1fr); }
+  .creature-traits > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .imprint-facts { gap: 12px; padding: 12px; }
+  .imprint-facts small { display: block; margin-left: 0; }
+  .imprint-links > div { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}

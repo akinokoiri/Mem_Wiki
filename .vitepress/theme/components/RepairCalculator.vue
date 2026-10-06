@@ -2,8 +2,8 @@
   <div class="repair-calc">
     <div class="calc-header">
       <span class="calc-icon">🔮</span>
-      <h3 class="calc-title">反转术式模拟器</h3>
-      <select v-model="mode" class="mode-select">
+      <p class="calc-title">修补模拟器</p>
+      <select v-model="mode" class="mode-select" aria-label="修补机制">
         <option value="new">新版(反转)</option>
         <option value="old">旧版(顺向)</option>
       </select>
@@ -20,6 +20,7 @@
           min="0" 
           max="99" 
           class="dur-slider"
+          aria-label="目标物品剩余耐久百分比"
         />
         <div class="slider-labels">
           <span>0% (破损)</span>

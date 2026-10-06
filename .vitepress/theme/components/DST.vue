@@ -5,9 +5,11 @@
     class="dst-noun" 
     :class="{ 'has-link': targetLink }"
     :style="themeStyle" 
-    :title="hoverTitle"
+    :title="preview ? undefined : hoverTitle"
+    :data-term-preview="preview?.term"
+    :tabindex="preview && !targetLink ? 0 : undefined"
   >
-    <img :src="withBase(iconSrc)" class="noun-icon" @error="handleImageError" />
+    <img v-if="!hideIcon" :src="withBase(iconSrc)" class="noun-icon" alt="" @error="handleImageError" />
     <slot></slot>
   </component>
 </template>
@@ -16,9 +18,11 @@
 import { computed, useSlots, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { iconMap, colorMap, linkMap, officialTerms, nounMap, iconToNounMap } from './icons.js'
+import { getTermPreview } from '../../data/term-previews.js'
 
 const props = defineProps({
   icon: String, // health, sanity, hunger, soul, beast, ghost, collar, etc.
+  hideIcon: Boolean,
 })
 
 const slots = useSlots()
@@ -48,9 +52,11 @@ const nounText = computed(() => {
   return ''
 })
 
+const preview = computed(() => getTermPreview(nounText.value, props.icon))
+
 const isModifier = computed(() => {
   const text = nounText.value.trim()
-  return /^[+-]?\d+/.test(text)
+  return /^[+−-]?\d+/.test(text)
 })
 
 const targetLink = computed(() => {

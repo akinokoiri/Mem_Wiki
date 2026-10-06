@@ -1,11 +1,23 @@
 import DefaultTheme from 'vitepress/theme'
+import './term-preview-events.js'
+import '@fontsource-variable/noto-sans-sc'
 import './custom.css'
+import './archive.css'
+import './items.css'
+import './enemies.css'
+import './statuses.css'
+import './settings.css'
+import CreatureDossier from './components/CreatureDossier.vue'
+import CharacterDossier from './components/CharacterDossier.vue'
+import ComparisonTable from './components/ComparisonTable.vue'
+import ItemSummary from './components/ItemSummary.vue'
 import Infobox from './components/Infobox.vue'
 import DST from './components/DST.vue'
 import MediaCard from './components/MediaCard.vue'
 import DSTIcon from './components/DSTIcon.vue'
 import ShowcaseBlock from './components/ShowcaseBlock.vue'
 import ReturnCapsule from './components/ReturnCapsule.vue'
+import TermPreview from './components/TermPreview.vue'
 import MechanicCard from './components/MechanicCard.vue'
 import MechanicItem from './components/MechanicItem.vue'
 import HighlightCard from './components/HighlightCard.vue'
@@ -14,15 +26,20 @@ import BossCard from './components/BossCard.vue'
 import RepairCalculator from './components/RepairCalculator.vue'
 
 import { h, nextTick } from 'vue'
+import { getScrollOffset } from 'vitepress'
 
 export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'layout-bottom': () => h(ReturnCapsule)
+      'layout-bottom': () => [h(ReturnCapsule), h(TermPreview)]
     })
   },
   enhanceApp({ app, router }) {
+    app.component('CharacterDossier', CharacterDossier)
+    app.component('CreatureDossier', CreatureDossier)
+    app.component('ComparisonTable', ComparisonTable)
+    app.component('ItemSummary', ItemSummary)
     app.component('Infobox', Infobox)
     app.component('DST', DST)
     app.component('MediaCard', MediaCard)
@@ -38,20 +55,41 @@ export default {
     if (typeof window !== 'undefined') {
       let currentActiveUrl = location.href
 
+      const revealHashTarget = (hash) => {
+        if (!hash) return null
+        try {
+          const target = document.getElementById(decodeURIComponent(hash.slice(1)))
+          let disclosure = target?.closest('details')
+          while (disclosure) {
+            disclosure.open = true
+            disclosure = disclosure.parentElement?.closest('details')
+          }
+          return target
+        } catch { return null }
+      }
+
       const triggerHighlight = () => {
         if (!location.hash) return
         setTimeout(() => {
           try {
-            const hash = decodeURIComponent(location.hash)
-            const el = document.querySelector(hash)
+            const el = revealHashTarget(location.hash)
             if (el) {
-              const block = el.closest('li, p, h2, h3, h4, tr') || el
+              const block = el.closest('li, p, h2, h3, h4, h5, summary, tr') || el
               block.classList.remove('dst-highlight-pulse')
               void block.offsetWidth // trigger reflow
               block.classList.add('dst-highlight-pulse')
+              setTimeout(() => block.classList.remove('dst-highlight-pulse'), 2500)
               
-              // Ensure it's centered to solve the "hard to find" issue
-              el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              if (block.closest('.ink-archive')) {
+                // Match VitePress's own outline threshold and keep the heading
+                // below the currently visible navigation bars.
+                window.scrollTo({
+                  top: window.scrollY + block.getBoundingClientRect().top - getScrollOffset(),
+                  behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+                })
+              } else {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              }
             }
           } catch (e) {}
         }, 150) // slight delay to ensure dom is ready and override native scroll
@@ -66,14 +104,24 @@ export default {
         currentActiveUrl = location.href
         triggerHighlight()
       }
+
+      // Run before VitePress consumes same-hash navigation clicks.
+      document.addEventListener('click', (e) => {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+        const a = e.target.closest('a')
+        if (!a?.href || a.target === '_blank' || a.hasAttribute('download')) return
+        const url = new URL(a.href)
+        if (url.origin !== location.origin || !url.hash ||
+            normalizePathname(url.pathname) !== normalizePathname(location.pathname)) return
+        revealHashTarget(url.hash)
+        if (url.hash === location.hash) triggerHighlight()
+      }, true)
       
       // Global click interceptor to record "Return Capsule" state
       document.addEventListener('click', (e) => {
+        if (!e.target.closest('.vp-doc')) return
         const a = e.target.closest('a')
         if (!a || !a.href) return
-        
-        // Only track clicks inside the actual document content (ignore sidebar/nav)
-        if (!e.target.closest('.vp-doc')) return
         
         const url = new URL(a.href)
         const currentUrl = new URL(currentActiveUrl)
@@ -81,7 +129,7 @@ export default {
         const urlPath = normalizePathname(url.pathname)
         const currentPath = normalizePathname(currentUrl.pathname)
         const isSamePage = urlPath === currentPath
-        
+
         // If it's a cross-page jump or a hash jump on the same page
         if (url.origin === currentUrl.origin && (!isSamePage || url.hash)) {
            // If it's an in-page jump, calculate distance to avoid "too close" jumps

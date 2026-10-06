@@ -1,0 +1,86 @@
+/* Item reference pages share the archive theme, with media inside the reading area. */
+.archive-items .vp-doc .item-summary { display: grid; margin: 16px 0 28px; border: 1px solid var(--ink-line); border-radius: 3px; background: var(--ink-soft); }
+.archive-items .vp-doc .item-summary.has-image { grid-template-columns: 112px minmax(0, 1fr); }
+.item-summary-art { display: flex; align-items: center; justify-content: center; padding: 16px; }
+.item-summary-image { width: 80px; max-height: 128px; object-fit: contain; }
+.item-summary-body { min-width: 0; padding: 18px 24px; }
+.archive-items .vp-doc .item-summary-kicker { margin: 0 0 14px; font-size: 12px; letter-spacing: .08em; color: var(--ink-secondary); font-weight: 600; }
+.item-summary-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px 24px; margin: 0; min-width: 0; font-size: 15px; }
+.item-summary-facts > div { min-width: 0; }
+.item-summary-facts dt { color: var(--ink-secondary); font-size: 13px; margin-bottom: 6px; }
+.item-summary-facts dt img { display: inline-block; width: 1em; height: 1em; margin-right: 4px; vertical-align: -.15em; }
+.item-summary-facts dd { margin: 0; white-space: pre-line; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.archive-items .vp-doc .media-card { padding: 0; margin-block: 16px; vertical-align: top; }
+.archive-items .vp-doc .archive-illustrated { margin-block: 16px 24px; }
+.archive-items .vp-doc .archive-media-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-block: 20px 32px; }
+.archive-items .vp-doc .archive-media-pair > .media-card { width: 100%; margin: 0; }
+.archive-items .vp-doc .archive-table { margin-block: 16px 24px; }
+.archive-items .vp-doc .archive-table-scroll table { min-width: 720px; font-size: 14px; line-height: 1.6; }
+.archive-items .vp-doc .archive-table-scroll :is(th, td) { white-space: normal; vertical-align: top; }
+.archive-items .vp-doc .archive-table-scroll :is(th, td):first-child { min-width: 112px; max-width: 156px; }
+.archive-items .vp-doc .archive-table-scroll th { white-space: nowrap; }
+.archive-items .vp-doc .recipe-table table { min-width: 840px; }
+.archive-items .vp-doc .recipe-table :is(th, td):nth-child(2) { min-width: 180px; }
+.archive-items .vp-doc .recipe-table :is(th, td):last-child,
+.archive-items .vp-doc .effects-table :is(th, td):last-child { min-width: 240px; }
+.archive-items .vp-doc .chainsaw-upgrades :is(th, td):nth-child(1),
+.archive-items .vp-doc .chainsaw-upgrades :is(th, td):nth-child(3) { min-width: 112px; }
+.archive-items .vp-doc .chainsaw-upgrades :is(th, td):nth-child(2) { min-width: 128px; }
+.archive-items .vp-doc .chainsaw-upgrades :is(th, td):nth-child(4) { width: 88px; min-width: 88px; white-space: nowrap; overflow-wrap: normal; }
+.archive-items .vp-doc .chainsaw-upgrades :is(th, td):nth-child(5) { min-width: 144px; }
+.archive-items .vp-doc .headless-guide h5 { margin: 28px 0 12px; color: var(--ink-text); font-size: 17px; line-height: 1.5; }
+.archive-items .vp-doc .repair-calc { border: 1px solid var(--ink-line); border-radius: 2px; background: var(--ink-surface); box-shadow: none; padding: 20px; margin: 16px 0 28px; }
+.archive-items .repair-calc .calc-icon { display: none; }
+.archive-items .repair-calc .calc-header { flex-wrap: wrap; border-bottom: 1px solid var(--ink-line); }
+.archive-items .repair-calc .calc-title { font-size: 16px !important; }
+.archive-items .repair-calc .mode-select { min-height: 36px; font-size: 14px; border-radius: 2px; }
+.archive-items .repair-calc .mode-select:focus-visible { outline: 2px solid var(--ink-link); outline-offset: 3px; }
+.archive-items .repair-calc .slider-header,
+.archive-items .repair-calc .result-label,
+.archive-items .repair-calc .details-section { font-size: 14px; }
+.archive-items .repair-calc .slider-labels { font-size: 12px; }
+.archive-items .repair-calc .dur-slider { accent-color: var(--ink-link); min-height: 28px; }
+.archive-items .repair-calc .results-container { background: none; border: 0; padding: 0; }
+.archive-items .repair-calc .details-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.archive-items .repair-calc .detail-card { border-radius: 0; background: none; padding: 8px 12px; line-height: 1.6; }
+.archive-items .repair-calc .success-card { border-color: var(--ink-tip); }
+.archive-items .repair-calc .failure-card { border-color: var(--ink-danger); }
+.archive-items .repair-calc .text-success { color: var(--ink-tip); }
+.archive-items .repair-calc .text-danger { color: var(--ink-danger); }
+.archive-items .repair-calc .text-soul { color: var(--ink-link); }
+.archive-items .repair-calc .result-val.highlight { color: var(--ink-link) !important; }
+.repair-workspace { display: flex; flex-direction: column; gap: 24px; }
+.repair-explanation { min-width: 0; }
+.repair-sidecar { order: 1; min-width: 0; scroll-margin-top: 100px; }
+.archive-items .vp-doc .repair-sidecar .repair-calc { margin: 0; padding: 18px; }
+.archive-items .repair-sidecar .details-section { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.archive-items .vp-doc .repair-tool-note { font-size: 13px; color: var(--ink-secondary); margin: 8px 0 0; }
+.archive-items .vp-doc .repair-explanation > h4:first-child { margin-top: 0; }
+.archive-items .vp-doc .repair-explanation > h4 { display: flow-root; }
+@container wiki-content (min-width: 860px) {
+  .repair-workspace { display: flow-root; }
+  .repair-sidecar { float: right; width: 360px; margin: 0 0 20px 28px; }
+  .repair-explanation { display: contents; }
+}
+.imprint-formulas { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin: 16px 0; }
+.imprint-formula { min-width: 0; padding: 18px 20px; border: 1px solid var(--ink-line); background: var(--ink-surface); border-radius: 3px; }
+:is(.archive-items, .archive-statuses) .vp-doc .imprint-formula > p:first-child { margin: 0 0 12px; font-size: 14px; color: var(--ink-secondary); }
+:is(.archive-items, .archive-statuses) .vp-doc .imprint-equation { margin: 0; font-size: 18px; line-height: 1.8; }
+.imprint-equation .formula-factor { display: inline-block; }
+.imprint-equation .formula-operator { color: var(--ink-muted); padding-inline: .25em; }
+:is(.archive-items, .archive-statuses) .vp-doc .imprint-bonus-table { width: 100%; margin-block: 16px; }
+:is(.archive-items, .archive-statuses) .vp-doc .imprint-bonus-table th { width: 25%; }
+@container wiki-content (min-width: 760px) {
+  .imprint-formulas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .archive-items .vp-doc .item-summary.has-image { grid-template-columns: 80px minmax(0, 1fr); }
+  .item-summary-art { padding: 12px; }
+  .item-summary-image { width: 56px; max-height: 96px; }
+  .item-summary-body { padding: 16px; }
+  .item-summary-facts { gap: 14px; }
+  .item-summary-facts dt { margin-bottom: 2px; }
+  .archive-items .vp-doc .archive-media-pair,
+  .archive-items .repair-calc .details-section { grid-template-columns: minmax(0, 1fr); }
+  .archive-items .vp-doc .repair-calc { padding: 16px; }
+}

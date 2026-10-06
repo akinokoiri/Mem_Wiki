@@ -1,8 +1,18 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vitepress'
+import { ref, shallowRef, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import { useRouter, useData } from 'vitepress'
 
 const router = useRouter()
+const { frontmatter } = useData()
+const isMobile = ref(false)
+const dockTarget = shallowRef(null)
+let mobileQuery
+const updateMobile = () => { isMobile.value = mobileQuery.matches }
+watch([isMobile, () => frontmatter.value.pageClass], async () => {
+  await nextTick()
+  dockTarget.value = isMobile.value && String(frontmatter.value.pageClass || '').split(/\s+/).includes('ink-archive')
+    ? document.querySelector('.VPLocalNav') : null
+}, { flush: 'post' })
 
 const isVisible = ref(false)
 const returnTitle = ref('')
@@ -37,24 +47,30 @@ const dismiss = () => {
 }
 
 onMounted(() => {
+  mobileQuery = window.matchMedia('(max-width: 639px)')
+  mobileQuery.addEventListener('change', updateMobile)
+  updateMobile()
   checkStorage()
   window.addEventListener('mem-wiki-route-changed', checkStorage)
 })
 
 onUnmounted(() => {
+  mobileQuery?.removeEventListener('change', updateMobile)
   window.removeEventListener('mem-wiki-route-changed', checkStorage)
 })
 </script>
 
 <template>
+  <Teleport :to="dockTarget" :disabled="!dockTarget">
   <Transition name="capsule">
-    <div v-if="isVisible" class="return-capsule" title="返回上一阅读位置">
-      <div class="return-capsule-main" @click="goBack">
+    <div v-if="isVisible" class="return-capsule" :class="{ 'is-docked': dockTarget }" title="返回上一阅读位置">
+      <button type="button" class="return-capsule-main" :aria-label="`↶ 返回上文：${returnTitle}`" :title="`返回上文：${returnTitle}`" @click="goBack">
         <span class="return-capsule-icon">↶</span>
-        <span class="return-capsule-text">返回上文：{{ returnTitle }}</span>
-      </div>
-      <div class="return-capsule-divider"></div>
-      <div class="return-capsule-close" @click.stop="dismiss" title="关闭并留在当前页面">×</div>
+        <span class="return-capsule-text">{{ dockTarget ? '返回上文' : `返回上文：${returnTitle}` }}</span>
+      </button>
+      <div class="return-capsule-divider" aria-hidden="true"></div>
+      <button type="button" class="return-capsule-close" @click.stop="dismiss" aria-label="关闭返回上文" title="关闭并留在当前页面">×</button>
     </div>
   </Transition>
+  </Teleport>
 </template>

@@ -1,8 +1,29 @@
 import { defineConfig } from 'vitepress'
 import { nounMap } from './theme/components/icons.js'
+import { checkWikiLinks } from '../scripts/check-links.mjs'
+import { archiveMathCjk } from './markdown/math-cjk.mjs'
+import { wikiSearchOptions } from './data/wiki-search.js'
+import { skillTitle } from './data/skill-presentation.js'
+
+const archiveSidebar = [
+  { text: '开始', items: [{ text: '极速上手', link: '/mechanics/lite_draft' }] },
+  { text: '资料', items: [
+    { text: '角色机制', link: '/mechanics/core' },
+    { text: '物品与料理', link: '/mechanics/items' },
+    { text: '敌人与随从', link: '/mechanics/enemies' },
+    { text: '状态与机制', link: '/mechanics/statuses' }
+  ] },
+  { text: '工具与设置', items: [
+    { text: '技能树', link: '/mechanics/skilltree' },
+    { text: '模组设置', link: '/mechanics/settings' }
+  ] }
+]
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  buildEnd(siteConfig) {
+    checkWikiLinks(siteConfig.outDir)
+  },
   title: "芒伊木 Wiki",
   description: "饥荒：联机版 芒伊木模组全效果说明书",
   srcExclude: [
@@ -19,23 +40,18 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '快速开始', link: '/mechanics/core' }
+      { text: '极速上手', link: '/mechanics/lite_draft' },
+      { text: '资料', items: [
+        { text: '角色机制', link: '/mechanics/core' },
+        { text: '物品与料理', link: '/mechanics/items' },
+        { text: '敌人与随从', link: '/mechanics/enemies' },
+        { text: '状态与机制', link: '/mechanics/statuses' }
+      ] },
+      { text: '技能树', link: '/mechanics/skilltree' }
     ],
 
-    sidebar: [
-      {
-        text: '芒伊木 Wiki 词条',
-        collapsed: false,
-        items: [
-          { text: '★ 极速上手「省流版」', link: '/mechanics/lite_draft' },
-          { text: '一、基础属性与常驻机制', link: '/mechanics/core' },
-          { text: '二、建筑、物品、装备与料理', link: '/mechanics/items' },
-          { text: '三、敌人与随从', link: '/mechanics/enemies' },
-          { text: '四、技能树', link: '/mechanics/skilltree' },
-          { text: '五、模组设置', link: '/mechanics/settings' }
-        ]
-      }
-    ],
+    // The sidebar switches pages; section links belong to each page's outline.
+    sidebar: archiveSidebar,
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/akinokoiri/Mem_Wiki' }
@@ -46,6 +62,12 @@ export default defineConfig({
       level: [2, 3]
     },
     
+    sidebarMenuLabel: '页面导航',
+    returnToTopLabel: '回到顶部',
+    darkModeSwitchLabel: '外观',
+    lightModeSwitchTitle: '切换为浅色',
+    darkModeSwitchTitle: '切换为暗色',
+
     docFooter: {
       prev: '上一页',
       next: '下一页'
@@ -59,11 +81,26 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
+        miniSearch: wikiSearchOptions,
+        translations: {
+          button: { buttonText: '搜索', buttonAriaLabel: '搜索 Wiki' },
+          modal: {
+            displayDetails: '显示详情', resetButtonTitle: '清除搜索', backButtonTitle: '返回',
+            noResultsText: '没有找到相关内容，试试机制或物品名称。',
+            footer: { selectText: '选择', navigateText: '切换', closeText: '关闭' }
+          }
+        },
         _render(src, env, md) {
           const relativePath = env.relativePath || ''
           // 只渲染 mechanics 目录下的 markdown 文件供搜索索引使用
           if (!relativePath.startsWith('mechanics/')) {
             return ''
+          }
+          const skill = relativePath.match(/^mechanics\/skills_desc\/([^/]+)\.md$/)
+          if (skill && skillTitle(skill[1])) {
+            // Detail fragments are loaded inside the skill tree. Give search
+            // their skill title; extractField routes each section to that tree.
+            return md.render(`# ${skillTitle(skill[1])} {#${skill[1]}}\n\n${src}`, env)
           }
           return md.render(src, env)
         }
@@ -75,6 +112,7 @@ export default defineConfig({
   markdown: {
     math: true,
     config: (md) => {
+      md.use(archiveMathCjk)
       // 注册黑幕 ||文字|| 行内语法插件
       md.inline.ruler.before('emphasis', 'heimu', (state, silent) => {
         const start = state.pos;
