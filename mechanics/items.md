@@ -157,10 +157,10 @@ next:
 
 ## 2. 物品
 
-### [#芒式修补工具]芒式修补工具 <DSTIcon icon="mem_repair" />
+### [#芒式修补工具]芒式·修补 <DSTIcon icon="mem_repair" /> {#芒式修补工具}
 
 <ItemSummary 
-  title="芒式修补工具"
+  title="芒式·修补"
   image="/mem_repair-0.webp"
   :stats="[
     { label: '配方', value: '5 月岩 + 5 活木 + 1 彩虹宝石' },

@@ -29,7 +29,7 @@ export const termTranslations = {
   "暗项圈": "Seal Collar Lv.IV - Shadow",
   "封印项圈lv4·月": "Seal Collar Lv.IV - Lunar",
   "月项圈": "Seal Collar Lv.IV - Lunar",
-  "芒式修补工具": "Mangem's Repair Tool",
+  "芒式修补工具": "Mangem Technique: Repair",
   "狐狸的凶宅": "Fox's Murder House",
   "芒芒的坟墓": "Mangem's Grave",
   "芒芒的墓碑": "Mangem's Tombstone",

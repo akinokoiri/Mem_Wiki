@@ -59,13 +59,13 @@ Under **World Selection → Mod Settings**, you can adjust Mangem's mechanics, v
 
 <ComparisonTable label-id="难度预设">
 
-| Preset | Main Differences |
-| :--- | :--- |
-| Casual | Reduces form-switching penalties and uses easier equipment recipes; disables in-game skill awakening, low-Sanity taunting, and Lurking Terror spawning, while improving follower survival and endurance. |
-| Normal | Reduces some penalties relative to Default and uses easier equipment recipes; retains in-game skill awakening and Lurking Terror spawning, but disables low-Sanity taunting. |
-| Default | Restores the base balance values for the options covered by the preset: retains in-game awakening, taunting, and Lurking Terror, and disables the Boss special enhancements covered by the preset. |
-| Hard | Increases some penalties, uses classic equipment recipes and strict skill awakening, and enables Anti-Rollback Penalty; raises some Boss parameters and enables Orbital Deployment (25%), Moonscorched Earth, Ghost Fire Overflow (50%), Cognitive Blockade, and In Lockstep. It does not enable every enhancement. |
-| Custom | Indicates manually adjusted settings; it is not an additional fixed difficulty. |
+| Preset | Beast Form Combat Mode | Main Differences |
+| :--- | :--- | :--- |
+| Casual | Modern | Reduces form-switching penalties and uses easier equipment recipes; disables in-game skill awakening, low-Sanity taunting, and Lurking Terror spawning, while improving follower survival and endurance. |
+| Normal | Modern | Reduces some penalties relative to Default and uses easier equipment recipes; retains in-game skill awakening and Lurking Terror spawning, but disables low-Sanity taunting. |
+| Default | Classic | Restores the base balance values for the options covered by the preset: retains in-game awakening, taunting, and Lurking Terror, and disables the Boss special enhancements covered by the preset. |
+| Hard | Classic | Increases some penalties, uses classic equipment recipes and strict skill awakening, and enables Anti-Rollback Penalty; raises some Boss parameters and enables Orbital Deployment (25%), Moonscorched Earth, Ghost Fire Overflow (50%), Cognitive Blockade, and In Lockstep. It does not enable every enhancement. |
+| Custom | Current individual setting | Indicates manually adjusted settings; it is not an additional fixed difficulty. |
 
 </ComparisonTable>
 

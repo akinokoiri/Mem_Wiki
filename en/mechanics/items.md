@@ -157,10 +157,10 @@ Unlocked after learning and activating [魂墙(技能)].
 
 ## 2. Items {#_2-物品}
 
-### [#芒式修补工具]Mangem's Repair Tool <DSTIcon icon="mem_repair" /> {#芒式修补工具}
+### [#芒式修补工具]Mangem Technique: Repair <DSTIcon icon="mem_repair" /> {#芒式修补工具}
 
 <ItemSummary
-  title="Mangem's Repair Tool"
+  title="Mangem Technique: Repair"
   image="/mem_repair-0.webp"
   :stats="[
     { label: 'Recipe', value: '5 Moon Rocks + 5 Living Logs + 1 Iridescent Gem' },

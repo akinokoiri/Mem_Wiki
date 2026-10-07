@@ -992,7 +992,7 @@ Shadows and the body follow commands from the main unit and token. They are Mang
 
 [先驱意志] is a token bound to the follower, similar to the Eye Bone. **Right-click to open the radial menu** to change modes, summon units, or dismiss them. Inspecting the token gives a brief summary; "Status Info" reports equipment durability, Shadow Level, and other details.
 
-Give items with **[暗影等级]** to the token as if giving them directly to the follower. Replaced equipment warps back into the player's inventory.
+Give equipment with **[暗影等级]** (including masks), or `Dreadstone` used to heal the follower, to the token as if giving them directly to the follower. The token does not accept `Salt Crystals`. Replaced equipment warps back into the player's inventory. See [Healing and Mask Recovery](#尸骸修复-1) for healing effects.
 
 </div>
 </div>
