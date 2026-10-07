@@ -1,5 +1,7 @@
 <script setup>
-import { ref, shallowRef, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import { useWikiLocale } from '../../data/locale.js'
+const { t, isEnglish } = useWikiLocale()
+import { computed, ref, shallowRef, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRouter, useData } from 'vitepress'
 
 const router = useRouter()
@@ -17,6 +19,13 @@ watch([isMobile, () => frontmatter.value.pageClass], async () => {
 const isVisible = ref(false)
 const returnTitle = ref('')
 const returnUrl = ref('')
+const returnLabel = computed(() => {
+  const title = t(returnTitle.value)
+  // An older Chinese session can retain a heading without an English lookup.
+  // Keep its return destination, while using a localized generic button label.
+  return isEnglish.value && /[\u3400-\u9fff]/.test(title)
+    ? t('返回上文') : `${t('返回上文：')}${title}`
+})
 
 const checkStorage = () => {
   if (typeof window !== 'undefined') {
@@ -63,13 +72,13 @@ onUnmounted(() => {
 <template>
   <Teleport :to="dockTarget" :disabled="!dockTarget">
   <Transition name="capsule">
-    <div v-if="isVisible" class="return-capsule" :class="{ 'is-docked': dockTarget }" title="返回上一阅读位置">
-      <button type="button" class="return-capsule-main" :aria-label="`↶ 返回上文：${returnTitle}`" :title="`返回上文：${returnTitle}`" @click="goBack">
+    <div v-if="isVisible" class="return-capsule" :class="{ 'is-docked': dockTarget }" :title="t('返回上一阅读位置')">
+      <button type="button" class="return-capsule-main" :aria-label="`↶ ${returnLabel}`" :title="returnLabel" @click="goBack">
         <span class="return-capsule-icon">↶</span>
-        <span class="return-capsule-text">{{ dockTarget ? '返回上文' : `返回上文：${returnTitle}` }}</span>
+        <span class="return-capsule-text">{{ dockTarget ? t('返回上文') : returnLabel }}</span>
       </button>
       <div class="return-capsule-divider" aria-hidden="true"></div>
-      <button type="button" class="return-capsule-close" @click.stop="dismiss" aria-label="关闭返回上文" title="关闭并留在当前页面">×</button>
+      <button type="button" class="return-capsule-close" @click.stop="dismiss" :aria-label="t('关闭返回上文')" :title="t('关闭并留在当前页面')">×</button>
     </div>
   </Transition>
   </Teleport>

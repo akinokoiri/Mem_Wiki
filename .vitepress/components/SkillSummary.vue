@@ -1,4 +1,6 @@
 <script setup>
+import { useWikiLocale } from '../data/locale.js'
+const { t, isEnglish } = useWikiLocale()
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import { nounMap } from '../theme/components/icons.js'
@@ -12,7 +14,7 @@ const emit = defineEmits(['learn', 'refund', 'reset', 'details', 'select'])
 const info = computed(() => skillPresentation(props.node?.id))
 const has = id => props.learnedIds?.has(id)
 const open = computed(() => props.node?.isLock && evaluateSkillLock(props.node.id, has))
-const effects = computed(() => (props.node?.desc || '').split('\n').filter(Boolean).map(line =>
+const effects = computed(() => t(props.node?.desc || '').split('\n').filter(Boolean).map(line =>
   line.split(/(\[[^\]]+\])/).filter(Boolean).map(text => ({
     noun: text.startsWith('[') && text.endsWith(']'),
     text: text.startsWith('[') && text.endsWith(']') ? text.slice(1, -1) : text,
@@ -36,71 +38,71 @@ const groupLabel = group => group.skills.length === 1 ? '需要学习'
 <template>
   <section class="skill-summary" aria-labelledby="skill-summary-title">
     <template v-if="node">
-      <p class="skill-summary-kicker">{{ info.category }} · {{ node.isLock ? '路径条件' : info.awakening ? '封印技能' : '普通技能' }}</p>
+      <p class="skill-summary-kicker">{{ t(info.category) }} · {{ node.isLock ? t('路径条件') : info.awakening ? t('封印技能') : t('普通技能') }}</p>
       <div class="skill-summary-heading">
         <img :src="withBase(skillIcon(node.id))" alt="" width="40" height="40" />
-        <h2 id="skill-summary-title">{{ info.title }}</h2>
-        <span class="skill-skill-cost">{{ node.isLock ? '不耗洞察' : '1 洞察' }}</span>
+        <h2 id="skill-summary-title">{{ t(info.title) }}</h2>
+        <span class="skill-skill-cost">{{ node.isLock ? t('不耗洞察') : t('1 洞察') }}</span>
       </div>
-      <nav v-if="info.levels.length > 1" class="skill-levels" aria-label="技能等级">
+      <nav v-if="info.levels.length > 1" class="skill-levels" :aria-label="t('技能等级')">
         <button v-for="(id, index) in info.levels" :key="id" type="button" :aria-current="id === node.id ? 'true' : undefined" @click="emit('select', id)">
-          {{ ['一级', '二级', '三级'][index] }}<span v-if="has(id)"> · 已学</span>
+          {{ [t('一级'), t('二级'), t('三级')][index] }}<span v-if="has(id)"> {{ t("· 已学") }}</span>
         </button>
       </nav>
-      <p v-if="node.isLock" class="skill-lock-intro">满足学习前置即可通向 <button type="button" @click="emit('select', node.connects[0])">{{ skillTitle(node.connects[0]) }} →</button>。路径锁自动判定，无需单独分配洞察。</p>
+      <p v-if="node.isLock" class="skill-lock-intro">{{ t("满足学习前置即可通向") }} <button type="button" @click="emit('select', node.connects[0])">{{ t(skillTitle(node.connects[0])) }} →</button>{{ t("。路径锁自动判定，无需单独分配洞察。") }}</p>
       <ul v-else class="skill-effects">
         <li v-for="(line, index) in effects" :key="index">
           <template v-for="(part, i) in line" :key="i">
-            <DST v-if="part.noun" :icon="nounMap[part.text]">{{ part.text }}</DST>
+            <DST v-if="part.noun" :term="part.text" :icon="nounMap[part.text]">{{ part.text }}</DST>
             <template v-else>{{ part.text }}</template>
           </template>
         </li>
       </ul>
       <div class="skill-requirement">
-        <h3>学习前置 <span v-if="!info.requirements.length">起始技能，可直接学习</span><span v-else-if="info.requirements.length > 1">以下各组均需满足</span></h3>
+        <h3>{{ t("学习前置") }} <span v-if="!info.requirements.length">{{ t("起始技能，可直接学习") }}</span><span v-else-if="info.requirements.length > 1">{{ t("以下各组均需满足") }}</span></h3>
         <div v-for="(group, index) in info.requirements" :key="index" class="skill-requirement-group">
-          <p class="skill-group-label">{{ groupLabel(group) }} <span>{{ group.skills.filter(has).length }} / {{ group.min }}</span></p>
+          <p class="skill-group-label">{{ t(groupLabel(group)) }} <span>{{ group.skills.filter(has).length }} / {{ group.min }}</span></p>
           <ul>
             <li v-for="id in group.skills" :key="id">
               <button type="button" class="skill-prerequisite" @click="emit('select', id)">
-                <img :src="withBase(skillIcon(id))" alt="" />{{ skillTitle(id) }}<span v-if="has(id)" class="skill-check">已学</span>
+                <img :src="withBase(skillIcon(id))" alt="" />{{ t(skillTitle(id)) }}<span v-if="has(id)" class="skill-check">{{ t("已学") }}</span>
               </button>
             </li>
           </ul>
         </div>
       </div>
       <div v-if="info.awakening" class="skill-requirement">
-        <h3>觉醒条件</h3>
-        <p>{{ info.awakening }}</p>
-        <p class="skill-hint">模拟器只检查前置与洞察。游戏开启技能觉醒时，还需完成此挑战才能生效。</p>
+        <h3>{{ t("觉醒条件") }}</h3>
+        <p>{{ t(info.awakening) }}</p>
+        <p class="skill-hint">{{ t("模拟器只检查前置与洞察。游戏开启技能觉醒时，还需完成此挑战才能生效。") }}</p>
       </div>
       <div class="skill-controls">
-        <p class="skill-learning-state" role="status">剩余 {{ points }} 洞察 · {{ node.isLock ? (open ? '路径已通' : '前置未满足') : learned ? '已学习' : canLearn ? '可以学习' : points === 0 ? '洞察不足' : '前置未满足' }}</p>
+        <p class="skill-learning-state" role="status">{{ t("剩余") }} {{ points }} {{ t("洞察 ·") }} {{ node.isLock ? (open ? t('路径已通') : t('前置未满足')) : learned ? t('已学习') : canLearn ? t('可以学习') : points === 0 ? t('洞察不足') : t('前置未满足') }}</p>
         <div class="skill-control-buttons">
           <template v-if="!node.isLock">
-            <button type="button" class="skill-primary" :disabled="!canLearn" @click="emit('learn')">{{ learned ? '已学习' : '学习技能' }}</button>
-            <button type="button" :disabled="!canRefund" @click="emit('refund')">退还此点</button>
+            <button type="button" class="skill-primary" :disabled="!canLearn" @click="emit('learn')">{{ learned ? t('已学习') : t('学习技能') }}</button>
+            <button type="button" :disabled="!canRefund" @click="emit('refund')">{{ t("退还此点") }}</button>
           </template>
-          <button type="button" @click="emit('reset')">重置洞察</button>
+          <button type="button" @click="emit('reset')">{{ t("重置洞察") }}</button>
         </div>
-        <p v-if="learned && !canRefund" class="skill-hint">后续技能仍依赖此节点，暂时无法单独退点。</p>
-        <button type="button" class="skill-read-more" @click="emit('details')">{{ node.isLock ? '阅读觉醒说明' : '阅读详细机制' }} <span aria-hidden="true">↓</span></button>
+        <p v-if="learned && !canRefund" class="skill-hint">{{ t("后续技能仍依赖此节点，暂时无法单独退点。") }}</p>
+        <button type="button" class="skill-read-more" @click="emit('details')">{{ node.isLock ? t('阅读觉醒说明') : t('阅读详细机制') }} <span aria-hidden="true">↓</span></button>
       </div>
       <details v-if="info.following.length" class="skill-next">
-        <summary>后续路径 · {{ info.following.length }}</summary>
-        <div><button v-for="id in info.following" :key="id" type="button" @click="emit('select', id)">{{ skillTitle(id) }} →</button></div>
+        <summary>{{ t("后续路径 ·") }} {{ info.following.length }}</summary>
+        <div><button v-for="id in info.following" :key="id" type="button" @click="emit('select', id)">{{ t(skillTitle(id)) }} →</button></div>
       </details>
     </template>
     <template v-else>
-      <p class="skill-summary-kicker">28 个技能 · 7 个路径锁</p>
-      <h2 id="skill-summary-title">{{ guide.title }}</h2>
-      <p>{{ guide.description }}</p>
+      <p class="skill-summary-kicker">{{ t("28 个技能 · 7 个路径锁") }}</p>
+      <h2 id="skill-summary-title">{{ t(guide.title) }}</h2>
+      <p>{{ t(guide.description) }}</p>
       <details class="skill-next">
-        <summary>鼠标快捷操作</summary>
-        <ol class="skill-guide"><li v-for="[action, text] in guide.steps" :key="action"><strong>{{ action }}</strong>：{{ text }}</li></ol>
+        <summary>{{ t("鼠标快捷操作") }}</summary>
+        <ol class="skill-guide"><li v-for="[action, text] in guide.steps" :key="action"><strong>{{ t(action) }}</strong>{{ isEnglish ? ': ' : '：' }}{{ t(text) }}</li></ol>
       </details>
-      <p class="skill-hint">{{ guide.hint }}</p>
-      <div class="skill-control-buttons"><button type="button" @click="emit('reset')">重置洞察 · 剩余 {{ points }}</button></div>
+      <p class="skill-hint">{{ t(guide.hint) }}</p>
+      <div class="skill-control-buttons"><button type="button" @click="emit('reset')">{{ t("重置洞察 · 剩余") }} {{ points }}</button></div>
     </template>
   </section>
 </template>
@@ -111,6 +113,7 @@ const groupLabel = group => group.skills.length === 1 ? '需要学习'
 .vp-doc .skill-summary-heading { display: flex; align-items: center; gap: 12px; }
 .vp-doc .skill-summary-heading h2 { margin: 0; padding: 0; border: 0; font-size: 26px; line-height: 1.35; }
 .vp-doc .skill-summary-heading h2::before { display: none; }
+.vp-doc .skill-summary-heading:lang(en) h2 { min-width: 0; overflow-wrap: anywhere; }
 .vp-doc .skill-skill-cost { margin-left: auto; white-space: nowrap; color: var(--ink-muted); font-size: 13px; }
 .vp-doc .skill-effects { padding-left: 20px; margin: 20px 0; }
 .vp-doc .skill-effects li { margin: 8px 0; line-height: 1.8; }

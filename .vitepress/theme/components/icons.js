@@ -97,6 +97,7 @@ export const nounMap = {
   '索敌忽视': 'original',
   '理智值修正': 'original',
   '暗影等级': 'original',
+  '虚影侵蚀区': 'atk',
   '虚影轰炸区': 'atk',
   '三连击': 'atk',
   '跳劈': 'atk',
@@ -379,7 +380,8 @@ export const linkMap = {
   '月能激光': '/mechanics/enemies.html#def-月能激光',
   '月能灼烧伤害': '/mechanics/statuses.html#def-月能灼烧伤害',
   '极限催眠': '/mechanics/statuses.html#def-极限催眠',
-  '虚影轰炸区': '/mechanics/enemies.html#def-虚影轰炸区',
+  '虚影侵蚀区': '/mechanics/enemies.html#def-虚影侵蚀区',
+  '虚影轰炸区': '/mechanics/enemies.html#def-虚影侵蚀区',
   '三连击': '/mechanics/enemies.html#def-三连击',
   '跳劈': '/mechanics/enemies.html#def-跳劈',
   '横扫': '/mechanics/enemies.html#def-横扫',
@@ -478,6 +480,7 @@ export const iconToNounMap = {
 
 
 export const aliasMap = {
+  '虚影轰炸区': '虚影侵蚀区',
   '尸体': '芒芒的尸体',
   '兽化状态': '兽化',
   '灵魂振荡': '灵魂震荡',

@@ -1,10 +1,10 @@
 <template>
   <aside :class="['media-card', 'pos-' + position]" :style="{ '--media-width': width, '--aside-push': push }">
     <div class="media-container">
-      <video v-if="isVideo" :src="withBase(src)" :width="intrinsicWidth" :height="intrinsicHeight" autoplay :controls="manual" preload="auto" :aria-label="caption" loop muted playsinline class="media-content"></video>
-      <button v-else-if="src" type="button" class="media-zoom-trigger" :aria-label="`放大图片：${caption || '机制演示'}`" aria-haspopup="dialog" @click="openImage">
-        <img :src="withBase(src)" :alt="caption || ''" :width="intrinsicWidth" :height="intrinsicHeight" :loading="loading" class="media-content" />
-        <span class="media-zoom-hint" aria-hidden="true">放大 ↗</span>
+      <video v-if="isVideo" :src="withBase(src)" :width="intrinsicWidth" :height="intrinsicHeight" autoplay :controls="manual" preload="auto" :aria-label="t(caption)" loop muted playsinline class="media-content"></video>
+      <button v-else-if="src" type="button" class="media-zoom-trigger" :aria-label="`${t('放大图片：')}${t(caption) || t('机制演示')}`" aria-haspopup="dialog" @click="openImage">
+        <img :src="withBase(src)" :alt="t(caption) || ''" :width="intrinsicWidth" :height="intrinsicHeight" :loading="loading" class="media-content" />
+        <span class="media-zoom-hint" aria-hidden="true">{{ t("放大 ↗") }}</span>
       </button>
       <slot v-else></slot>
     </div>
@@ -15,10 +15,10 @@
   </aside>
   <ClientOnly>
     <Teleport to="body">
-      <dialog v-if="src && !isVideo" ref="imageDialog" class="media-lightbox" :aria-label="caption || '机制演示大图'" @click="closeOnBackdrop">
+      <dialog v-if="src && !isVideo" ref="imageDialog" class="media-lightbox" :aria-label="t(caption) || t('机制演示大图')" @click="closeOnBackdrop">
         <div class="media-lightbox-content">
-          <button type="button" class="media-lightbox-close" autofocus @click="imageDialog.close()">关闭大图 ×</button>
-          <img :src="withBase(src)" :alt="caption || '机制演示'" :width="intrinsicWidth" :height="intrinsicHeight" loading="lazy" />
+          <button type="button" class="media-lightbox-close" autofocus @click="imageDialog.close()">{{ t("关闭大图 ×") }}</button>
+          <img :src="withBase(src)" :alt="t(caption) || t('机制演示')" :width="intrinsicWidth" :height="intrinsicHeight" loading="lazy" />
           <p v-if="caption">{{ formattedCaption }}</p>
         </div>
       </dialog>
@@ -27,6 +27,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 import { computed, ref, onBeforeUnmount } from 'vue'
 import { withBase } from 'vitepress'
 const imageDialog = ref(null)
@@ -62,7 +64,7 @@ const isVideo = computed(() => {
 
 const formattedCaption = computed(() => {
   if (!props.caption) return ''
-  return props.caption.replace(/\\n/g, '\n') // 将字符串 "\n" 转换为真正的换行符
+  return t(props.caption).replace(/\\n/g, '\n') // 将字符串 "\n" 转换为真正的换行符
 })
 </script>
 

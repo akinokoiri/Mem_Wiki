@@ -1,5 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
+import LanguageSwitch from './components/LanguageSwitch.vue'
 import './term-preview-events.js'
+import './language-switch-events.js'
 import '@fontsource-variable/noto-sans-sc'
 import './custom.css'
 import './archive.css'
@@ -32,6 +34,8 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      'layout-top': () => h(LanguageSwitch, { homeOnly: true }),
+      'nav-bar-content-after': () => h(LanguageSwitch),
       'layout-bottom': () => [h(ReturnCapsule), h(TermPreview)]
     })
   },

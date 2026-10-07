@@ -34,6 +34,13 @@ npm run docs:build
 npm run docs:preview
 ```
 
+The local production preview uses Vite's server to read the current build files
+on each request. After another build finishes, refresh the browser to load the
+new HTML and hashed scripts. VitePress 1.6's own preview caches its file list at
+startup, so rebuilding under that server can leave the skill tree and page
+outline blank when new scripts return 404. Use `npm run docs:preview` here;
+use `npm run docs:dev` for live source editing.
+
 Every build checks noun links against rendered page anchors and skill IDs, and
 checks that aliases and special links agree with the noun map. A broken target
 fails the build. To recheck an existing build, run `npm run docs:check` (or
@@ -79,3 +86,33 @@ their icons so readers can identify terms wherever they enter a long page.
 
 Use lowercase native HTML tags in Markdown (for example, `<u>`). Uppercase `<U>`
 was interpreted differently during server rendering and browser hydration.
+
+### Chinese and English editions
+
+Chinese pages keep their original URLs. English pages mirror them under `/en/`.
+The language control preserves the corresponding page, query and section/selected
+skill hash. Skill-point allocations remain page-local and reset on route remount
+or refresh, as documented by the simulator.
+
+English source files retain canonical Chinese `[#definition]` anchors and
+`[noun]` tokens intentionally. The Markdown renderer translates display labels
+before search indexing; canonical keys keep icons, hover definitions and links
+unambiguous even when two concepts share an English name. Plain translated
+headings keep explicit matching anchor IDs. Do not translate those IDs.
+
+Shared display strings live in `.vitepress/data/ui-en.js` and `terms-en.js`.
+The original skill graph, requirements and calculation modules remain the
+source of truth. Translate their presentation without changing their values.
+
+After editing either edition, run:
+
+```bash
+npm test
+npm run docs:build
+npm run docs:check-locales
+```
+
+The locale check compares all translated pages and numeric tokens, verifies
+heading/definition anchors and internal links, checks rendered English text and
+accessibility labels, and queries the actual emitted English search index.
+Exact Chinese `/mem` command arguments are preserved because they are game input.

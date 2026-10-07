@@ -4,6 +4,8 @@ import { checkWikiLinks } from '../scripts/check-links.mjs'
 import { archiveMathCjk } from './markdown/math-cjk.mjs'
 import { wikiSearchOptions } from './data/wiki-search.js'
 import { skillTitle } from './data/skill-presentation.js'
+import { termDisplayNamesZh } from './data/terms-zh.js'
+import { termTranslations } from './data/terms-en.js'
 
 const archiveSidebar = [
   { text: '开始', items: [{ text: '极速上手', link: '/mechanics/lite_draft' }] },
@@ -23,6 +25,45 @@ const archiveSidebar = [
 export default defineConfig({
   buildEnd(siteConfig) {
     checkWikiLinks(siteConfig.outDir)
+  },
+  locales: {
+    root: { label: "中文", lang: "zh-CN", title: "芒伊木 Wiki" },
+    en: {
+      label: "English", lang: "en-US", title: "Mangem Wiki",
+      description: "Complete guide to the Mangem mod for Don’t Starve Together",
+      themeConfig: {
+        nav: [
+          { text: 'Home', link: '/en/' },
+          { text: 'Quick Start', link: '/en/mechanics/lite_draft' },
+          { text: 'Reference', items: [
+            { text: 'Character Mechanics', link: '/en/mechanics/core' },
+            { text: 'Items & Food', link: '/en/mechanics/items' },
+            { text: 'Enemies & Followers', link: '/en/mechanics/enemies' },
+            { text: 'Statuses & Systems', link: '/en/mechanics/statuses' }
+          ] },
+          { text: 'Skill Tree', link: '/en/mechanics/skilltree' }
+        ],
+        sidebar: [
+          { text: 'Start Here', items: [{ text: 'Quick Start', link: '/en/mechanics/lite_draft' }] },
+          { text: 'Reference', items: [
+            { text: 'Character Mechanics', link: '/en/mechanics/core' },
+            { text: 'Items & Food', link: '/en/mechanics/items' },
+            { text: 'Enemies & Followers', link: '/en/mechanics/enemies' },
+            { text: 'Statuses & Systems', link: '/en/mechanics/statuses' }
+          ] },
+          { text: 'Tools & Settings', items: [
+            { text: 'Skill Tree', link: '/en/mechanics/skilltree' },
+            { text: 'Mod Settings', link: '/en/mechanics/settings' }
+          ] }
+        ],
+        outline: { label: 'On this page', level: [2, 3] },
+        sidebarMenuLabel: 'Menu', returnToTopLabel: 'Back to top',
+        darkModeSwitchLabel: 'Appearance', lightModeSwitchTitle: 'Switch to light theme',
+        darkModeSwitchTitle: 'Switch to dark theme', langMenuLabel: 'Change language',
+        docFooter: { prev: 'Previous page', next: 'Next page' },
+        notFound: { title: 'PAGE NOT FOUND', quote: 'This page could not be found. Return to the Wiki to continue exploring.', linkLabel: 'Go to home', linkText: 'Take me home' }
+      }
+    },
   },
   title: "芒伊木 Wiki",
   description: "饥荒：联机版 芒伊木模组全效果说明书",
@@ -82,6 +123,16 @@ export default defineConfig({
       provider: 'local',
       options: {
         miniSearch: wikiSearchOptions,
+        locales: {
+          en: { translations: {
+            button: { buttonText: 'Search', buttonAriaLabel: 'Search the Wiki' },
+            modal: {
+              displayDetails: 'Show details', resetButtonTitle: 'Clear search', backButtonTitle: 'Back',
+              noResultsText: 'No results found. Try a mechanic or item name.',
+              footer: { selectText: 'Select', navigateText: 'Navigate', closeText: 'Close' }
+            }
+          } }
+        },
         translations: {
           button: { buttonText: '搜索', buttonAriaLabel: '搜索 Wiki' },
           modal: {
@@ -93,14 +144,16 @@ export default defineConfig({
         _render(src, env, md) {
           const relativePath = env.relativePath || ''
           // 只渲染 mechanics 目录下的 markdown 文件供搜索索引使用
-          if (!relativePath.startsWith('mechanics/')) {
+          if (!/^(en\/)?mechanics\//.test(relativePath)) {
             return ''
           }
-          const skill = relativePath.match(/^mechanics\/skills_desc\/([^/]+)\.md$/)
+          const skill = relativePath.match(/^(?:en\/)?mechanics\/skills_desc\/([^/]+)\.md$/)
           if (skill && skillTitle(skill[1])) {
             // Detail fragments are loaded inside the skill tree. Give search
             // their skill title; extractField routes each section to that tree.
-            return md.render(`# ${skillTitle(skill[1])} {#${skill[1]}}\n\n${src}`, env)
+            const title = skillTitle(skill[1])
+            const label = relativePath.startsWith('en/') ? (termTranslations[title] || (termTranslations[title.replace(' · 路径锁', '')] || title.replace(' · 路径锁', '')) + (title.endsWith(' · 路径锁') ? ' · Path lock' : '')) : title
+            return md.render(`# ${label} {#${skill[1]}}\n\n${src}`, env)
           }
           return md.render(src, env)
         }
@@ -113,6 +166,24 @@ export default defineConfig({
     math: true,
     config: (md) => {
       md.use(archiveMathCjk)
+      md.core.ruler.after('anchor', 'wiki-heading-labels', state => {
+        const english = (state.env.relativePath || '').startsWith('en/')
+        for (let i = 0; i < state.tokens.length; i++) {
+          if (state.tokens[i].type !== 'heading_open') continue
+          const inline = state.tokens[i + 1]
+          const title = (inline?.content || '')
+            .replace(/\[#([^\]]+)\]/g, '')
+            .replace(/\{#[^}]+\}/g, '')
+            .replace(/<[^>]*>/g, '')
+            .replace(/\[([^\]]+)\]/g, (_, term) => english ? (termTranslations[term] || term) : (termDisplayNamesZh[term] || term))
+            .replace(/[*_`]/g, '').trim()
+          for (const child of inline?.children || []) {
+            if (child.attrGet?.('class') === 'header-anchor') {
+              child.attrSet('aria-label', english ? `Permalink to "${title}"` : `链接到“${title}”`)
+            }
+          }
+        }
+      })
       // 注册黑幕 ||文字|| 行内语法插件
       md.inline.ruler.before('emphasis', 'heimu', (state, silent) => {
         const start = state.pos;
@@ -216,7 +287,10 @@ export default defineConfig({
                     const key = nounMap[lowerNoun] || nounMap[noun] || 'mod';
                     
                     const htmlToken = new state.Token('html_inline', '', 0);
-                    htmlToken.content = `<DST icon="${key}">${noun}</DST>`;
+                    const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+                    const english = (state.env.relativePath || '').startsWith('en/');
+                    const label = english ? (termTranslations[noun] || noun) : (termDisplayNamesZh[noun] || noun);
+                    htmlToken.content = `<DST term="${escape(noun)}" icon="${key}">${escape(label)}</DST>`;
                     newChildren.push(htmlToken);
                     
                     lastIndex = endIndex;

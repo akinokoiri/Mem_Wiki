@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { linkMap, specialLinks, aliasMap } from '../.vitepress/theme/components/icons.js'
 import { SKILL_NODES } from '../.vitepress/data/skilltree.js'
+import { localizeWikiLink } from '../.vitepress/data/locale-routing.js'
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url))
 
@@ -33,7 +34,7 @@ export function validateLinks(outDir, links, skills) {
     const html = pages.get(file)
     if (html === null) {
       errors.push(`${term}: missing page ${target}`)
-    } else if (page.replace(/\.html$/, '') === '/mechanics/skilltree' && id.startsWith('mem_')) {
+    } else if (/^\/(?:en\/)?mechanics\/skilltree$/.test(page.replace(/\.html$/, '')) && id.startsWith('mem_')) {
       if (!Object.hasOwn(skills, id)) errors.push(`${term}: unknown skill ${id}`)
     } else if (id && !Array.from(html.matchAll(/\bid=["']([^"']*)["']/g), m => m[1]).includes(id)) {
       errors.push(`${term}: missing anchor ${target}`)
@@ -44,6 +45,10 @@ export function validateLinks(outDir, links, skills) {
 
 export function checkWikiLinks(outDir) {
   const errors = validateLinks(outDir, linkMap, SKILL_NODES)
+  if (existsSync(path.join(outDir, 'en'))) {
+    const englishLinks = Object.fromEntries(Object.entries(linkMap).map(([term, link]) => [term, localizeWikiLink(link, true)]))
+    errors.push(...validateLinks(outDir, englishLinks, SKILL_NODES).map(error => `English: ${error}`))
+  }
   for (const [term, target] of Object.entries(specialLinks)) {
     if (linkMap[term] !== target) errors.push(`${term}: specialLinks and linkMap disagree`)
   }
@@ -53,7 +58,7 @@ export function checkWikiLinks(outDir) {
     }
   }
   if (errors.length) throw new Error(`Wiki link check failed:\n${errors.join('\n')}`)
-  console.log(`Wiki links checked: ${Object.keys(linkMap).length} targets and alias mappings.`)
+  console.log(`Wiki links checked: ${Object.keys(linkMap).length} targets per available locale and alias mappings.`)
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

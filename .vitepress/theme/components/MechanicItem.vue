@@ -1,4 +1,6 @@
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 defineProps({
   label: {
     type: String,
@@ -14,11 +16,11 @@ defineProps({
 <template>
   <div class="stat-row" :class="type === 'pro' ? 'row-pro' : 'row-con'">
     <template v-if="type === 'pro'">
-      <span class="badge badge-pro">{{ label }}</span>
+      <span class="badge badge-pro">{{ t(label) }}</span>
       <span class="detail-text"><slot></slot></span>
     </template>
     <template v-else>
-      <span class="badge badge-con">{{ label }}</span>
+      <span class="badge badge-con">{{ t(label) }}</span>
       <span class="detail-text"><slot></slot></span>
     </template>
   </div>

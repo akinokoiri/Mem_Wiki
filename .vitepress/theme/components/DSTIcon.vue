@@ -1,8 +1,10 @@
 <template>
-  <img :src="withBase(iconSrc)" class="dst-inline-icon" :alt="resolvedIconName" :title="resolvedIconName" @error="handleImageError" />
+  <img :src="withBase(iconSrc)" class="dst-inline-icon" :alt="t(resolvedIconName)" :title="t(resolvedIconName)" @error="handleImageError" />
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { iconMap } from './icons.js'

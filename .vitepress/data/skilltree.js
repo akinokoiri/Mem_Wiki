@@ -117,7 +117,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_SOUL_LOCK_1",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[融魂术]\n【封印】你需要在黑暗中倾听危险的警告，逃回光照以积攒胆识。\n越是极限收益越高，未达标时被夜袭击中，会失去95%的已有进度。",
+    "desc": "前置要求：点亮[融魂术]\n【封印】你需要在黑暗中倾听危险的警告，逃回光照以积攒胆识。\n越是极限收益越高，未达标时被夜袭击中，当前总进度乘以0.05，保留5%，损失95%。",
     "icon": "mem_skill_soul_lock_1"
   },
   "mem_skill_soul_light": {
@@ -177,7 +177,7 @@ export const SKILL_NODES = {
     "isLock": true,
     "stringKey": "MEM_SKILL_SOUL_LOCK_2",
     "title": "路径锁定",
-    "desc": "前置要求：点亮[休养死息二级]\n【封印】你需要承受一次幅度≥101%的[灵魂震荡]。\n只有让躯壳彻底体验过灵魂撕裂的痛苦，你才能学会如何构筑壁垒。",
+    "desc": "前置要求：点亮[休养死息二级]\n【封印】你需要承受一次幅度≥126%的[灵魂震荡]。\n只有让躯壳彻底体验过灵魂撕裂的痛苦，你才能学会如何构筑壁垒。",
     "icon": "mem_skill_soul_lock_2"
   },
   "mem_skill_soul_wall": {
@@ -192,7 +192,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_SOUL_WALL",
     "title": "魂墙",
-    "desc": "免疫[灵魂裂痕]；[灵魂震荡]恢复速率+100%，不再免疫震荡；\n免疫[怨灵]/[意识转移]产生的[暗影观察者]；\n可消耗1点[灵魂值]制造脆弱但能挡路的[魂墙(物品)]。",
+    "desc": "仅免疫死亡与复活造成的[灵魂裂痕]，不免疫制作[芒芒的尸体]造成的[灵魂值]上限损失；[灵魂震荡]恢复速率+100%，不再免疫震荡；\n免疫[怨灵]/[意识转移]产生的[暗影观察者]；\n可消耗1点[灵魂值]制造脆弱但能挡路的[魂墙(物品)]。",
     "icon": "mem_skill_soul_wall"
   },
   "mem_skill_instinct_teleport": {
@@ -388,7 +388,7 @@ export const SKILL_NODES = {
     "isLock": false,
     "stringKey": "MEM_SKILL_INSTINCT_BEASTLY",
     "title": "野兽体质",
-    "desc": "[兽化]时可空手工作（但效率仅有40%且工作时肚子会饿）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃滞空时间缩短40%；\n藏食物时刨的土坑的可维持的时间翻倍",
+    "desc": "[兽化]时可空手工作（砍伐/开采/敲每7帧一次，单次效果为40%，成功工作消耗饱食度）；\n处于[兽化]且[分头行动]时可以指挥身体工作；\n[兽化]跳跃滞空时间缩短40%；\n藏食物时刨的土坑的可维持的时间翻倍",
     "icon": "mem_skill_instinct_beastly"
   },
   "mem_skill_instinct_ghostly": {

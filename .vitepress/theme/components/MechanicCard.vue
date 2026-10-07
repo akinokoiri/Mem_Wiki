@@ -1,4 +1,6 @@
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 const props = defineProps({
   title: {
     type: String,
@@ -29,35 +31,35 @@ const props = defineProps({
       <h3 class="mechanic-title">
         <slot name="title">
           <DSTIcon v-if="icon" :icon="icon" />
-          <span v-html="title"></span>
+          <span v-html="t(title)"></span>
         </slot>
       </h3>
       <div v-if="subtitle || $slots.subtitle" class="mechanic-desc">
-        <slot name="subtitle"><span v-html="subtitle"></span></slot>
+        <slot name="subtitle"><span v-html="t(subtitle)"></span></slot>
       </div>
     </div>
     
     <div class="split-panel">
       <!-- 左侧：优势 -->
       <div class="split-side split-pro">
-        <div class="split-title">优势收益</div>
+        <div class="split-title">{{ t("优势收益") }}</div>
         <slot name="pros">
-          <div v-if="pros.length === 0" class="empty-state">暂无</div>
+          <div v-if="pros.length === 0" class="empty-state">{{ t("暂无") }}</div>
           <div v-for="(item, index) in pros" :key="'pro-'+index" class="stat-row">
-            <span class="badge badge-pro">{{ item.label }}</span>
-            <span class="detail-text" v-html="item.text"></span>
+            <span class="badge badge-pro">{{ t(item.label) }}</span>
+            <span class="detail-text" v-html="t(item.text)"></span>
           </div>
         </slot>
       </div>
 
       <!-- 右侧：代价 -->
       <div class="split-side split-con">
-        <div class="split-title">机制代价</div>
+        <div class="split-title">{{ t("机制代价") }}</div>
         <slot name="cons">
-          <div v-if="cons.length === 0" class="empty-state">暂无</div>
+          <div v-if="cons.length === 0" class="empty-state">{{ t("暂无") }}</div>
           <div v-for="(item, index) in cons" :key="'con-'+index" class="stat-row">
-            <span class="badge badge-con">{{ item.label }}</span>
-            <span class="detail-text" v-html="item.text"></span>
+            <span class="badge badge-con">{{ t(item.label) }}</span>
+            <span class="detail-text" v-html="t(item.text)"></span>
           </div>
         </slot>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <component 
     :is="targetLink ? 'a' : 'span'"
-    :href="targetLink ? withBase(targetLink) : undefined"
+    :href="targetLink ? withBase(localizeLink(targetLink)) : undefined"
     class="dst-noun" 
     :class="{ 'has-link': targetLink }"
     :style="themeStyle" 
@@ -10,7 +10,8 @@
     :tabindex="preview && !targetLink ? 0 : undefined"
   >
     <img v-if="!hideIcon" :src="withBase(iconSrc)" class="noun-icon" alt="" @error="handleImageError" />
-    <slot></slot>
+    <template v-if="translatedLabel !== slotText">{{ translatedLabel }}</template>
+    <slot v-else></slot>
   </component>
 </template>
 
@@ -19,8 +20,12 @@ import { computed, useSlots, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { iconMap, colorMap, linkMap, officialTerms, nounMap, iconToNounMap } from './icons.js'
 import { getTermPreview } from '../../data/term-previews.js'
+import { useWikiLocale } from '../../data/locale.js'
+import { termTranslations } from '../../data/terms-en.js'
+const { isEnglish, t, localizeLink } = useWikiLocale()
 
 const props = defineProps({
+  term: String,
   icon: String, // health, sanity, hunger, soul, beast, ghost, collar, etc.
   hideIcon: Boolean,
 })
@@ -45,13 +50,15 @@ const extractText = (vnodes) => {
   return text
 }
 
-const nounText = computed(() => {
+const slotText = computed(() => {
   if (slots.default) {
     return extractText(slots.default())
   }
   return ''
 })
 
+const nounText = computed(() => props.term || slotText.value)
+const translatedLabel = computed(() => isEnglish.value ? (termTranslations[props.term || slotText.value] || slotText.value) : t(slotText.value))
 const preview = computed(() => getTermPreview(nounText.value, props.icon))
 
 const isModifier = computed(() => {
@@ -83,21 +90,21 @@ const hoverTitle = computed(() => {
   const resolvedIcon = iconKey !== 'mod' ? iconKey : (nounMap[nounText.value] || 'mod')
   
   if (officialTerms.includes(resolvedIcon)) {
-    return '官方属性/词条'
+    return t('官方属性/词条', 'Base-game stat / term')
   }
   
   if (isModifier.value && props.icon) {
     const iconKeyLower = props.icon.toLowerCase().trim()
     if (officialTerms.includes(iconKeyLower)) {
-      return '官方属性/词条'
+      return t('官方属性/词条', 'Base-game stat / term')
     }
     const canonicalNoun = iconToNounMap[iconKeyLower]
     if (canonicalNoun) {
-      return `模组词条: ${canonicalNoun}`
+      return isEnglish.value ? `Mod term: ${termTranslations[canonicalNoun] || canonicalNoun}` : `模组词条: ${canonicalNoun}`
     }
   }
   
-  return `模组词条: ${nounText.value}`
+  return isEnglish.value ? `Mod term: ${termTranslations[nounText.value] || nounText.value}` : `模组词条: ${nounText.value}`
 })
 
 const iconSrc = computed(() => {

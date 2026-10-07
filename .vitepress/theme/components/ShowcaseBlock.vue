@@ -5,12 +5,14 @@
     </div>
     <div class="showcase-media">
       <video v-if="video" :src="withBase(video)" autoplay loop muted playsinline class="media-video"></video>
-      <div v-else class="media-placeholder">视频演示待补充</div>
+      <div v-else class="media-placeholder">{{ t("视频演示待补充") }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 import { withBase } from 'vitepress'
 defineProps({
   video: String,

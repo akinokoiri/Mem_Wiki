@@ -1,4 +1,6 @@
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 // No props needed as we use slots for rich formatting
 </script>
 
@@ -6,7 +8,7 @@
   <div class="highlight-card-wrapper">
     <div class="highlight-header">
       <h3 class="highlight-title">
-        <slot name="title">👤 模组特点</slot>
+        <slot name="title">{{ t("👤 模组特点") }}</slot>
       </h3>
       <div class="highlight-desc">
         <slot name="subtitle"></slot>
@@ -17,7 +19,7 @@
       <!-- 左侧：亮点优势 -->
       <div class="split-side split-pro">
         <div class="split-title">
-          <span>✨ 核心设计</span>
+          <span>{{ t("✨ 核心设计") }}</span>
         </div>
         <div class="side-content">
           <slot name="pros"></slot>
@@ -27,7 +29,7 @@
       <!-- 右侧：避雷缺点 -->
       <div class="split-side split-con">
         <div class="split-title">
-          <span>⚠️ 避雷指南</span>
+          <span>{{ t("⚠️ 避雷指南") }}</span>
         </div>
         <div class="side-content">
           <slot name="cons"></slot>

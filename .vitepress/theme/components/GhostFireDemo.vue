@@ -1,4 +1,6 @@
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t, isEnglish } = useWikiLocale()
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { actorById, fireActors, fireMultiplier, fireStages, flightPosition, ghostFireRules, initialFireHealth, stageDuration } from '../../data/ghost-fire-demo.js'
 
@@ -111,27 +113,27 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section id="鬼火弹射演示" ref="root" class="ghost-fire-demo" aria-label="鬼火发射与弹射演示">
+  <section id="鬼火弹射演示" ref="root" class="ghost-fire-demo" :aria-label="t('鬼火发射与弹射演示')">
     <header class="fire-header">
       <div>
-        <p class="fire-eyebrow">一级弹射＋本源协调</p>
-        <p class="fire-title">友军接力，够到远处敌人</p>
+        <p class="fire-eyebrow">{{ t("一级弹射＋本源协调") }}</p>
+        <p class="fire-title">{{ t("友军接力，够到远处敌人") }}</p>
       </div>
       <div class="fire-controls">
-        <button type="button" class="fire-play" @click="play">{{ playing ? '暂停演示' : finished ? '再次播放' : '播放演示' }}</button>
-        <button type="button" :disabled="finished" @click="next">下一步</button>
-        <button type="button" @click="replay">重播</button>
+        <button type="button" class="fire-play" @click="play">{{ playing ? t('暂停演示') : finished ? t('再次播放') : t('播放演示') }}</button>
+        <button type="button" :disabled="finished" @click="next">{{ t("下一步") }}</button>
+        <button type="button" @click="replay">{{ t("重播") }}</button>
       </div>
     </header>
 
-    <svg class="fire-scene" viewBox="0 0 640 440" role="img" aria-label="鬼火在友军 A、B 之间往返，扩大索敌范围后攻击敌人 C；D 入场后，鬼火优先在 C、D 两个敌人之间弹射，完成十次额外弹射。">
+    <svg class="fire-scene" viewBox="0 0 640 440" role="img" :aria-label="t('鬼火在友军 A、B 之间往返，扩大索敌范围后攻击敌人 C；D 入场后，鬼火优先在 C、D 两个敌人之间弹射，完成十次额外弹射。')">
       <rect x="1" y="1" width="638" height="438" rx="10" class="scene-ground" />
-      <text x="24" y="36" class="scene-rule">敌人优先 · 无敌人时借友军跳板</text>
-      <text v-if="stage.bounces < actorById.d.entersAt" x="24" y="414" class="entry-label">D 尚未入场</text>
+      <text x="24" y="36" class="scene-rule">{{ t("敌人优先 · 无敌人时借友军跳板") }}</text>
+      <text v-if="stage.bounces < actorById.d.entersAt" x="24" y="414" class="entry-label">{{ t("D 尚未入场") }}</text>
       <g v-if="searchPoint">
         <circle v-if="stage.bounces > 0" :cx="searchPoint.x" :cy="searchPoint.y" :r="ghostFireRules.range * ghostFireRules.pixelsPerUnit" class="original-range" />
         <circle :cx="searchPoint.x" :cy="searchPoint.y" :r="searchRadius" class="search-range" />
-        <text :x="searchPoint.x" :y="Math.max(64, searchPoint.y - range * ghostFireRules.pixelsPerUnit + 28)" text-anchor="middle" class="range-label">索敌 {{ format(range) }}</text>
+        <text :x="searchPoint.x" :y="Math.max(64, searchPoint.y - range * ghostFireRules.pixelsPerUnit + 28)" text-anchor="middle" class="range-label">{{ t("索敌") }} {{ format(range) }}</text>
         <line v-if="stage.next" :x1="searchPoint.x" :y1="searchPoint.y" :x2="actorById[stage.next].x" :y2="actorById[stage.next].y" class="selected-route" />
       </g>
       <line v-for="(flight, index) in completedFlights" :key="index" :x1="actorById[flight.from].x" :y1="actorById[flight.from].y" :x2="actorById[flight.to].x" :y2="actorById[flight.to].y" class="travelled-route" />
@@ -141,13 +143,13 @@ onBeforeUnmount(() => {
         <template v-if="actor.id === 'caster'">
           <circle cy="-13" r="12" class="caster-head" />
           <path d="M-20 23 Q-21 0 0 0 Q21 0 20 23 Z" class="caster-body" />
-          <text y="52" text-anchor="middle" class="caster-label">芒伊木</text>
+          <text y="52" text-anchor="middle" class="caster-label">{{ t("芒伊木") }}</text>
         </template>
         <template v-else>
           <circle r="22" class="actor-disc" />
-          <text y="10" text-anchor="middle" class="actor-letter">{{ actor.label }}</text>
+          <text y="10" text-anchor="middle" class="actor-letter">{{ t(actor.label) }}</text>
           <path v-if="defeated.has(actor.id)" d="M-14 -14 L14 14 M14 -14 L-14 14" class="defeated-mark" />
-          <text :y="actor.id === 'c' ? -36 : 44" text-anchor="middle" class="actor-label">{{ actor.faction === 'ally' ? '友军' : actor.id === 'd' && entering ? '入场中' : defeated.has(actor.id) ? '已击败' : `敌人 · ${health[actor.id]}血` }}</text>
+          <text :y="actor.id === 'c' ? -36 : 44" text-anchor="middle" class="actor-label">{{ actor.faction === 'ally' ? t('友军') : actor.id === 'd' && entering ? t('入场中') : defeated.has(actor.id) ? t('已击败') : `${t('敌人')} · ${health[actor.id]}${isEnglish ? ' health' : '血'}` }}</text>
         </template>
       </g>
 
@@ -159,19 +161,19 @@ onBeforeUnmount(() => {
     </svg>
 
     <div class="fire-metrics">
-      <div><span>飞行速度</span><strong>×{{ format(multiplier) }}</strong><small>{{ format(ghostFireRules.speed * multiplier) }} / 基准 7</small></div>
-      <div><span>{{ stage.kind === 'search' ? '本次索敌范围' : '下一次索敌范围' }}</span><strong>{{ format(range) }}</strong><small>基准 10 · +{{ stage.bounces * 10 }}%</small></div>
-      <div><span>已弹射</span><strong>{{ stage.bounces }} <small>/ {{ ghostFireRules.bounces }}</small></strong><small>剩余 {{ ghostFireRules.bounces - stage.bounces }} 次</small></div>
+      <div><span>{{ t("飞行速度") }}</span><strong>×{{ format(multiplier) }}</strong><small>{{ format(ghostFireRules.speed * multiplier) }} {{ t("/ 基准 7") }}</small></div>
+      <div><span>{{ stage.kind === 'search' ? t('本次索敌范围') : t('下一次索敌范围') }}</span><strong>{{ format(range) }}</strong><small>{{ t("基准 10 · +") }}{{ stage.bounces * 10 }}%</small></div>
+      <div><span>{{ t("已弹射") }}</span><strong>{{ stage.bounces }} <small>/ {{ ghostFireRules.bounces }}</small></strong><small>{{ t("剩余") }} {{ ghostFireRules.bounces - stage.bounces }} {{ t("次") }}</small></div>
     </div>
 
     <div class="fire-caption" role="status" aria-live="polite" aria-atomic="true">
-      <strong>{{ stage.title }}</strong>
-      <p>{{ stage.description }}</p>
+      <strong>{{ t(stage.title) }}</strong>
+      <p>{{ t(stage.description) }}</p>
     </div>
     <div class="fire-footer">
-      <span class="fire-legend"><i></i> 本轮范围 <i class="legend-original"></i> 原始范围</span>
+      <span class="fire-legend"><i></i> {{ t("本轮范围") }} <i class="legend-original"></i> {{ t("原始范围") }}</span>
     </div>
-    <p class="fire-note">本例 C 为 40 血、D 为 30 血，每次命中敌人造成 10 伤害，友军不受伤。距离按比例绘制；飞行放慢，索敌时停顿便于阅读。发起者本人不参与回跳。</p>
+    <p class="fire-note">{{ t("本例 C 为 40 血、D 为 30 血，每次命中敌人造成 10 伤害，友军不受伤。距离按比例绘制；飞行放慢，索敌时停顿便于阅读。发起者本人不参与回跳。") }}</p>
   </section>
 </template>
 

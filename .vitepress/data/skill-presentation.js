@@ -14,8 +14,8 @@ export const LOCK_RULES = {
   ],
 }
 export const AWAKENING = {
-  mem_skill_soul_lock_1: '在黑暗的夜袭警报中积攒 10 点胆识。逃回光亮可保留进度；达成前被夜袭命中会清空进度。',
-  mem_skill_soul_lock_2: '承受一次幅度至少为 101% 的灵魂震荡。',
+  mem_skill_soul_lock_1: '在黑暗的夜袭警报中积攒 10 点胆识。逃回光亮可保留进度；达成前被夜袭命中，当前总进度乘以 0.05，保留 5%，损失 95%。',
+  mem_skill_soul_lock_2: '承受一次幅度至少为 126% 的灵魂震荡。',
   mem_skill_soul_lock_3: '让灵魂池在某一刻达到至少 150 点。',
   mem_skill_body_lock_spirit: '在 5 秒内失去相当于当前灵魂上限的灵魂值。',
   mem_skill_body_lock_exp: '因爆炸而死亡 1 次。',

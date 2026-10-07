@@ -3,9 +3,9 @@
     class="skill-node" 
     role="button"
     tabindex="0"
-    :aria-label="skillTitle(node.id)"
+    :aria-label="t(skillTitle(node.id))"
     :aria-pressed="isFocused"
-    :title="skillTitle(node.id)"
+    :title="t(skillTitle(node.id))"
     :style="nodeStyle"
     @keydown.enter.prevent.stop="handleClick"
     @keydown.space.prevent.stop="handleClick"
@@ -24,6 +24,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../data/locale.js'
+const { t } = useWikiLocale()
 import { ref, computed } from 'vue';
 import { withBase } from 'vitepress';
 import { skillTitle } from '../data/skill-presentation.js';

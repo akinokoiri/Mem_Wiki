@@ -1,15 +1,15 @@
 <template>
   <Teleport to="body">
     <aside v-if="preview" ref="panel" class="term-preview" :style="position"
-      role="dialog" :aria-label="`${preview.term}：词条预览`"
+      role="dialog" :aria-label="`${previewLabel}: ${t('词条预览', 'Term preview')}`"
       @pointerenter="cancelClose" @pointerleave="scheduleClose"
       @focusin="cancelClose" @focusout="onFocusOut">
       <div class="term-preview-heading">
-        <strong>{{ preview.term }}</strong>
-        <button type="button" aria-label="关闭词条预览" @click="dismiss">×</button>
+        <strong>{{ previewLabel }}</strong>
+        <button type="button" :aria-label="t('关闭词条预览', 'Close term preview')" @click="dismiss">×</button>
       </div>
-      <p id="term-preview-summary">{{ preview.description }}</p>
-      <a v-if="preview.href" :href="withBase(preview.href)" @click="followLink">查看详情 <span aria-hidden="true">→</span></a>
+      <p id="term-preview-summary">{{ previewDescription }}</p>
+      <a v-if="preview.href" :href="withBase(localizeLink(preview.href))" @click="followLink">{{ t('查看详情', 'View details') }} <span aria-hidden="true">→</span></a>
     </aside>
   </Teleport>
 </template>
@@ -17,12 +17,18 @@
 <script setup>
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, withBase } from 'vitepress'
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
+import { useWikiLocale } from '../../data/locale.js'
+import { termTranslations, termDescriptionsEn } from '../../data/terms-en.js'
+import { aliasMap } from './icons.js'
+const { isEnglish, t, localizeLink } = useWikiLocale()
 import { getTermPreview } from '../../data/term-previews.js'
 import { TERM_PREVIEW_EVENT } from '../term-preview-events.js'
 
 const route = useRoute()
 const preview = ref(null)
+const previewLabel = computed(() => isEnglish.value ? termTranslations[preview.value?.term] || preview.value?.term : t(preview.value?.term))
+const previewDescription = computed(() => isEnglish.value ? termDescriptionsEn[preview.value?.term] || termDescriptionsEn[aliasMap[preview.value?.term]] || preview.value?.description : preview.value?.description)
 const panel = ref(null)
 const position = ref({})
 let anchor = null

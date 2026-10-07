@@ -2,16 +2,16 @@
   <div class="repair-calc">
     <div class="calc-header">
       <span class="calc-icon">🔮</span>
-      <p class="calc-title">修补模拟器</p>
-      <select v-model="mode" class="mode-select" aria-label="修补机制">
-        <option value="new">新版(反转)</option>
-        <option value="old">旧版(顺向)</option>
+      <p class="calc-title">{{ t("修补模拟器") }}</p>
+      <select v-model="mode" class="mode-select" :aria-label="t('修补机制')">
+        <option value="new">{{ t("反转术式") }}</option>
+        <option value="old">{{ t("赌徒修补") }}</option>
       </select>
     </div>
     <div class="calc-body">
       <div class="slider-container">
         <div class="slider-header">
-          <span>目标物品剩余耐久</span>
+          <span>{{ t("目标物品剩余耐久") }}</span>
           <span class="slider-val">{{ currentDur }}%</span>
         </div>
         <input 
@@ -20,48 +20,48 @@
           min="0" 
           max="99" 
           class="dur-slider"
-          aria-label="目标物品剩余耐久百分比"
+          :aria-label="t('目标物品剩余耐久百分比')"
         />
         <div class="slider-labels">
-          <span>0% (破损)</span>
-          <span>100% (完好)</span>
+          <span>{{ t("0% (破损)") }}</span>
+          <span>{{ t("100% (完好)") }}</span>
         </div>
       </div>
 
       <div class="results-container">
         <div class="result-row border-dash">
-          <span class="result-label">修补成功率</span>
+          <span class="result-label">{{ t("修补成功率") }}</span>
           <span class="result-val highlight" :style="{ color: successColor }">
             {{ successChance }}%
           </span>
         </div>
         <div class="result-row border-dash">
-          <span class="result-label">工具消耗耐久</span>
-          <span class="result-val">{{ toolCost }} 点</span>
+          <span class="result-label">{{ t("工具消耗耐久") }}</span>
+          <span class="result-val">{{ toolCost }} {{ t("点") }}</span>
         </div>
 
         <div v-if="mode === 'new'" class="details-section">
           <div class="detail-card success-card">
-            <div class="card-title text-success">👍 修补成功奖励</div>
-            <div>灵魂值: <span class="text-soul">+{{ rewardSoul }}</span></div>
-            <div class="card-desc">(满溢出时转换为理智值与生命值)</div>
+            <div class="card-title text-success">{{ t("👍 修补成功奖励") }}</div>
+            <div>{{ t("灵魂值:") }} <span class="text-soul">+{{ rewardSoul }}</span></div>
+            <div class="card-desc">{{ t("(满溢出时转换为理智值与生命值)") }}</div>
           </div>
           <div class="detail-card failure-card">
-            <div class="card-title text-danger">👎 修补失败代价</div>
-            <div>扣除灵魂: <span class="text-danger">-{{ penaltySoul }}</span></div>
-            <div class="card-desc">灵魂不足扣双倍理智，理智不足扣生命</div>
+            <div class="card-title text-danger">{{ t("👎 修补失败代价") }}</div>
+            <div>{{ t("扣除灵魂:") }} <span class="text-danger">-{{ penaltySoul }}</span></div>
+            <div class="card-desc">{{ t("灵魂不足扣双倍理智，理智不足扣生命") }}</div>
           </div>
         </div>
 
         <div v-else class="details-section">
           <div class="detail-card success-card">
-            <div class="card-title text-success">👍 修补成功奖励</div>
-            <div class="card-desc">无属性改变，目标直接恢复 100% 耐久。</div>
+            <div class="card-title text-success">{{ t("👍 修补成功奖励") }}</div>
+            <div class="card-desc">{{ t("无属性改变，目标直接恢复 100% 耐久。") }}</div>
           </div>
           <div class="detail-card failure-card">
-            <div class="card-title text-danger">👎 修补失败代价</div>
-            <div>扣除理智: <span class="text-danger">-30</span></div>
-            <div class="card-desc">概率在身边召唤无掉落的恶梦生物</div>
+            <div class="card-title text-danger">{{ t("👎 修补失败代价") }}</div>
+            <div>{{ t("扣除理智:") }} <span class="text-danger">-30</span></div>
+            <div class="card-desc">{{ t("概率在身边召唤无掉落的恶梦生物") }}</div>
           </div>
         </div>
       </div>
@@ -70,6 +70,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 import { ref, computed } from 'vue'
 
 const currentDur = ref(50)

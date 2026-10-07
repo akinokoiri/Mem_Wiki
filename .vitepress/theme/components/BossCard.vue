@@ -3,12 +3,12 @@
     <div class="card-main-content">
       <div class="boss-name-row">
         <div class="boss-name">
-          <slot name="title">{{ title }}</slot>
+          <slot name="title">{{ t(title) }}</slot>
         </div>
-        <span class="theme-badge">{{ theme === 'moon' ? '天体机制' : '暗影机制' }}</span>
+        <span class="theme-badge">{{ theme === 'moon' ? t('天体机制') : t('暗影机制') }}</span>
       </div>
       
-      <div class="boss-key-action">{{ keyAction }}</div>
+      <div class="boss-key-action">{{ t(keyAction) }}</div>
       
       <div class="boss-guide-content">
         <slot></slot>
@@ -22,6 +22,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 defineProps({
   title: {
     type: String,

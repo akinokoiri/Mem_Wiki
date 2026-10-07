@@ -13,7 +13,7 @@
           @click="activeStage = step.id"
         >
           <div class="nav-step-num">{{ step.label }}</div>
-          <div class="nav-step-title">{{ step.title }}</div>
+          <div class="nav-step-title">{{ t(step.title) }}</div>
         </div>
       </div>
 
@@ -30,6 +30,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 import { ref } from 'vue'
 
 const activeStage = ref('day1')

@@ -1,4 +1,6 @@
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t, isEnglish } = useWikiLocale()
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { berserkMultiplier, damageAfterReduction, damagePresets, initialResources, simulateAttack } from '../../data/soul-continuation.js'
@@ -85,13 +87,13 @@ function reset() {
 </script>
 
 <template>
-  <section id="灵魂续行演示" class="soul-simulator" aria-label="灵魂续行受伤演示">
+  <section id="灵魂续行演示" class="soul-simulator" :aria-label="t('灵魂续行受伤演示')">
     <header class="sim-header">
       <div>
-        <p class="sim-eyebrow">点一下，承受一次伤害</p>
-        <p class="sim-title">灵魂续行 · 受伤演示</p>
+        <p class="sim-eyebrow">{{ t("点一下，承受一次伤害") }}</p>
+        <p class="sim-title">{{ t("灵魂续行 · 受伤演示") }}</p>
       </div>
-      <button type="button" class="reset-button" title="恢复三项资源，保留伤害与减伤设置" @click="reset">重置</button>
+      <button type="button" class="reset-button" :title="t('恢复三项资源，保留伤害与减伤设置')" @click="reset">{{ t("重置") }}</button>
     </header>
 
     <div class="sim-resources">
@@ -103,78 +105,78 @@ function reset() {
           <img class="badge-layer" :src="asset(`${stat.id}-icon`)" alt="" width="192" height="192" />
           <span v-if="lost(stat.id) > 0" :key="feedbackKey" class="badge-loss">−{{ display(lost(stat.id)) }}</span>
         </div>
-        <label class="stat-label" :for="`continuation-${stat.id}`">{{ stat.label }}</label>
+        <label class="stat-label" :for="`continuation-${stat.id}`">{{ t(stat.label) }}</label>
         <div class="stat-amount">
           <input :id="`continuation-${stat.id}`" type="number" inputmode="decimal" :value="inputDisplay(resources[stat.id])" min="0" :max="stat.max" step="any" @change="setResource(stat, $event)" @blur="setResource(stat, $event)" @keydown.enter="setResource(stat, $event)" />
           <span>/ {{ stat.max }}</span>
         </div>
-        <input class="stat-slider" type="range" :aria-label="`调整${stat.label}`" :value="resources[stat.id]" min="0" :max="stat.max" step="0.1" @input="setResource(stat, $event)" />
+        <input class="stat-slider" type="range" :aria-label="isEnglish ? `Adjust ${t(stat.label)}` : `调整${stat.label}`" :value="resources[stat.id]" min="0" :max="stat.max" step="0.1" @input="setResource(stat, $event)" />
       </div>
     </div>
 
     <div class="sim-conditions">
       <label class="condition-switch">
         <input v-model="applyBerserk" type="checkbox" role="switch" @change="clearFeedback" />
-        计入怨灵承伤倍率
+        {{ t("计入怨灵承伤倍率") }}
       </label>
       <label class="skill-option">
-        逐渐麻木
-        <select v-model.number="numbLevel" aria-label="逐渐麻木等级" :disabled="!applyBerserk" @change="clearFeedback">
-          <option :value="0">未学习</option>
-          <option :value="1">一级</option>
-          <option :value="2">二级</option>
-          <option :value="3">三级</option>
+        {{ t("逐渐麻木") }}
+        <select v-model.number="numbLevel" :aria-label="t('逐渐麻木等级')" :disabled="!applyBerserk" @change="clearFeedback">
+          <option :value="0">{{ t("未学习") }}</option>
+          <option :value="1">{{ t("一级") }}</option>
+          <option :value="2">{{ t("二级") }}</option>
+          <option :value="3">{{ t("三级") }}</option>
         </select>
       </label>
     </div>
     <div class="reduction-control">
-      <label for="continuation-reduction">减伤率</label>
+      <label for="continuation-reduction">{{ t("减伤率") }}</label>
       <div class="option-amount">
         <input id="continuation-reduction" type="number" inputmode="decimal" :value="attackOptions.reductionPercent" min="0" max="100" step="any" @change="setAttackOption('reductionPercent', $event)" @blur="setAttackOption('reductionPercent', $event)" @keydown.enter="setAttackOption('reductionPercent', $event)" />
         <span>%</span>
       </div>
-      <input type="range" aria-label="调整减伤率" :value="attackOptions.reductionPercent" min="0" max="100" step="0.1" @input="setAttackOption('reductionPercent', $event)" />
-      <small>多件普通护甲取最高减伤率，不相加。</small>
+      <input type="range" :aria-label="t('调整减伤率')" :value="attackOptions.reductionPercent" min="0" max="100" step="0.1" @input="setAttackOption('reductionPercent', $event)" />
+      <small>{{ t("多件普通护甲取最高减伤率，不相加。") }}</small>
     </div>
-    <p class="multiplier-readout" aria-live="polite">下一击：理智 {{ display(sanityPercent) }}% · 承伤 <strong>×{{ displayMultiplier(currentMultiplier) }}</strong><span v-if="!applyBerserk">（未计入易伤）</span> · 减伤 {{ display(attackOptions.reductionPercent) }}%</p>
+    <p class="multiplier-readout" aria-live="polite">{{ t("下一击：理智") }} {{ display(sanityPercent) }}{{ t("% · 承伤") }} <strong>×{{ displayMultiplier(currentMultiplier) }}</strong><span v-if="!applyBerserk">{{ t("（未计入易伤）") }}</span> {{ t("· 减伤") }} {{ display(attackOptions.reductionPercent) }}%</p>
 
-    <div class="sim-attacks" role="group" aria-label="伤害预设">
+    <div class="sim-attacks" role="group" :aria-label="t('伤害预设')">
       <button v-for="preset in damagePresets" :key="preset.id" type="button" class="attack-button" :disabled="isDead" @click="hit(preset)">
-        <span class="attacker-name">{{ preset.label }}</span>
-        <span class="attacker-damage">{{ display(actualDamage(preset.damage)) }} <small>点伤害</small></span>
-        <small class="attack-base">基础 {{ preset.damage }}</small>
+        <span class="attacker-name">{{ t(preset.label) }}</span>
+        <span class="attacker-damage">{{ display(actualDamage(preset.damage)) }} <small>{{ t("点伤害") }}</small></span>
+        <small class="attack-base">{{ t("基础") }} {{ preset.damage }}</small>
       </button>
     </div>
 
     <div class="custom-attack">
-      <label for="continuation-custom-damage">自定义基础伤害</label>
+      <label for="continuation-custom-damage">{{ t("自定义基础伤害") }}</label>
       <div class="option-amount">
         <input id="continuation-custom-damage" type="number" inputmode="decimal" :value="attackOptions.customDamage" min="0" :max="Number.MAX_SAFE_INTEGER" step="any" @change="setAttackOption('customDamage', $event)" @blur="setAttackOption('customDamage', $event)" @keydown.enter="setAttackOption('customDamage', $event)" />
-        <span>点</span>
+        <span>{{ t("点") }}</span>
       </div>
       <button type="button" class="attack-button custom-hit-button" :disabled="isDead" @click="hit({ label: '自定义', damage: attackOptions.customDamage })">
-        <span class="attacker-name">受伤一次</span>
-        <span class="attacker-damage">{{ display(actualDamage(attackOptions.customDamage)) }} <small>点伤害</small></span>
+        <span class="attacker-name">{{ t("受伤一次") }}</span>
+        <span class="attacker-damage">{{ display(actualDamage(attackOptions.customDamage)) }} <small>{{ t("点伤害") }}</small></span>
       </button>
     </div>
 
     <div class="sim-result" role="status" aria-live="polite" aria-atomic="true" :class="{ 'result-dead': isDead }">
       <template v-if="lastHit">
         <div class="result-heading">
-          <span>第 {{ hitCount }} 次受击 · {{ lastHit.attacker }}</span>
-          <strong>{{ lastHit.dead ? '已死亡' : lastHit.damage <= 0 ? '未受伤 · 存活' : lastHit.continued ? '触发续行 · 存活' : '普通受伤 · 存活' }}</strong>
+          <span>{{ t("第") }} {{ hitCount }} {{ t("次受击 ·") }} {{ t(lastHit.attacker) }}</span>
+          <strong>{{ lastHit.dead ? t('已死亡') : lastHit.damage <= 0 ? t('未受伤 · 存活') : lastHit.continued ? t('触发续行 · 存活') : t('普通受伤 · 存活') }}</strong>
         </div>
-        <p class="hit-detail"><template v-if="lastHit.applyBerserk">受击前理智 {{ display(lastHit.sanityPercent) }}%：</template>基础 {{ display(lastHit.baseDamage) }} → 减伤 {{ display(lastHit.reductionPercent) }}% 后 {{ display(lastHit.reducedDamage) }} → 承伤 ×{{ displayMultiplier(lastHit.damageMultiplier) }} → 实际 {{ display(lastHit.damage) }} 点伤害。</p>
-        <p class="hit-summary">受击 {{ display(lastHit.damage) }} → 生命 −{{ display(lastHit.healthLost) }}<template v-if="lastHit.soulLost > 0"> → 灵魂 −{{ display(lastHit.soulLost) }}</template><template v-if="lastHit.sanityLost > 0"> → 理智 −{{ display(lastHit.sanityLost) }}</template></p>
-        <p v-if="lastHit.continued" class="hit-detail">溢出 {{ display(lastHit.overflow) }} × (0.40 + 48 / (40 + {{ display(lastHit.overflow) }})) = {{ display(lastHit.resourceCost) }} 点资源消耗。</p>
-        <p v-else-if="lastHit.damage <= 0" class="hit-detail">实际伤害为 0，三项资源均未扣减。</p>
-        <p v-else class="hit-detail">本次伤害未致命，只扣生命值。</p>
-        <p v-if="lastHit.uncoveredCost > 0" class="hit-detail">灵魂与理智耗尽，未覆盖的 {{ display(lastHit.uncoveredCost) }} 点消耗转为扣血。{{ lastHit.dead ? '重置或调整生命值后可继续体验。' : `剩余生命 ${display(resources.health)}，仍然存活。` }}</p>
+        <p class="hit-detail"><template v-if="lastHit.applyBerserk">{{ t("受击前理智") }} {{ display(lastHit.sanityPercent) }}%{{ isEnglish ? ': ' : '：' }}</template>{{ t("基础") }} {{ display(lastHit.baseDamage) }} {{ t("→ 减伤") }} {{ display(lastHit.reductionPercent) }}{{ t("% 后") }} {{ display(lastHit.reducedDamage) }} {{ t("→ 承伤 ×") }}{{ displayMultiplier(lastHit.damageMultiplier) }} {{ t("→ 实际") }} {{ display(lastHit.damage) }} {{ t("点伤害。") }}</p>
+        <p class="hit-summary">{{ t("受击") }} {{ display(lastHit.damage) }} {{ t("→ 生命 −") }}{{ display(lastHit.healthLost) }}<template v-if="lastHit.soulLost > 0"> {{ t("→ 灵魂 −") }}{{ display(lastHit.soulLost) }}</template><template v-if="lastHit.sanityLost > 0"> {{ t("→ 理智 −") }}{{ display(lastHit.sanityLost) }}</template></p>
+        <p v-if="lastHit.continued" class="hit-detail">{{ t("溢出") }} {{ display(lastHit.overflow) }} × (0.40 + 48 / (40 + {{ display(lastHit.overflow) }})) = {{ display(lastHit.resourceCost) }} {{ t("点资源消耗。") }}</p>
+        <p v-else-if="lastHit.damage <= 0" class="hit-detail">{{ t("实际伤害为 0，三项资源均未扣减。") }}</p>
+        <p v-else class="hit-detail">{{ t("本次伤害未致命，只扣生命值。") }}</p>
+        <p v-if="lastHit.uncoveredCost > 0" class="hit-detail">{{ t("灵魂与理智耗尽，未覆盖的") }} {{ display(lastHit.uncoveredCost) }} {{ t("点消耗转为扣血。") }} {{ lastHit.dead ? t('重置或调整生命值后可继续体验。') : `${t('剩余生命')} ${display(resources.health)}${t('，仍然存活。')}` }}</p>
       </template>
-      <p v-else-if="isDead" class="empty-result">生命值为 0。重置或调整生命值后可继续体验。</p>
-      <p v-else class="empty-result">调整资源，或点击上方生物受伤。致命时优先耗魂，再扣理智。</p>
+      <p v-else-if="isDead" class="empty-result">{{ t("生命值为 0。重置或调整生命值后可继续体验。") }}</p>
+      <p v-else class="empty-result">{{ t("调整资源，或点击上方生物受伤。致命时优先耗魂，再扣理智。") }}</p>
     </div>
-    <p class="sim-note">预设和自定义伤害均先减伤，再计入受击前的怨灵承伤倍率，最后结算续行；关闭易伤时仍应用减伤。耗理智后更新下一击倍率。熊獾对玩家基础伤害为 87.5。减伤率按固定值演示普通伤害，不模拟护甲耐久、位面伤害或每秒理智流失。</p>
+    <p class="sim-note">{{ t("预设和自定义伤害均先减伤，再计入受击前的怨灵承伤倍率，最后结算续行；关闭易伤时仍应用减伤。耗理智后更新下一击倍率。熊獾对玩家基础伤害为 87.5。减伤率按固定值演示普通伤害，不模拟护甲耐久、位面伤害或每秒理智流失。") }}</p>
   </section>
 </template>
 
@@ -230,6 +232,7 @@ function reset() {
 .attack-button:active:enabled { transform: translateY(1px); }
 .attack-button:disabled { opacity: .45; cursor: default; }
 .attacker-name { color: var(--ink-text); font-size: 14px; font-weight: 600; white-space: nowrap; }
+.soul-simulator:lang(en) .attacker-name { white-space: normal; }
 .attacker-damage { color: var(--ink-secondary); font-size: 16px; font-weight: 650; white-space: nowrap; }
 .attacker-damage small { font-size: 11px; font-weight: 400; }
 .attack-base { grid-column: 1 / -1; color: var(--ink-muted); font-size: 11px; line-height: 1.5; }

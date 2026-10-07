@@ -1,23 +1,23 @@
 <template>
   <aside :class="['infobox', 'pos-' + position]" :style="{ '--infobox-width': width }">
-    <div class="infobox-title">{{ title }}</div>
+    <div class="infobox-title">{{ t(title) }}</div>
     <div v-if="image" class="infobox-image">
-      <img :src="withBase(image)" :alt="title" />
+      <img :src="withBase(image)" :alt="t(title)" />
     </div>
-    <div class="infobox-section">数值属性</div>
+    <div class="infobox-section">{{ t("数值属性") }}</div>
     <div class="infobox-stats">
       <div v-for="stat in stats" :key="stat.label" class="infobox-stat-row">
         <div class="infobox-stat-label">
           <img v-if="stat.icon" :src="withBase(stat.icon)" class="stat-mini-icon" />
-          {{ stat.label }}
+          {{ t(stat.label) }}
         </div>
         <div class="infobox-stat-value">{{ formatValue(stat.value) }}</div>
       </div>
     </div>
-    <div v-if="details && details.length" class="infobox-section">核心特征</div>
+    <div v-if="details && details.length" class="infobox-section">{{ t("核心特征") }}</div>
     <div class="infobox-details">
       <div v-for="detail in details" :key="detail.label" class="infobox-detail-row">
-        <span class="detail-label">{{ detail.label }}:</span>
+        <span class="detail-label">{{ t(detail.label) }}:</span>
         <span class="detail-value">{{ formatValue(detail.value) }}</span>
       </div>
     </div>
@@ -25,6 +25,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../../data/locale.js'
+const { t } = useWikiLocale()
 import { withBase } from 'vitepress'
 defineProps({
   title: String,
@@ -43,7 +45,7 @@ defineProps({
 
 const formatValue = (val) => {
   if (typeof val !== 'string') return val
-  return val.replace(/\\n/g, '\n') // 将字符串 "\n" 转换为真正的换行符
+  return t(val).replace(/\\n/g, '\n') // 将字符串 "\n" 转换为真正的换行符
 }
 </script>
 

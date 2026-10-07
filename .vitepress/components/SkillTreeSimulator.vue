@@ -3,7 +3,7 @@
     <div class="skill-tree-stage">
       <slot name="tree-header" />
       <div class="skill-tree-board">
-        <div class="tree-caption"><span>技能树</span><span>剩余 <strong>{{ availablePoints }}</strong> 洞察</span></div>
+        <div class="tree-caption"><span>{{ t("技能树") }}</span><span>{{ t("剩余") }} <strong>{{ availablePoints }}</strong> {{ t("洞察") }}</span></div>
         <div class="simulator-scaler" ref="scalerRef" :style="{ height: `${scaleFactor * 320}px` }" @click="resetSelection">
           <div class="simulator-canvas" :style="{ transform: `scale(${scaleFactor})` }">
             <div class="content-layer">
@@ -16,7 +16,7 @@
             </div>
           </div>
         </div>
-        <p class="tree-help">选中节点后，在摘要中学习或退点。</p>
+        <p class="tree-help">{{ t("选中节点后，在摘要中学习或退点。") }}</p>
       </div>
     </div>
     <slot name="summary" :node="SKILL_NODES[selectedNodeId]" :points="availablePoints"
@@ -27,6 +27,8 @@
 </template>
 
 <script setup>
+import { useWikiLocale } from '../data/locale.js'
+const { t } = useWikiLocale()
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { withBase } from 'vitepress'
 import { SKILL_NODES } from '../data/skilltree.js'
