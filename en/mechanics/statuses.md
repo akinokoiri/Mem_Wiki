@@ -83,6 +83,7 @@ A stacking status on a target, detonated by damaging [鬼火].
 
 - **Stack decay**: If no stacks are added or refreshed for 6 seconds, stacks begin decreasing by 1 per second.
 - **Detonation**: A damaging [鬼火] attack detonates and consumes all stacks. The Ghost Fire's **caster** counts as the **detonator**.
+- **Allied bounce targets**: When [本源协调] Ghost Fire hits an ally, it deals no damage and does not detonate marks; that hit grants no [闪耀刻印] through mark detonation.
 - **Effects that cannot detonate**: Ghost Fire visuals from [分头行动], [意识转移], or active [刻印形态] cannot detonate marks; all other damaging Ghost Fires can.
 
 Below, “stacks” means the mark stacks consumed by this detonation. All stat values are taken from the **detonator**.

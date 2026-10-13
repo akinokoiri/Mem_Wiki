@@ -45,7 +45,7 @@ Under **World Selection → Mod Settings**, you can adjust Mangem's mechanics, v
 | Difficulty Preset | Casual / Normal / Default / Hard / Custom | Default | Adjusts mechanics and values together, with individual fine-tuning available afterward. See [Preset Details](#难度预设) below. |
 | Language | Auto / Simplified Chinese / English | Auto | Auto follows the game client's language. |
 | Taunt Style | Normal / Meme | Normal | Changes the lines used for automatic low-Sanity [嘲讽]; “Taunt & Lurking Terror” controls whether taunting is enabled. |
-| Speech Style | Old (Classic) / New (Complete) | Old (Classic) | Selects the character's item inspection text. The new version includes more complete custom inspection lines. |
+| Speech Style | Old (Classic) / New (Complete) | New (Complete) | Selects the character's item inspection text. The new version includes more complete custom inspection lines. |
 | [Beast Form] Combat Mode | Classic / Modern | Classic | Changes unarmed Beast Form attack range, player hold-F timing, and automatic body attack timing. Both modes retain a 7-frame recovery-cancel cooldown. Reload the world to apply; see the [timing comparison](/en/mechanics/core#beast-combat). |
 | [兽化状态] Jump Habit | Off (Shift Key) / On (Adaptive) | On (Adaptive) | Determines whether [跳跃] follows the cursor or movement direction. See [Jump Controls & Protection](#跳跃操作与保护) below. |
 | Safe Jump | Strict / Safe Landing / Off | Strict | Controls out-of-range handling and landing protection for cursor-directed jumps; all three modes retain the maximum jump distance. |
@@ -55,7 +55,7 @@ Under **World Selection → Mod Settings**, you can adjust Mangem's mechanics, v
 
 ### Difficulty Presets {#难度预设}
 
-**“Normal” and “Default” are different presets.** When a preset is selected, options it does not specify inherit the values in the “Default” preset; only options absent from both keep their current values. Changing an individual option marks the preset as “Custom.” Selecting a preset again reapplies all the settings it covers.
+**“Normal” and “Default” are different presets.** When a preset is selected, options it does not specify inherit the values in the “Default” preset; only options absent from both keep their current values. Manually changing **an option covered by the presets** marks the preset as “Custom,” including numeric inputs, toggles, and selection changes (such as combat mode or Skill Awakening mode). Changing an option outside preset management does not cause this switch. Selecting a preset again reapplies all the settings it covers.
 
 <ComparisonTable label-id="难度预设">
 
@@ -145,7 +145,7 @@ These are the character's base maximums. Changes from skills, states, and equipm
 | Soulfire Orbit Drain Rate ([四象离魂]) | 0–50, up to two decimal places | 0.5 | [灵魂值] spent per second to maintain the skill; 0 disables the ongoing drain. |
 | Soulfire Orbit Collision Cost ([四象离魂]) | 0–50, up to two decimal places | 0.5 | [灵魂值] spent each time Ghost Fire collides with a target; during [分头行动]/[意识转移], the two rings check hits separately and each hit costs half this amount. |
 | Chainsaw Mark Cost | 0.01–999 | 3 | Soul spent to apply [魂魄刻印] with each attack in [刻印形态]; also affects Soul refunded by mark-detonation kills and [闪耀刻印]. |
-| Soul Mark Soul Constant | 0.2–1 | 0.2 (20%) | If the detonator has a Soul system, base damage is “detonator's missing Soul × constant × stacks.” |
+| Soul Mark Soul Constant | 0.01–1 | 0.2 (20%) | If the detonator has a Soul system, base damage is “detonator's missing Soul × constant × stacks.” |
 | Soul Mark Health Constant | 0.001–1, three decimal places | 0.02 (2%) | If the detonator has no Soul system, base damage is “detonator's missing Health × constant × stacks”; unaffected by difficulty presets. |
 
 </ComparisonTable>

@@ -62,7 +62,7 @@ next:
   image="/death2-54.webp"
   :stats="[
     { label: '配方 A', value: '6 小肉 + 4 噩梦燃料' },
-    { label: '配方 B', value: '6 小肉 + 50 灵魂值上限' },
+    { label: '配方 B', value: '6 小肉 + 40 灵魂值上限' },
     { label: '腐烂时间', value: '3 天', icon: '/icons/icon_spoil.webp' },
   ]"
 />

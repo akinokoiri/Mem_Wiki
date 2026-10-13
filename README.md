@@ -116,3 +116,17 @@ The locale check compares all translated pages and numeric tokens, verifies
 heading/definition anchors and internal links, checks rendered English text and
 accessibility labels, and queries the actual emitted English search index.
 Exact Chinese `/mem` command arguments are preserved because they are game input.
+
+### Media verification
+
+When cutting demonstration clips, bind each time range to its exact source
+recording; timestamps alone are ambiguous across recordings. Preserve the
+requested action and duration when reducing frame rate, dimensions or file size.
+Keep asset-specific export settings in the corresponding task handoff.
+
+Check embedded media on the actual target page, including the affected language
+edition. A valid source GIF does not prove that Steam displays the animation:
+previous embeds returned a small static thumbnail despite the source file being
+correct. Verify playback, displayed size and loading behavior in the target
+browser. Distinguish local file checks, target-page checks and user confirmation
+when reporting completion.

@@ -362,7 +362,7 @@ These changes apply after learning the corresponding skills; changes to jump spe
 - [隐藏本能]: In Beast Form, Pigs and similar creatures no longer regard her as a monster, and she no longer startles small animals. Hunting Stance's movement penalty improves from **−60%** to **−20%**. In addition:
   - **Capture chance**: Level I / II adds a total of **+10 / +20 percentage points**; capturing from behind the target while in the stance adds another **+30 percentage points**. The final chance is clamped to **0–100%**.
   - **Target-search ignoring**: When ordinary enemies have not yet locked onto you, their chance to ignore you rises from the unlearned **40%** to **50%** at Level I / **60%** at Level II.
-  - **Additional Level II effect**: Jumping in Hunting Stance automatically captures the nearest capturable target nearby.
+  - **Additional Level II effect (pounce)**: On landing safely in Hunting Stance, attempts to capture **the single nearest eligible target within 3 units**, using the success chance above. This includes flying insects such as Butterflies and birds, but excludes birds already taking flight to escape, hidden targets, and other ineligible states. Checks only once on landing and does not chase the target.
 - [精准度“优化”]: Greatly increases gathering speed in Beast Form. Each level adds **5%** unarmed damage in Beast Form: **+5% / +10% / +15%** at Level I / II / III.
 
 </section>
@@ -505,7 +505,7 @@ The first bounce has a search range of **10**, followed by **11, 12, 13…**; fl
 
 - [彼世的光芒]: A lighting upgrade that makes Ghost Fire emit light over a small area.
 - [灵魂实体专精一级]: Ghost Fires you fire can **bounce 10 more times** after their first hit.
-- [本源协调]: Any [友善随从], player, or follower following Mangem can act as a bounce **stepping stone**, without taking damage.
+- [本源协调]: Players, followers or companions eligible for ally searches, domesticated or hitched creatures, and similar eligible allies can act as bounce **stepping stones**, regardless of ownership. Allied hits deal no damage and do not detonate [魂魄刻印]. See [Allied Bounce Targets](/en/mechanics/skilltree#mem_skill_body_medicine--友军跳板) for the full scope.
 - [魂魄逸散]: Every **30 [灵魂值]** spent causes the next successful attack to fire a Ghost Fire.
 
 **Origin Coordination's targeting order**: First seek the nearest eligible enemy in range; only if none exists, seek the nearest eligible ally. **Previously hit targets can be selected again**, so two allies can pass it back and forth, gradually expanding the range until it reaches an enemy. The current code excludes the original caster and the target just hit from the next bounce, and does not select defeated targets.

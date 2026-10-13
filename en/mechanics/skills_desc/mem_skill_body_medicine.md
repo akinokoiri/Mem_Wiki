@@ -1,8 +1,9 @@
 ### Allied Bounce Targets {#友军跳板}
 
 - [鬼火] only attempts to bounce toward allies when there are **no other attackable hostile targets** nearby.
-- It neither deals damage nor provokes other allies.
-- Allies here include **your followers** and **all players**.
+- Hitting an allied bounce target deals no damage, provokes no aggro, and does not detonate [魂魄刻印], so it also grants no [闪耀刻印] from detonation.
+- Automatic bounces can search for **all players**, creatures marked as followers or companions, domesticated or hitched creatures, mod [友善随从] and their derivatives, `Abigail`, and `Glommer`; **they do not need to belong to you**, and must be alive.
+- Manual cast target selection, initial aggro, and Ghost Fire hit resolution share the same ally check, which also recognizes allies confirmed by the game and Beefalo with some domestication. Targets qualifying only through these two conditions, without the category markers above, are not necessarily found by automatic bounce searches.
 - This can help prevent Ghost Fire from disappearing for lack of a bounce target when only one hostile creature is present, despite still having bounces remaining.
 
 ### Mangelune's Weakness Duration {#芒伊月的虚弱时间}

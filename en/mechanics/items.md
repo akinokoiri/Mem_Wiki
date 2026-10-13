@@ -62,7 +62,7 @@ Cannot be crafted normally. **Haunt** a `Tent` as a ghost to convert it into [ç‹
   image="/death2-54.webp"
   :stats="[
     { label: 'Recipe A', value: '6 Morsels + 4 Nightmare Fuel' },
-    { label: 'Recipe B', value: '6 Morsels + 50 maximum Soul' },
+    { label: 'Recipe B', value: '6 Morsels + 40 maximum Soul' },
     { label: 'Spoil time', value: '3 days', icon: '/icons/icon_spoil.webp' },
   ]"
 />

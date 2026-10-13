@@ -68,6 +68,7 @@ export default defineConfig({
   title: "芒伊木 Wiki",
   description: "饥荒：联机版 芒伊木模组全效果说明书",
   srcExclude: [
+    'AGENTS.md',
     'CLAUDE.md',
     'GEMINI.md',
     '_RAW_DATA_SOURCE.md',

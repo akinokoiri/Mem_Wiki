@@ -802,7 +802,7 @@ Give [月亮装备], `Brightshade Repair Kits`, or `Brightshade Husks` to the to
 
 </ComparisonTable>
 
-Click ongoing commands again to cancel them. Most commands are unavailable without a binding or while recalled. Dropping the token or changing its holder resets the Fight command. Commands with a targeting circle have a visual radius close to their actual effective range.
+Click ongoing commands again to cancel them. Most commands are unavailable without a binding or while recalled. Dropping or handing over the token no longer resets the Fight command. Reconnecting or reloading the same world also preserves the saved mode and guard location. Commands with a targeting circle have a visual radius close to their actual effective range.
 
 <span class="heimu" title="Behind the scenes">While recalled, the follower is actually frozen in place and does not interact with any entities.</span>
 
@@ -1016,7 +1016,7 @@ Give equipment with **[暗影等级]** (including masks), or `Dreadstone` used t
 
 Click ongoing commands again to cancel them. Most commands are unavailable without a binding. The targeting circle's visual radius is close to the actual effective range.
 
-**Dropping or handing over the token resets the team**: When the token is dropped or changes holders, work and combat commands reset, and all bodies and shadows are dismissed.
+**Dropping or handing over the token preserves the team**: Work and combat commands and their designated locations no longer reset when the holder changes, and the body and shadows are not dismissed. Reconnecting or reloading the same world restores saved commands, the body and shadows, and the empowerment they received when summoned.
 
 #### Summon Limits, Costs, and Damage Feedback {#shadow-pet-costs}
 
@@ -1056,15 +1056,19 @@ While shadows and the body actually work or fight, they **do not continue consum
 |------|------|
 | Dig | Digs all nearby diggable objects, including transplanted plants, then collects drops |
 | Hammer | Hammers all nearby hammerable structures, then collects drops |
-| Collect | Picks up all nearby collectible objects, teleporting them directly to [友善的荒尹沐] |
+| Collect | Actively picks up eligible nearby ground items and teleports them to [友善的荒尹沐]; Backpacks, WOBOT, and other excluded items are skipped; see below |
 | Chop | Chops all nearby trees that an axe can cut, then collects drops |
 | Mine | Mines all nearby mineable objects, including `Rift Crystals`, then collects drops |
-| Pick | Harvests all nearby harvestable plants, plus finished Drying Racks and cooked Crock Pots |
+| Pick | Gathers ready plants (without picking planted Flowers), finished Drying Racks, cooked Crock Pots, and harvestable Bee Boxes, Mushroom Planters, Sea Weeds, and similar targets |
 | Till | Tills a 3×3 grid of holes in nearby moist, tillable ground |
 
 </ComparisonTable>
 
-Collected items enter the main unit's **9-slot inventory**. Right-click it to retrieve everything. If no collected items are stored, right-click instead removes equipment.
+**Active collection and incidental pickup**: Incidental pickup during other work skips equippable items, furniture decorations, vase decorations, small animals, and birds. The Collect command can still actively pick up eligible items in these categories. Both exclude Backpacks, WOBOT, heavy objects, bundled items, traps, and other blacklisted items, as well as targets that cannot be picked up. The current code does not exclude all non-stackable items as a category.
+
+**Empowered harvesting**: When empowered bodies or shadows harvest a Bee Box or Sea Weed (Barnacles), that harvest does not trigger bees to emerge and attack or the Sea Weed's harvest aggro. This does not grant lasting immunity to their attacks. Empowerment applies only to units summoned after it is enabled; see [Empowerment Rules](#shadow-pet-empower).
+
+Collected items enter the main unit's **9-slot inventory**. Even with no empty slots, items can still be collected into matching incomplete stacks. Multiple items from one harvest are transferred individually, subject to actual capacity; items that cannot be accepted remain on or drop to the ground. Right-click it to retrieve everything. If no collected items are stored, right-click instead removes equipment.
 
 #### Combat Mode: Marks, Ghost Fire, and Empowerment {#shadow-pet-combat}
 
@@ -1083,6 +1087,8 @@ Shadows make intermittent assaults on the main unit's command, while the body ca
 Enabling "Shadow Enhancement" on the token grants **subsequently summoned** shadows and bodies faster work and the ability to teleport toward targets. If the additional weapon durability cost is successfully paid, they also gain the weapon's **listed physical and planar damage**. Without enough extra durability, they still receive movement and work improvements, but not that damage bonus.
 
 Teleport cooldown is **3 seconds** while working and **6 seconds** in combat. Target distance and other conditions must be met; it does not trigger while busy, and teleporting resets attack cooldown. Already empowered summons retain their empowerment; turning the enhancement toggle off does not remove it.
+
+**Body landing protection**: Teleports check the destination and look for a nearby passable point if the target's position is impassable. If none is suitable, they try to return near the main unit on passable ground, or stay in place if that is unavailable. If the body is already on impassable ocean or void terrain and is not on a boat, entering idle also attempts to return it to the main unit; this fallback requires the main unit itself to be on passable ground.
 
 #### Equipment, Healing, and Repairs {#shadow-pet-care}
 
@@ -1125,7 +1131,7 @@ The following upgrades depend on skills learned by the **player currently holdin
 - Learning [彼世的光芒] grants fired [鬼火] the **lighting upgrade**, making it emit light.
   - The **Ghost Fire visual effect** shown when [鬼火] is ready to fire is also upgraded to emit light.
   - [魂魄刻印] applied by [友善的沐尹荒]/[身体(友善的荒尹沐)] following this [友善的荒尹沐] are also upgraded to emit light.
-- Learning [本源协调] allows fired [鬼火] to use any [友善随从], player, or follower of Mangem as a **bounce point**, without dealing damage.
+- Learning [本源协调] allows fired [鬼火] to use players and eligible allies as **bounce points**, including other players' followers or companions; they need not belong to the token holder. Allied hits deal no damage and do not detonate [魂魄刻印]. See [Allied Bounce Targets](/en/mechanics/skilltree#mem_skill_body_medicine--友军跳板) for the full scope.
 
 ##### Optional Settings {#shadow-pet-settings}
 
